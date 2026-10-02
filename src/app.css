@@ -1,0 +1,118 @@
+/* Folio's shared tokens and fonts (vendor/ewo, from `npm run vendor -- atrium` in Folio).
+   Atrium takes them as they are: the page is monochrome, and colour comes from the apps
+   (each tile sets data-ewo-project, which picks that app's accent). */
+@import '../vendor/ewo/tokens/index.css';
+@import '../vendor/ewo/tokens/base.css';
+
+:root {
+  --gutter: clamp(16px, 3vw, 40px);
+  --page: 1380px;
+  --bar-h: 60px;
+  --tile-r: 22px;
+}
+
+/* The page colour lives on <html> only, so the fixed dot field (z-index 0) shows through
+   <body>, whose own background would otherwise paint over it. */
+body {
+  background: transparent;
+  font-size: 15px;
+}
+
+html {
+  overflow-x: clip;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 0 var(--gutter) 56px;
+}
+
+/* In the browser (not installed), Safari's toolbar floats over the bottom of the page. */
+@media not (display-mode: standalone) {
+  @supports (-webkit-touch-callout: none) {
+    main {
+      padding-bottom: 132px;
+    }
+  }
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+kbd {
+  font: 500 var(--ewo-text-2xs) / 1 var(--ewo-mono);
+  border: 1px solid var(--ewo-line);
+  border-radius: 5px;
+  padding: 3px 5px;
+  color: var(--ewo-fg-3);
+}
+
+/* A status dot: Pulse's states. */
+.dot {
+  display: inline-block;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ewo-unknown);
+}
+.dot[data-state='operational'] {
+  background: var(--ewo-ok);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ewo-ok) 20%, transparent);
+}
+.dot[data-state='degraded'] {
+  background: var(--ewo-warn);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ewo-warn) 22%, transparent);
+}
+.dot[data-state='down'] {
+  background: var(--ewo-bad);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ewo-bad) 22%, transparent);
+}
+
+/* The small mono label row at the top of a tile. */
+.vlabel {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font: 500 var(--ewo-text-2xs) / 1 var(--ewo-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ewo-fg-3);
+}
+
+/* While the page scrolls, tiles slide under a resting cursor; their hover states wait until it
+   stops (src/lib/scrolling.ts). Only for a mouse: touch has no hover to protect. */
+@media (hover: hover) and (pointer: fine) {
+  :root[data-scrolling] main {
+    pointer-events: none;
+  }
+}
+
+::view-transition-group(pick) {
+  animation-duration: 0.5s;
+  animation-timing-function: var(--ewo-ease);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,60 @@
+name: CI
+
+# Runs on pull requests, and is the gate docker-publish.yml calls before it publishes
+# anything, so the checks guarding a PR and the checks guarding a deploy can't drift apart.
+on:
+  pull_request:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Typecheck, test, build
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          # Matches the Dockerfile.
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run check
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      # The built app served by the real production server. The apps it reads are pointed at a
+      # closed port, so this proves the page and the API answer even when every upstream is down.
+      - name: Smoke test the production server
+        run: |
+          PORT=5499 ATRIUM_CLINCH=http://127.0.0.1:9 ATRIUM_CANTINA=http://127.0.0.1:9 ATRIUM_PULSE=http://127.0.0.1:9 node server/server.mjs &
+          for _ in $(seq 1 20); do curl -sf http://127.0.0.1:5499/healthz && break; sleep 0.5; done
+          curl -sf http://127.0.0.1:5499/ | grep -q '<title>Atrium</title>'
+          curl -sf http://127.0.0.1:5499/clinch | grep -q '<title>Atrium</title>'
+          curl -sf http://127.0.0.1:5499/api/apps | grep -q '"slug":"clinch"'
+          if curl -s http://127.0.0.1:5499/api/apps | grep -q '"slug":"census"'; then echo "::error::owner apps reached a guest"; exit 1; fi
+          curl -sI http://127.0.0.1:5499/ | grep -qi "content-security-policy: default-src 'self'"
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5499/api/nope)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5499/assets/missing.js)" = 404
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST http://127.0.0.1:5499/api/apps)" = 405
+          test "$(curl -s -o /dev/null -w '%{http_code}' 'http://127.0.0.1:5499/api/cantina/photo?d=1')" = 404
+          # Sign-in is off without its settings.
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5499/login)" = 404
+          # The Census forwarder is wired in; without ATRIUM_CENSUS it answers locally.
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5499/_e.js)" = 200
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST --data '{}' http://127.0.0.1:5499/_e)" = 204

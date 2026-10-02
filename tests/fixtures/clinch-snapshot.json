@@ -1,0 +1,282 @@
+{
+ "generatedAt": 1790955064826,
+ "season": {
+  "year": 2026,
+  "type": 2,
+  "label": "Regular season"
+ },
+ "week": {
+  "number": 4,
+  "label": "Week 4",
+  "total": 18
+ },
+ "live": false,
+ "conferences": [
+  {
+   "id": "AFC",
+   "seeds": [
+    {
+     "abbr": "KC",
+     "record": "3-0",
+     "seed": 1,
+     "status": "in",
+     "wins": 3,
+     "losses": 0
+    },
+    {
+     "abbr": "BUF",
+     "record": "3-0",
+     "seed": 2,
+     "status": "in",
+     "wins": 3,
+     "losses": 0
+    },
+    {
+     "abbr": "CLE",
+     "record": "3-1",
+     "seed": 3,
+     "status": "in",
+     "wins": 3,
+     "losses": 1
+    },
+    {
+     "abbr": "JAX",
+     "record": "2-1",
+     "seed": 4,
+     "status": "in",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "LV",
+     "record": "3-0",
+     "seed": 5,
+     "status": "in",
+     "wins": 3,
+     "losses": 0
+    },
+    {
+     "abbr": "BAL",
+     "record": "2-1",
+     "seed": 6,
+     "status": "in",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "DEN",
+     "record": "2-1",
+     "seed": 7,
+     "status": "in",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "CIN",
+     "record": "2-1",
+     "seed": 8,
+     "status": "bubble",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "PIT",
+     "record": "2-2",
+     "seed": 9,
+     "status": "bubble",
+     "wins": 2,
+     "losses": 2
+    },
+    {
+     "abbr": "NYJ",
+     "record": "1-2",
+     "seed": 10,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "NE",
+     "record": "1-2",
+     "seed": 11,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "IND",
+     "record": "1-2",
+     "seed": 12,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "MIA",
+     "record": "0-3",
+     "seed": 13,
+     "status": "hunt",
+     "wins": 0,
+     "losses": 3
+    },
+    {
+     "abbr": "LAC",
+     "record": "0-3",
+     "seed": 14,
+     "status": "hunt",
+     "wins": 0,
+     "losses": 3
+    },
+    {
+     "abbr": "TEN",
+     "record": "0-3",
+     "seed": 15,
+     "status": "hunt",
+     "wins": 0,
+     "losses": 3
+    },
+    {
+     "abbr": "HOU",
+     "record": "0-3",
+     "seed": 16,
+     "status": "hunt",
+     "wins": 0,
+     "losses": 3
+    }
+   ]
+  },
+  {
+   "id": "NFC",
+   "seeds": [
+    {
+     "abbr": "MIN",
+     "record": "3-0",
+     "seed": 1,
+     "status": "in",
+     "wins": 3,
+     "losses": 0
+    },
+    {
+     "abbr": "SF",
+     "record": "3-0",
+     "seed": 2,
+     "status": "in",
+     "wins": 3,
+     "losses": 0
+    },
+    {
+     "abbr": "PHI",
+     "record": "2-1",
+     "seed": 3,
+     "status": "in",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "CAR",
+     "record": "1-2",
+     "seed": 4,
+     "status": "in",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "DET",
+     "record": "2-1",
+     "seed": 5,
+     "status": "in",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "CHI",
+     "record": "2-1",
+     "seed": 6,
+     "status": "in",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "SEA",
+     "record": "2-1",
+     "seed": 7,
+     "status": "in",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "NYG",
+     "record": "2-1",
+     "seed": 8,
+     "status": "bubble",
+     "wins": 2,
+     "losses": 1
+    },
+    {
+     "abbr": "LAR",
+     "record": "1-2",
+     "seed": 9,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "DAL",
+     "record": "1-2",
+     "seed": 10,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "WSH",
+     "record": "1-2",
+     "seed": 11,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "NO",
+     "record": "1-2",
+     "seed": 12,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "ATL",
+     "record": "1-2",
+     "seed": 13,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "GB",
+     "record": "1-2",
+     "seed": 14,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "ARI",
+     "record": "1-2",
+     "seed": 15,
+     "status": "bubble",
+     "wins": 1,
+     "losses": 2
+    },
+    {
+     "abbr": "TB",
+     "record": "0-3",
+     "seed": 16,
+     "status": "hunt",
+     "wins": 0,
+     "losses": 3
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+# The Atrium stack Portainer runs on the NAS.
+#
+# This is deliberately NOT the repo's docker-compose.yml. That one carries `build: .`,
+# which would make Portainer compile Atrium on the NAS instead of pulling the image
+# CI already published. Paste this into Portainer's stack editor (or point a
+# Git-backed stack at this file), never that one.
+#
+# Auto-updates come from the shared Watchtower stack (clinch/deploy/watchtower-stack.yml),
+# which only touches containers carrying the label below. With it, a push to `release`
+# is the entire deploy.
+
+services:
+  atrium:
+    image: ghcr.io/ewolution94/atrium:latest
+    container_name: atrium
+    restart: unless-stopped
+    ports:
+      # Change both numbers if 5400 is taken on the NAS.
+      - "5400:5400"
+    environment:
+      - PORT=5400
+      - TZ=Europe/Berlin
+      # Where the tiles' live data comes from: the apps' own ports on the NAS, so these
+      # requests never leave the LAN. Without them Atrium uses the public hostnames.
+      - ATRIUM_CLINCH=http://192.168.178.36:4600
+      - ATRIUM_CANTINA=http://192.168.178.36:5200
+      - ATRIUM_PULSE=http://192.168.178.36:4400
+      # Visit counts: /_e and /_e.js are forwarded to Census over the `ewolution` network.
+      # Remove the line to stop counting; the page doesn't change either way.
+      - ATRIUM_CENSUS=http://census:4901
+      # Sign-in for the owner (Census and Folio appear on the wall), off until all three are
+      # set. The values live here in Portainer, never in git. See the README, "Sign-in".
+      # - ATRIUM_ACCESS_TEAM=ewolution.cloudflareaccess.com
+      # - ATRIUM_ACCESS_AUD=${ATRIUM_ACCESS_AUD}
+      # - ATRIUM_SESSION_SECRET=${ATRIUM_SESSION_SECRET}
+      # - ATRIUM_OWNERS=${ATRIUM_OWNERS}
+    networks:
+      # The shared network Census listens on. It must exist before this stack is created
+      # (Portainer → Networks → `ewolution`).
+      - ewolution
+    labels:
+      # The opt-in the shared Watchtower looks for (it runs with
+      # WATCHTOWER_LABEL_ENABLE=true, so unlabelled containers are never touched).
+      - "com.centurylinklabs.watchtower.enable=true"
+
+networks:
+  ewolution:
+    external: true
