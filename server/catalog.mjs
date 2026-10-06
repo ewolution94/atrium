@@ -150,6 +150,27 @@ export const APPS = [
       },
     },
   },
+  {
+    slug: 'aale-spiele',
+    name: 'Aale Spiele',
+    audience: 'public',
+    host: 'aale-spiele.ewolution.cloud',
+    pulse: 'aale-spiele',
+    repo: 'https://github.com/ewolution94/aale-spiele',
+    writeup: '/aale-spiele/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'The games our afternoon meeting plays, and a button that picks one.',
+        desc: 'Ten browser games, from skribbl.io to HaxBall, each with a sentence on how it plays, what kind it is and whether it’s teams or everyone for themselves. “Was spielen wir?” spins a reel through them like a slot machine and stops on one, never the same twice in a row, and a filter narrows the draw to creative, guessing, geo or action games. The games ship with the page, so it works offline.',
+      },
+      de: {
+        line: 'Die Spiele aus unserem Nachmittags-Meeting, und ein Knopf, der eins aussucht.',
+        desc: 'Zehn Browser-Spiele von skribbl.io bis HaxBall, jedes mit einem Satz dazu, wie es läuft, welche Art es ist und ob in Teams oder jeder gegen jeden. „Was spielen wir?“ dreht eine Walze wie am Spielautomaten durch die Spiele und hält auf einem, nie zweimal hintereinander auf demselben, und ein Filter beschränkt die Auslosung auf kreative, Rate-, Geo- oder Action-Spiele. Die Spiele kommen mit der Seite, also funktioniert sie auch offline.',
+      },
+    },
+  },
 
   // --- Only for the owner, once sign-in is set up (auth.mjs). ------------------------------
   {

@@ -34,9 +34,9 @@
   }
   .web {
     grid-template-areas:
-      'clinch clinch clinch clinch clinch clinch clinch planum planum planum planum planum'
-      'clinch clinch clinch clinch clinch clinch clinch planum planum planum planum planum'
-      'clinch clinch clinch clinch clinch clinch clinch pulse pulse pulse pulse pulse'
+      'clinch clinch clinch clinch clinch clinch planum planum planum aale-spiele aale-spiele aale-spiele'
+      'clinch clinch clinch clinch clinch clinch planum planum planum aale-spiele aale-spiele aale-spiele'
+      'clinch clinch clinch clinch clinch clinch pulse pulse pulse pulse pulse pulse'
       'cantina cantina cantina cantina axioma axioma axioma axioma axioma fermata fermata fermata'
       'cantina cantina cantina cantina axioma axioma axioma axioma axioma fermata fermata fermata';
   }
@@ -82,7 +82,9 @@
         'planum planum planum axioma axioma axioma'
         'pulse pulse pulse pulse pulse pulse'
         'cantina cantina cantina fermata fermata fermata'
-        'cantina cantina cantina fermata fermata fermata';
+        'cantina cantina cantina fermata fermata fermata'
+        'aale-spiele aale-spiele aale-spiele aale-spiele aale-spiele aale-spiele'
+        'aale-spiele aale-spiele aale-spiele aale-spiele aale-spiele aale-spiele';
     }
     .owner {
       grid-template-areas:

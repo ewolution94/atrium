@@ -9,6 +9,7 @@
   import Cantina from './viz/Cantina.svelte';
   import Axioma from './viz/Axioma.svelte';
   import Fermata from './viz/Fermata.svelte';
+  import AaleSpiele from './viz/AaleSpiele.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
 
@@ -27,6 +28,8 @@
   <Axioma {awake} />
 {:else if app.slug === 'fermata'}
   <Fermata url={app.url} {awake} />
+{:else if app.slug === 'aale-spiele'}
+  <AaleSpiele {awake} />
 {:else if app.slug === 'census'}
   <Census {awake} />
 {:else if app.slug === 'folio'}
