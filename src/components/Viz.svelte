@@ -12,6 +12,7 @@
   import AaleSpiele from './viz/AaleSpiele.svelte';
   import Tcgsl from './viz/Tcgsl.svelte';
   import Schaetzle from './viz/Schaetzle.svelte';
+  import Verso from './viz/Verso.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
 
@@ -36,6 +37,8 @@
   <Tcgsl {awake} />
 {:else if app.slug === 'schaetzle'}
   <Schaetzle {awake} />
+{:else if app.slug === 'verso'}
+  <Verso {awake} />
 {:else if app.slug === 'census'}
   <Census {awake} />
 {:else if app.slug === 'folio'}

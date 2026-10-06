@@ -1,9 +1,10 @@
 // The apps Atrium shows, and what it says about them. Nothing is discovered: an app is here
 // because it's listed here.
 //
-// `audience` decides who sees an entry: 'public' for everyone, 'owner' only for a signed-in
-// owner (see auth.mjs). Owner entries never reach a guest's browser, not even their names:
-// /api/apps filters on the server.
+// `audience` decides who sees an entry: 'public' for everyone; 'private' for everyone too, but in
+// its own group on the wall, for apps only invited people can use (a login of their own, like
+// Verso's Spotify allow-list); 'owner' only for a signed-in owner (see auth.mjs). Owner entries
+// never reach a guest's browser, not even their names: /api/apps filters on the server.
 //
 // The lines and descriptions are the landing's (ewolution.cloud, site/index.html and
 // site/i18n.js), so the two never say different things about an app. Census and Folio aren't on
@@ -15,7 +16,7 @@
 /** @typedef {{ line: string, desc: string }} Text */
 /**
  * @typedef {{
- *   slug: string, name: string, audience: 'public' | 'owner',
+ *   slug: string, name: string, audience: 'public' | 'private' | 'owner',
  *   host: string, live?: false, pulse: string | null, repo: string | null, writeup: string | null,
  *   stack: string, since: number, text: { en: Text, de: Text },
  * }} App
@@ -216,6 +217,30 @@ export const APPS = [
     },
   },
 
+  // --- Private: shown to everyone, usable by invited people only. -------------------------
+  // Not on the landing, so the texts restate the README.
+  {
+    slug: 'verso',
+    name: 'Verso',
+    audience: 'private',
+    host: 'verso.ewolution.cloud',
+    pulse: 'verso',
+    repo: 'https://github.com/ewolution94/verso',
+    writeup: null,
+    stack: 'Svelte · Node · SQLite',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Type a message and get a Spotify playlist whose song titles, read top to bottom, spell it out.',
+        desc: 'Log in with Spotify, type a message, and Verso searches the catalogue for songs whose titles say its words: whole phrases where it can (“Thank You For Everything”, “See You Later”), single words where it must. Choose fewer or more songs, shuffle, or swap a song for another with the same title, then save it as a playlist in your own account. Spotify limits apps like this one to five invited accounts.',
+      },
+      de: {
+        line: 'Tipp eine Nachricht und bekomm eine Spotify-Playlist, deren Songtitel sie von oben nach unten ergeben.',
+        desc: 'Mit Spotify anmelden, eine Nachricht tippen, und Verso sucht im Katalog nach Songs, deren Titel ihre Wörter sagen: ganze Phrasen, wo es geht („Thank You For Everything“, „See You Later“), einzelne Wörter, wo es sein muss. Weniger oder mehr Songs wählen, neu mischen oder einen Song gegen einen anderen mit demselben Titel tauschen, dann als Playlist im eigenen Konto speichern. Spotify begrenzt Apps wie diese auf fünf eingeladene Konten.',
+      },
+    },
+  },
+
   // --- Only for the owner, once sign-in is set up (auth.mjs). ------------------------------
   {
     slug: 'census',
@@ -263,7 +288,7 @@ export const APPS = [
   },
 ];
 
-/** The entries a viewer may see: everyone gets the public ones, an owner all of them. */
+/** The entries a viewer may see: everyone gets the public and private ones, an owner all of them. */
 export function visibleApps(isOwner) {
-  return APPS.filter((app) => app.audience === 'public' || isOwner);
+  return APPS.filter((app) => app.audience !== 'owner' || isOwner);
 }

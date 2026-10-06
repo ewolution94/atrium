@@ -11,6 +11,11 @@
   --ewo-accent: light-dark(#dc001d, #ff5a68);
   --ewo-accent-2: light-dark(#212121, #f0f0f0);
 }
+[data-ewo-project='verso'] {
+  /* Folio's --ewo-project-verso pair: plum, and the dark full stop of its icon. */
+  --ewo-accent: light-dark(#7b2598, #d38bea);
+  --ewo-accent-2: light-dark(#2b0a38, #f6e0ff);
+}
 [data-ewo-project='tcgsl'] {
   /* Folio's --ewo-project-tcgsl pair: foil gold and the holo teal of its set symbol. */
   --ewo-accent: light-dark(#8a6200, #f2c14e);

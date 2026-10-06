@@ -51,7 +51,7 @@ export type PulseTile = {
 export type App = {
   slug: string;
   name: string;
-  audience: 'public' | 'owner';
+  audience: 'public' | 'private' | 'owner';
   url: string | null;
   host: string;
   repo: string | null;

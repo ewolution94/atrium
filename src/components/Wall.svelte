@@ -6,6 +6,7 @@
   let { apps }: { apps: App[] } = $props();
 
   const publicApps = $derived(apps.filter((a) => a.audience === 'public'));
+  const privateApps = $derived(apps.filter((a) => a.audience === 'private'));
   const ownerApps = $derived(apps.filter((a) => a.audience === 'owner'));
 </script>
 
@@ -14,6 +15,15 @@
     <Tile {app} />
   {/each}
 </div>
+
+{#if privateApps.length}
+  <h2 class="group">{t('private')} <span>{privateApps.length}</span></h2>
+  <div class="wall private">
+    {#each privateApps as app (app.slug)}
+      <Tile {app} />
+    {/each}
+  </div>
+{/if}
 
 {#if ownerApps.length}
   <h2 class="group">{t('yours')} <span>{ownerApps.length}</span></h2>
@@ -40,6 +50,12 @@
       'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata'
       'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata'
       'schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle';
+  }
+  /* Room beside Verso for the next app that needs an invitation. */
+  .private {
+    grid-template-areas:
+      'verso verso verso verso verso verso . . . . . .'
+      'verso verso verso verso verso verso . . . . . .';
   }
   .owner {
     grid-template-areas:
@@ -88,6 +104,11 @@
         'aale-spiele aale-spiele aale-spiele tcgsl tcgsl tcgsl'
         'schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle';
     }
+    .private {
+      grid-template-areas:
+        'verso verso verso verso verso verso'
+        'verso verso verso verso verso verso';
+    }
     .owner {
       grid-template-areas:
         'census census census folio folio folio'
@@ -101,6 +122,7 @@
       grid-auto-rows: auto;
     }
     .web,
+    .private,
     .owner {
       grid-template-areas: none;
     }
