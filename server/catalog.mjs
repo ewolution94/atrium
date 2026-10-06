@@ -163,11 +163,11 @@ export const APPS = [
     text: {
       en: {
         line: 'The games our afternoon meeting plays, and a button that picks one.',
-        desc: 'Ten browser games, from skribbl.io to HaxBall, each with a sentence on how it plays, what kind it is and whether it’s teams or everyone for themselves. “Was spielen wir?” spins a reel through them like a slot machine and stops on one, never the same twice in a row, and a filter narrows the draw to creative, guessing, geo or action games. The games ship with the page, so it works offline.',
+        desc: 'Eleven browser games, from skribbl.io to HaxBall, each with a sentence on how it plays, what kind it is and whether it’s teams or everyone for themselves. “Was spielen wir?” spins a reel through them like a slot machine and stops on one, never the same twice in a row, and a filter narrows the draw to creative, guessing, geo or action games. The games ship with the page, so it works offline.',
       },
       de: {
         line: 'Die Spiele aus unserem Nachmittags-Meeting, und ein Knopf, der eins aussucht.',
-        desc: 'Zehn Browser-Spiele von skribbl.io bis HaxBall, jedes mit einem Satz dazu, wie es läuft, welche Art es ist und ob in Teams oder jeder gegen jeden. „Was spielen wir?“ dreht eine Walze wie am Spielautomaten durch die Spiele und hält auf einem, nie zweimal hintereinander auf demselben, und ein Filter beschränkt die Auslosung auf kreative, Rate-, Geo- oder Action-Spiele. Die Spiele kommen mit der Seite, also funktioniert sie auch offline.',
+        desc: 'Elf Browser-Spiele von skribbl.io bis HaxBall, jedes mit einem Satz dazu, wie es läuft, welche Art es ist und ob in Teams oder jeder gegen jeden. „Was spielen wir?“ dreht eine Walze wie am Spielautomaten durch die Spiele und hält auf einem, nie zweimal hintereinander auf demselben, und ein Filter beschränkt die Auslosung auf kreative, Rate-, Geo- oder Action-Spiele. Die Spiele kommen mit der Seite, also funktioniert sie auch offline.',
       },
     },
   },
@@ -190,6 +190,28 @@ export const APPS = [
       de: {
         line: 'Jedes englische Pokémon-TCG-Set, das neueste zuerst, mit seinem Logo und seinen wertvollsten Karten.',
         desc: 'Alle englischen Sets seit dem Base Set von 1999, eins pro Zeile und nach Jahren gruppiert, auf dem Handy mit einer Leiste am Rand, über die man durch die Jahre fährt. Jedes Set öffnet seine ganze Kartenliste, angeführt von seinen drei wertvollsten Karten zum Cardmarket-Trendpreis. Ein kleiner Server verkleinert jedes Logo und jede Karte auf die Größe, in der die Seite sie zeigt, und hebt sie auf, sodass die Bilder der ganzen Liste 11 MB wiegen statt 104 MB, und er holt die Sets einmal am Tag neu von pokemontcg.io.',
+      },
+    },
+  },
+
+  {
+    slug: 'schaetzle',
+    name: 'Schätzle',
+    audience: 'public',
+    host: 'schaetzle.ewolution.cloud',
+    pulse: 'schaetzle',
+    repo: 'https://github.com/ewolution94/schaetzle',
+    writeup: '/schaetzle/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Guess the price of eBay listings together: a party game for our afternoon meeting.',
+        desc: 'Join a room with its four-letter code or QR code, no account needed; everyone sees the same listing and types a price. The reveal puts every guess on a line around the real price, scored by the ratio: 10% off earns about 850 of 1,000 points, half or double the price earns nothing. A Node server without dependencies keeps the rooms in memory and streams each one to its players over Server-Sent Events. Until its eBay keys are set, it plays 95 demo items and labels them as such.',
+      },
+      de: {
+        line: 'Gemeinsam den Preis von eBay-Angeboten schätzen: ein Partyspiel für unser Nachmittags-Meeting.',
+        desc: 'Beitreten mit dem Code aus vier Buchstaben oder per QR-Code, ohne Konto; alle sehen dasselbe Angebot und tippen einen Preis. Die Auflösung setzt jeden Tipp auf eine Linie um den echten Preis, gewertet nach dem Verhältnis: 10\u00a0% daneben bringt etwa 850 von 1.000 Punkten, der halbe oder doppelte Preis nichts. Ein Node-Server ohne Abhängigkeiten hält die Räume im Speicher und schickt jeden per Server-Sent Events an seine Spieler. Bis seine eBay-Schlüssel gesetzt sind, spielt es mit 95 Demo-Artikeln und sagt das auch.',
       },
     },
   },

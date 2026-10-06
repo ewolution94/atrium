@@ -6,6 +6,11 @@
 
 /* Folio's --ewo-project-aale-spiele pair, which the vendored tokens don't carry yet: the eel's
    pink and the yellow ball it chases. Drop this once Folio is vendored again. */
+[data-ewo-project='schaetzle'] {
+  /* Folio's --ewo-project-schaetzle pair: OTTO's red and its ink. */
+  --ewo-accent: light-dark(#dc001d, #ff5a68);
+  --ewo-accent-2: light-dark(#212121, #f0f0f0);
+}
 [data-ewo-project='tcgsl'] {
   /* Folio's --ewo-project-tcgsl pair: foil gold and the holo teal of its set symbol. */
   --ewo-accent: light-dark(#8a6200, #f2c14e);
