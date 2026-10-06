@@ -10,6 +10,7 @@
   import Axioma from './viz/Axioma.svelte';
   import Fermata from './viz/Fermata.svelte';
   import AaleSpiele from './viz/AaleSpiele.svelte';
+  import Tcgsl from './viz/Tcgsl.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
 
@@ -30,6 +31,8 @@
   <Fermata url={app.url} {awake} />
 {:else if app.slug === 'aale-spiele'}
   <AaleSpiele {awake} />
+{:else if app.slug === 'tcgsl'}
+  <Tcgsl {awake} />
 {:else if app.slug === 'census'}
   <Census {awake} />
 {:else if app.slug === 'folio'}

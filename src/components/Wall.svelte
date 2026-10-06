@@ -37,8 +37,8 @@
       'clinch clinch clinch clinch clinch clinch planum planum planum aale-spiele aale-spiele aale-spiele'
       'clinch clinch clinch clinch clinch clinch planum planum planum aale-spiele aale-spiele aale-spiele'
       'clinch clinch clinch clinch clinch clinch pulse pulse pulse pulse pulse pulse'
-      'cantina cantina cantina cantina axioma axioma axioma axioma axioma fermata fermata fermata'
-      'cantina cantina cantina cantina axioma axioma axioma axioma axioma fermata fermata fermata';
+      'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata'
+      'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata';
   }
   .owner {
     grid-template-areas:
@@ -83,8 +83,8 @@
         'pulse pulse pulse pulse pulse pulse'
         'cantina cantina cantina fermata fermata fermata'
         'cantina cantina cantina fermata fermata fermata'
-        'aale-spiele aale-spiele aale-spiele aale-spiele aale-spiele aale-spiele'
-        'aale-spiele aale-spiele aale-spiele aale-spiele aale-spiele aale-spiele';
+        'aale-spiele aale-spiele aale-spiele tcgsl tcgsl tcgsl'
+        'aale-spiele aale-spiele aale-spiele tcgsl tcgsl tcgsl';
     }
     .owner {
       grid-template-areas:

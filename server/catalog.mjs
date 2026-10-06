@@ -172,6 +172,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'tcgsl',
+    name: 'TCGSL',
+    audience: 'public',
+    host: 'tcgsl.ewolution.cloud',
+    pulse: 'tcgsl',
+    repo: 'https://github.com/ewolution94/tcgsl',
+    writeup: '/tcgsl/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Every English Pokémon TCG set, newest first, with its logo and its most valuable cards.',
+        desc: 'All English sets since Base Set in 1999, one row each and grouped by year, with a scrubber along the edge on a phone. Each set opens its full card list, led by its three most valuable cards at Cardmarket’s trend price. A small server resizes every logo and card to the size the page draws and keeps it, so the images of the whole list weigh 11 MB instead of 104 MB, and it fetches the sets from pokemontcg.io again once a day.',
+      },
+      de: {
+        line: 'Jedes englische Pokémon-TCG-Set, das neueste zuerst, mit seinem Logo und seinen wertvollsten Karten.',
+        desc: 'Alle englischen Sets seit dem Base Set von 1999, eins pro Zeile und nach Jahren gruppiert, auf dem Handy mit einer Leiste am Rand, über die man durch die Jahre fährt. Jedes Set öffnet seine ganze Kartenliste, angeführt von seinen drei wertvollsten Karten zum Cardmarket-Trendpreis. Ein kleiner Server verkleinert jedes Logo und jede Karte auf die Größe, in der die Seite sie zeigt, und hebt sie auf, sodass die Bilder der ganzen Liste 11 MB wiegen statt 104 MB, und er holt die Sets einmal am Tag neu von pokemontcg.io.',
+      },
+    },
+  },
+
   // --- Only for the owner, once sign-in is set up (auth.mjs). ------------------------------
   {
     slug: 'census',
