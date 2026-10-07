@@ -207,12 +207,12 @@ export const APPS = [
     since: 2026,
     text: {
       en: {
-        line: 'Guess the price of eBay listings together: a party game for our afternoon meeting.',
-        desc: 'Join a room with its four-letter code or QR code, no account needed; everyone sees the same listing and types a price. The reveal puts every guess on a line around the real price, scored by the ratio: 10% off earns about 850 of 1,000 points, half or double the price earns nothing. A Node server without dependencies keeps the rooms in memory and streams each one to its players over Server-Sent Events. Until its eBay keys are set, it plays 95 demo items and labels them as such.',
+        line: 'Guess the price of eBay listings together, in four modes: a party game for our afternoon meeting.',
+        desc: 'Join a room with its four-letter code or QR code, no account needed. Guess the price, guess without going over, call higher or lower against the last item, or sort four items by price, alone or in teams, while a big-screen view shows the game on the meeting room’s projector. Guesses are scored by the ratio: 10% off earns about 850 of 1,000 points, half or double the price earns nothing. A Node server without dependencies keeps the rooms in memory and streams them over Server-Sent Events; until its eBay keys are set, it plays 95 demo items and labels them as such.',
       },
       de: {
-        line: 'Gemeinsam den Preis von eBay-Angeboten schätzen: ein Partyspiel für unser Nachmittags-Meeting.',
-        desc: 'Beitreten mit dem Code aus vier Buchstaben oder per QR-Code, ohne Konto; alle sehen dasselbe Angebot und tippen einen Preis. Die Auflösung setzt jeden Tipp auf eine Linie um den echten Preis, gewertet nach dem Verhältnis: 10\u00a0% daneben bringt etwa 850 von 1.000 Punkten, der halbe oder doppelte Preis nichts. Ein Node-Server ohne Abhängigkeiten hält die Räume im Speicher und schickt jeden per Server-Sent Events an seine Spieler. Bis seine eBay-Schlüssel gesetzt sind, spielt es mit 95 Demo-Artikeln und sagt das auch.',
+        line: 'Gemeinsam den Preis von eBay-Angeboten schätzen, in vier Spielarten: ein Partyspiel für unser Nachmittags-Meeting.',
+        desc: 'Beitreten mit dem Code aus vier Buchstaben oder per QR-Code, ohne Konto. Den Preis schätzen, schätzen ohne drüberzuliegen, teurer oder billiger als der letzte Artikel, oder vier Artikel nach Preis sortieren, allein oder in Teams; eine Ansicht für den großen Bildschirm zeigt das Spiel am Beamer im Besprechungsraum. Tipps zählen nach dem Verhältnis: 10\u00a0% daneben bringt etwa 850 von 1.000 Punkten, der halbe oder doppelte Preis nichts. Ein Node-Server ohne Abhängigkeiten hält die Räume im Speicher und schickt sie per Server-Sent Events; bis seine eBay-Schlüssel gesetzt sind, spielt es mit 95 Demo-Artikeln und sagt das auch.',
       },
     },
   },
