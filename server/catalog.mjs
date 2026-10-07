@@ -217,6 +217,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'vollmond',
+    name: 'Vollmond',
+    audience: 'public',
+    host: 'vollmond.ewolution.cloud',
+    pulse: 'vollmond',
+    repo: 'https://github.com/ewolution94/vollmond',
+    writeup: '/vollmond/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'The party game Werewolf for our afternoon meeting, with the app as the narrator, on a video call or at one table.',
+        desc: 'Found a village, share its four-letter code, and the app deals the cards: werewolves, villagers and eight special roles from the Seer to the Elder, each a woodcut in two inks drawn for the game. It runs the nights and days by itself; at night everyone taps something, so no screen gives a role away, and the wolves agree on a victim without a word. Classic or quick, with a deck that shows its balance and a big-screen view for sharing; bots fill a table for trying it out. A Node server without dependencies holds the villages in memory and sends each player only their own view over Server-Sent Events.',
+      },
+      de: {
+        line: 'Das Partyspiel Werwolf für unser Nachmittags-Meeting, mit der App als Erzählerin, im Videocall oder am selben Tisch.',
+        desc: 'Ein Dorf gründen, den Code aus vier Buchstaben teilen, und die App verteilt die Karten: Werwölfe, Dorfbewohner und acht Sonderrollen von der Seherin bis zum Alten, jede ein Holzschnitt in zwei Farben, gezeichnet für das Spiel. Nächte und Tage laufen von selbst; nachts tippen alle etwas, damit kein Bildschirm eine Rolle verrät, und die Wölfe einigen sich ohne ein Wort auf ein Opfer. Klassisch oder schnell, mit einem Deck, das sein Gleichgewicht zeigt, und einer Ansicht für den großen Bildschirm; Bots füllen den Tisch zum Ausprobieren. Ein Node-Server ohne Abhängigkeiten hält die Dörfer im Speicher und schickt jedem per Server-Sent Events nur seine eigene Sicht.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
