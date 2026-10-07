@@ -30,12 +30,15 @@ var i = t`
   dialog.dragging { transition: none; }
   dialog:not(.dragging) { transition: translate var(--ewo-dur-2) var(--ewo-ease); }
   dialog.closing { animation: down 260ms var(--ewo-ease-io) forwards; }
+  /* Cantina's backdrop, every app's since 2026-10-07 (plans/settings-alignment.md): darkened, with a
+     slight blur, fading in over 300 ms and out over 260 ms. */
   dialog::backdrop {
-    background: rgb(0 0 0 / 0.45);
-    backdrop-filter: blur(2px);
-    animation: fade var(--ewo-dur-3) var(--ewo-ease);
+    background: oklch(0.1 0.01 270 / 0.5);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    animation: fade 300ms var(--ewo-ease);
   }
-  dialog.closing::backdrop { animation: fade 260ms var(--ewo-ease-io) reverse forwards; }
+  dialog.closing::backdrop { animation: fade 260ms var(--ewo-ease) reverse forwards; }
 
   @media (min-width: 720px) {
     dialog {
@@ -83,9 +86,25 @@ var i = t`
   }
   .close:hover { color: var(--ewo-fg); background: var(--ewo-fill-3); }
   .close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
-  .body { flex: 1; overflow: auto; overscroll-behavior: contain; padding: var(--ewo-space-2) var(--ewo-space-5) var(--ewo-space-5); }
+  /* \`auto\`, not \`flex: 1\`: the dialog has a max-height but no height, and Safari resolves a 0%
+     basis against that literally, so the sheet opened as a sliver at the bottom (Cantina, then
+     Pinout's settings, learnings/ios-and-webkit.md). Sized by its content, then shrunk to fit and
+     scrolled, it works the same everywhere. */
+  .body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: var(--ewo-space-2) var(--ewo-space-5) calc(var(--ewo-space-5) + env(safe-area-inset-bottom));
+  }
   footer { padding: var(--ewo-space-3) var(--ewo-space-5) max(var(--ewo-space-5), env(safe-area-inset-bottom)); border-top: 1px solid var(--ewo-line-2); }
   footer:not(.has) { display: none; }
+  /* In a phone's browser (not an installed app), Safari's floating toolbar covers the bottom of
+     the sheet; leave room to scroll the last rows (or the footer) above it. */
+  @media (display-mode: browser) and (max-width: 719px) {
+    dialog:not(.with-footer) .body { padding-bottom: calc(env(safe-area-inset-bottom) + 76px); }
+    footer { padding-bottom: calc(env(safe-area-inset-bottom) + 76px); }
+  }
 `, a = class extends e {
 	static styles = [i];
 	static observedAttributes = ["open", "label"];
@@ -104,7 +123,10 @@ var i = t`
 			this.#t && t.target === e && this.#o();
 		}), this.root.querySelector(".close").addEventListener("click", () => this.#i());
 		let t = this.root.querySelector("footer"), n = t.querySelector("slot");
-		n.addEventListener("slotchange", () => t.classList.toggle("has", n.assignedElements().length > 0));
+		n.addEventListener("slotchange", () => {
+			let r = n.assignedElements().length > 0;
+			t.classList.toggle("has", r), e.classList.toggle("with-footer", r);
+		});
 		let r = this.root.querySelector(".grip");
 		r.addEventListener("pointerdown", (t) => {
 			t.pointerType !== "mouse" && (this.#n = t.clientY, e.classList.add("dragging"), r.setPointerCapture(t.pointerId));

@@ -3,10 +3,12 @@
   import { go, route } from '../lib/route.svelte';
   import { prefs, setLayout, type Layout } from '../lib/prefs.svelte';
   import { t } from '../lib/i18n.svelte';
+  import Settings from './Settings.svelte';
 
   let { onsearch, wall }: { onsearch: () => void; wall: boolean } = $props();
 
   let scrolled = $state(false);
+  let settings = $state(false);
   onMount(() => {
     const check = () => (scrolled = scrollY > 8);
     check();
@@ -47,9 +49,13 @@
       <span class="label">{t('search')}</span>
       <kbd>{isMac ? '⌘K' : 'Ctrl K'}</kbd>
     </button>
-    <ewo-theme-toggle label-light={t('toLight')} label-dark={t('toDark')}></ewo-theme-toggle>
+    <!-- A real <button> inside (Folio's element): Enter and Space click it, the click reaches here. -->
+    <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+    <ewo-settings-button onclick={() => (settings = true)}></ewo-settings-button>
   </div>
 </header>
+
+<Settings bind:open={settings} />
 
 <style>
   .bar {

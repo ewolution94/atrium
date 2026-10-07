@@ -1,7 +1,6 @@
 <script lang="ts">
   import { data } from '../lib/data.svelte';
-  import { i18n, setLang, t } from '../lib/i18n.svelte';
-  import type { Lang } from '../lib/types';
+  import { t } from '../lib/i18n.svelte';
 </script>
 
 <footer class="foot">
@@ -14,16 +13,6 @@
     {:else if data.doc?.login}
       <a href="/login">{t('signIn')}</a>
     {/if}
-    <ewo-segmented
-      size="sm"
-      label={t('language')}
-      value={i18n.lang}
-      options={[
-        { value: 'en', label: 'EN' },
-        { value: 'de', label: 'DE' },
-      ]}
-      onchange={(e) => setLang(e.detail.value as Lang)}
-    ></ewo-segmented>
   </span>
 </footer>
 

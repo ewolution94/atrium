@@ -1,31 +1,56 @@
-// English and German, following the browser until the switch in the footer is used. The choice
-// is kept under `ewo:lang` (the landing's key); public/boot.js applies it before first paint.
+// English and German, following the browser until a language is picked in Settings. The choice
+// is kept under `ewo:lang` (the landing's key; System removes it); public/boot.js applies it
+// before first paint.
 
+import { themeShift } from '../../vendor/ewo/elements/theme-shift.js';
 import type { Lang } from './types';
 
 const KEY = 'ewo:lang';
 
-function initial(): Lang {
+export type LangPref = 'system' | Lang;
+
+const browser = (): Lang => (navigator.language?.toLowerCase().startsWith('de') ? 'de' : 'en');
+
+function storedPref(): LangPref {
   try {
     const stored = localStorage.getItem(KEY);
     if (stored === 'en' || stored === 'de') return stored;
   } catch {
     // storage blocked: follow the browser
   }
-  return navigator.language?.toLowerCase().startsWith('de') ? 'de' : 'en';
+  return 'system';
 }
 
-export const i18n = $state({ lang: initial() });
+const resolve = (pref: LangPref): Lang => (pref === 'system' ? browser() : pref);
 
-export function setLang(lang: Lang) {
+/** `pref`: the choice in Settings. `lang`: the language on screen, which follows it. */
+export const i18n = $state({ pref: storedPref(), lang: resolve(storedPref()) });
+
+function show(lang: Lang) {
   i18n.lang = lang;
   document.documentElement.lang = lang;
+}
+
+/**
+ * A pick in Settings. When it changes the language on screen, the page blurs for a moment while the
+ * new one comes in (Folio's themeShift, like a theme change).
+ */
+export function setLanguage(pref: LangPref) {
+  i18n.pref = pref;
   try {
-    localStorage.setItem(KEY, lang);
+    if (pref === 'system') localStorage.removeItem(KEY);
+    else localStorage.setItem(KEY, pref);
   } catch {
     // not kept, still applied
   }
+  const next = resolve(pref);
+  if (next !== i18n.lang) themeShift(() => show(next));
 }
+
+// The browser's own language changing under System applies at once.
+addEventListener('languagechange', () => {
+  if (i18n.pref === 'system') show(browser());
+});
 
 const STRINGS = {
   en: {
@@ -57,15 +82,14 @@ const STRINGS = {
     move: 'move',
     details: 'details',
     close: 'Close',
+    settings: 'Settings',
+    general: 'General',
     private: 'Private',
     yours: 'Only for you',
     signIn: 'Sign in',
     signOut: 'Sign out',
     notLive: 'Not live yet',
-    language: 'Language',
     theme: 'Theme',
-    toLight: 'Switch to light',
-    toDark: 'Switch to dark',
     week: 'Week {n}',
     playoffs: 'Playoffs',
     playoffPicture: 'Playoff picture',
@@ -109,15 +133,14 @@ const STRINGS = {
     move: 'wählen',
     details: 'Details',
     close: 'Schließen',
+    settings: 'Einstellungen',
+    general: 'Allgemein',
     private: 'Privat',
     yours: 'Nur für dich',
     signIn: 'Anmelden',
     signOut: 'Abmelden',
     notLive: 'Noch nicht live',
-    language: 'Sprache',
     theme: 'Design',
-    toLight: 'Zu hell wechseln',
-    toDark: 'Zu dunkel wechseln',
     week: 'Woche {n}',
     playoffs: 'Playoffs',
     playoffPicture: 'Playoff-Bild',
