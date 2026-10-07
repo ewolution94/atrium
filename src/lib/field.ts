@@ -32,9 +32,9 @@ export function startField(canvas: HTMLCanvasElement) {
   function readInk() {
     ink = getComputedStyle(canvas).color;
     const theme = document.documentElement.dataset.theme ?? (dark.matches ? 'dark' : 'light');
-    // Quiet on purpose: at 0.12 / 0.09 the grid read as a pattern on top of the page (the user,
-    // 2026-10-08, "too intense"). Schätzle's field uses the same values.
-    base = theme === 'dark' ? 0.05 : 0.07;
+    // Quiet on purpose: at 0.12 / 0.09 the grid read as a pattern on top of the page, and 0.07 / 0.05
+    // was still too much (the user, 2026-10-08). Schätzle's field uses the same values.
+    base = theme === 'dark' ? 0.035 : 0.045;
   }
 
   function resize() {
@@ -61,10 +61,10 @@ export function startField(canvas: HTMLCanvasElement) {
         const size = 0.9 + 1.3 * k;
         if (k > 0.04 && tint) {
           ctx!.fillStyle = tint;
-          ctx!.globalAlpha = Math.min(1, 0.15 + 0.8 * k);
+          ctx!.globalAlpha = Math.min(1, 0.1 + 0.6 * k);
         } else {
           ctx!.fillStyle = ink;
-          ctx!.globalAlpha = base + 0.3 * k;
+          ctx!.globalAlpha = base + 0.22 * k;
         }
         ctx!.fillRect(x + dx * push - size, y + dy * push - size, size * 2, size * 2);
       }
