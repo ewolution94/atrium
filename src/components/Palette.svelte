@@ -5,6 +5,7 @@
   import { go } from '../lib/route.svelte';
   import { i18n, t } from '../lib/i18n.svelte';
   import type { App } from '../lib/types';
+  import { lockScroll } from '../../vendor/ewo/elements/scroll-lock.js';
 
   let { apps }: { apps: App[] } = $props();
 
@@ -12,6 +13,8 @@
   let input: HTMLInputElement;
   let query = $state('');
   let selected = $state(0);
+  // The page behind stays put while the palette is open (Folio's lock, as in every sheet).
+  let unlock: (() => void) | undefined;
 
   const shown = $derived.by(() => {
     const q = query.trim().toLowerCase();
@@ -24,6 +27,7 @@
     query = '';
     selected = 0;
     dialog.showModal();
+    unlock = lockScroll();
     await tick();
     input.focus();
   }
@@ -63,7 +67,15 @@
   });
 </script>
 
-<dialog bind:this={dialog} aria-label={t('openApp')} onclick={(e) => e.target === dialog && dialog.close()}>
+<dialog
+  bind:this={dialog}
+  aria-label={t('openApp')}
+  onclick={(e) => e.target === dialog && dialog.close()}
+  onclose={() => {
+    unlock?.();
+    unlock = undefined;
+  }}
+>
   <div class="panel">
     <div class="head">
       <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" /><path d="M11 11l3.5 3.5" /></svg>
