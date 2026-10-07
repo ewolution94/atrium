@@ -239,6 +239,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'kritzle',
+    name: 'Kritzle',
+    audience: 'public',
+    host: 'kritzle.ewolution.cloud',
+    pulse: 'kritzle',
+    repo: 'https://github.com/ewolution94/kritzle',
+    writeup: '/kritzle/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Draw a word, guess the others’: our own skribbl.io for the afternoon meeting, with an avatar maker and a gallery at the end.',
+        desc: 'Share a room’s four-letter code, build a face with a few arrows, and take turns drawing while everyone else guesses in the chat; a right guess never shows, only who got it. The strokes reach every screen as they’re drawn and play back on the drawer’s own timing, fills included. Classic or Blitz, with hidden or combination words, German or English word lists in nine themes and your own words; bots fill a room for trying it out. At the end a podium, awards and a gallery where every drawing replays as a timelapse. A Node server without dependencies keeps the rooms in memory and sends each page only what it may see over Server-Sent Events.',
+      },
+      de: {
+        line: 'Ein Wort zeichnen, die der anderen raten: unser eigenes skribbl.io fürs Nachmittags-Meeting, mit Avatar-Baukasten und Galerie am Ende.',
+        desc: 'Den Code aus vier Buchstaben teilen, mit ein paar Pfeilen ein Gesicht bauen, und reihum zeichnet einer, während alle anderen im Chat raten; ein richtiger Tipp erscheint nie, nur wer es hat. Die Striche erreichen jeden Bildschirm, während sie entstehen, und laufen im Takt des Zeichners ab, Füllungen inklusive. Klassisch oder Blitz, mit versteckten oder kombinierten Wörtern, deutschen oder englischen Wortlisten in neun Themen und eigenen Wörtern; Bots füllen den Raum zum Ausprobieren. Am Ende ein Podest, Auszeichnungen und eine Galerie, in der jede Zeichnung im Zeitraffer abläuft. Ein Node-Server ohne Abhängigkeiten hält die Räume im Speicher und schickt jeder Seite per Server-Sent Events nur, was sie sehen darf.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {

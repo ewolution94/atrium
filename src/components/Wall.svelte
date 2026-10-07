@@ -49,7 +49,7 @@
       'clinch clinch clinch clinch clinch clinch pulse pulse pulse pulse pulse pulse'
       'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata'
       'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata'
-      'schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle vollmond vollmond vollmond vollmond vollmond vollmond';
+      'schaetzle schaetzle schaetzle schaetzle vollmond vollmond vollmond vollmond kritzle kritzle kritzle kritzle';
   }
   /* Room beside Verso for the next app that needs an invitation. */
   .private {
@@ -103,7 +103,8 @@
         'aale-spiele aale-spiele aale-spiele tcgsl tcgsl tcgsl'
         'aale-spiele aale-spiele aale-spiele tcgsl tcgsl tcgsl'
         'schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle'
-        'vollmond vollmond vollmond vollmond vollmond vollmond';
+        'vollmond vollmond vollmond vollmond vollmond vollmond'
+        'kritzle kritzle kritzle kritzle kritzle kritzle';
     }
     .private {
       grid-template-areas:

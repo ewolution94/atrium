@@ -13,6 +13,7 @@
   import Tcgsl from './viz/Tcgsl.svelte';
   import Schaetzle from './viz/Schaetzle.svelte';
   import Vollmond from './viz/Vollmond.svelte';
+  import Kritzle from './viz/Kritzle.svelte';
   import Verso from './viz/Verso.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
@@ -40,6 +41,8 @@
   <Schaetzle {awake} />
 {:else if app.slug === 'vollmond'}
   <Vollmond {awake} />
+{:else if app.slug === 'kritzle'}
+  <Kritzle {awake} />
 {:else if app.slug === 'verso'}
   <Verso {awake} />
 {:else if app.slug === 'census'}

@@ -9,7 +9,7 @@
   let { app }: { app: App } = $props();
 
   /** The slugs the wall's grid has a place for; anything else flows in after them. */
-  const PLACED = new Set(['clinch', 'planum', 'pulse', 'cantina', 'axioma', 'fermata', 'aale-spiele', 'tcgsl', 'schaetzle', 'vollmond', 'verso', 'census', 'folio']);
+  const PLACED = new Set(['clinch', 'planum', 'pulse', 'cantina', 'axioma', 'fermata', 'aale-spiele', 'tcgsl', 'schaetzle', 'vollmond', 'kritzle', 'verso', 'census', 'folio']);
 
   let tile: HTMLElement;
   let spot: HTMLElement;
