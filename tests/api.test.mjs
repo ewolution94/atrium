@@ -41,7 +41,7 @@ before(async () => {
 });
 after(() => server.close());
 
-test('a guest sees the eleven public apps and the private ones, with status and live tiles', async () => {
+test('a guest sees the twelve public apps and the private ones, with status and live tiles', async () => {
   const res = await fetch(`${base}/api/apps`);
   assert.equal(res.status, 200);
   assert.equal(res.headers.get('cache-control'), 'no-store');
@@ -51,7 +51,7 @@ test('a guest sees the eleven public apps and the private ones, with status and 
   assert.equal(doc.viewer, null);
   assert.deepEqual(
     doc.apps.map((a) => a.slug),
-    ['clinch', 'planum', 'pulse', 'cantina', 'axioma', 'fermata', 'aale-spiele', 'tcgsl', 'schaetzle', 'vollmond', 'kritzle', 'verso'],
+    ['clinch', 'planum', 'pulse', 'cantina', 'axioma', 'fermata', 'aale-spiele', 'tcgsl', 'schaetzle', 'vollmond', 'kritzle', 'cdnms', 'verso'],
   );
   assert.equal(doc.status.overall, 'operational');
 
@@ -63,8 +63,8 @@ test('a guest sees the eleven public apps and the private ones, with status and 
   assert.equal(by.clinch.tile.conferences[0].seeds[0].abbr, 'KC');
   assert.equal(by.cantina.tile.dish.photo, '/api/cantina/photo?d=249312');
   assert.equal(by.pulse.status.state, 'operational');
-  // Aale Spiele, TCGSL, Schätzle, Vollmond, Kritzle and Verso count towards Pulse's total, but the fixture predates their checks: no status yet.
-  assert.equal(by.pulse.tile.of, 11);
+  // Aale Spiele, TCGSL, Schätzle, Vollmond, Kritzle, CDNMS and Verso count towards Pulse's total, but the fixture predates their checks: no status yet.
+  assert.equal(by.pulse.tile.of, 12);
   assert.equal(by.pulse.tile.up, 5);
   assert.equal(by['aale-spiele'].status, null);
   assert.equal(by['aale-spiele'].tile, null);
@@ -81,6 +81,9 @@ test('a guest sees the eleven public apps and the private ones, with status and 
   assert.equal(by.kritzle.status, null);
   assert.equal(by.kritzle.tile, null);
   assert.equal(by.kritzle.writeup, 'https://ewolution.cloud/kritzle/');
+  assert.equal(by.cdnms.status, null);
+  assert.equal(by.cdnms.tile, null);
+  assert.equal(by.cdnms.writeup, 'https://ewolution.cloud/cdnms/');
   // Verso is private: everyone sees it, in its own group, and it has no write-up on the landing.
   assert.equal(by.verso.audience, 'private');
   assert.equal(by.verso.url, 'https://verso.ewolution.cloud/');
@@ -140,8 +143,8 @@ test('apps that are down upstream still list, without tile data', async () => {
   try {
     const doc = await (await fetch(`http://127.0.0.1:${s.address().port}/api/apps`)).json();
     assert.equal(doc.login, false);
-    // Eleven public apps and Verso, the private one; the owner's stay hidden.
-    assert.equal(doc.apps.length, 12);
+    // Twelve public apps and Verso, the private one; the owner's stay hidden.
+    assert.equal(doc.apps.length, 13);
     assert.equal(doc.status.overall, 'unknown');
     assert.ok(doc.apps.every((a) => a.tile === null));
     assert.equal(doc.apps.find((a) => a.slug === 'pulse').status.state, 'unknown');

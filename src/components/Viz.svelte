@@ -14,6 +14,7 @@
   import Schaetzle from './viz/Schaetzle.svelte';
   import Vollmond from './viz/Vollmond.svelte';
   import Kritzle from './viz/Kritzle.svelte';
+  import Cdnms from './viz/Cdnms.svelte';
   import Verso from './viz/Verso.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
@@ -43,6 +44,8 @@
   <Vollmond {awake} />
 {:else if app.slug === 'kritzle'}
   <Kritzle {awake} />
+{:else if app.slug === 'cdnms'}
+  <Cdnms {awake} />
 {:else if app.slug === 'verso'}
   <Verso {awake} />
 {:else if app.slug === 'census'}

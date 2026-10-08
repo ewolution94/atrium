@@ -261,6 +261,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'cdnms',
+    name: 'CDNMS',
+    audience: 'public',
+    host: 'cdnms.ewolution.cloud',
+    pulse: 'cdnms',
+    repo: 'https://github.com/ewolution94/cdnms',
+    writeup: '/cdnms/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'One word, a number, a board of cards: our own Codenames for the afternoon meeting, with word and picture cards.',
+        desc: 'Share a room’s four-letter code and take a seat in a team: one spymaster each, everyone else guesses. The spymaster taps the cards a clue is meant for and types one word, checked against the board as it’s typed; the team points at cards and holds to turn one over. Boards of 25 words, 20 picture cards that each put two line motifs together, or both; German or English words in six themes and your own; an objection for the other spymaster, clocks and bots. At the end the whole key and what every clue was meant for. A Node server without dependencies keeps the rooms in memory and sends each page only what it may see over Server-Sent Events, so the key never leaves the spymasters’ screens.',
+      },
+      de: {
+        line: 'Ein Wort, eine Zahl, ein Brett voller Karten: unser eigenes Codenames fürs Nachmittags-Meeting, mit Wort- und Bildkarten.',
+        desc: 'Den Code aus vier Buchstaben teilen und in einem Team Platz nehmen: je ein Chef, alle anderen raten. Der Chef tippt die Karten an, die ein Hinweis meint, und schreibt ein Wort, das schon beim Tippen gegen das Brett geprüft wird; das Team zeigt auf Karten und hält gedrückt, um eine aufzudecken. Bretter aus 25 Wörtern, aus 20 Bildkarten, die je zwei Strichmotive zusammensetzen, oder beides; deutsche oder englische Wörter in sechs Themen und eigene; Einspruch für den anderen Chef, Uhren und Bots. Am Ende der ganze Schlüssel und was jeder Hinweis gemeint hat. Ein Node-Server ohne Abhängigkeiten hält die Räume im Speicher und schickt jeder Seite per Server-Sent Events nur, was sie sehen darf, so verlässt der Schlüssel nie die Bildschirme der Chefs.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
