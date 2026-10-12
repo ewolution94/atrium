@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { berlinDate, cached, dayState, dayWindow, summarizeCantina, summarizeClinch, summarizePulse } from '../server/sources.mjs';
+import { berlinDate, cached, createSources, dayState, dayWindow, summarizeCantina, summarizeClinch, summarizePulse } from '../server/sources.mjs';
 
 // The fixtures are trimmed copies of the live answers on 2026-10-02.
 const fixture = (name) => JSON.parse(readFileSync(new URL(`fixtures/${name}`, import.meta.url), 'utf8'));
@@ -151,8 +151,60 @@ test('cached: a failed refresh keeps the last value, marks it stale later, and r
 });
 
 test('cached: a cold reader gives up after `wait` and gets null', async () => {
-  const source = cached(() => new Promise(() => {}), { ttl: 1000 });
+  const source = cached(() => new Promise(() => {}), { ttl: 1000, deadline: 100 });
   const started = Date.now();
   assert.equal(await source.get({ wait: 50 }), null);
   assert.ok(Date.now() - started < 1000);
+});
+
+// On 2026-10-09 one of Clinch's polls never settled: no answer, no error, no timeout, although its
+// request had been aborted. Here that would keep a tile's `pending` for good: readers stop waiting
+// after `wait`, but nothing would ever load that tile again.
+test('cached: a load that never settles fails at its deadline, so the next reader loads again', async () => {
+  let loads = 0;
+  const source = cached(
+    () => {
+      loads++;
+      return new Promise(() => {});
+    },
+    { ttl: 1000, retry: 0, deadline: 50 },
+  );
+  const warn = console.warn;
+  console.warn = () => {};
+  try {
+    assert.equal(await source.get({ wait: 200 }), null);
+    assert.equal(source.stuck, false);
+    await source.get({ wait: 0 });
+    assert.equal(loads, 2);
+  } finally {
+    console.warn = warn;
+  }
+});
+
+test('cached: a load held past its deadline counts as stuck', () => {
+  let clock = 0;
+  const source = cached(() => new Promise(() => {}), { ttl: 1000, deadline: 300, now: () => clock });
+  void source.get({ wait: 0 });
+  assert.equal(source.stuck, false);
+  // The clock moves, the load's real deadline hasn't fired yet: as if it never would.
+  clock = 300 + 60_001;
+  assert.equal(source.stuck, true);
+});
+
+test('sources: a fetch that never answers fails its tile at the timeout, even when it ignores the abort', async () => {
+  const signals = [];
+  const fetch = (_url, init) => {
+    signals.push(init.signal);
+    return new Promise(() => {});
+  };
+  const sources = createSources({ upstreams: { clinch: 'http://clinch', cantina: 'http://cantina', pulse: 'http://pulse' }, fetch, timeout: 50 });
+  const warn = console.warn;
+  console.warn = () => {};
+  try {
+    assert.equal(await sources.clinch.get({ wait: 500 }), null);
+    assert.ok(signals[0].aborted);
+    assert.equal(sources.stuck, false);
+  } finally {
+    console.warn = warn;
+  }
 });

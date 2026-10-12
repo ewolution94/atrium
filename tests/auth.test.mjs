@@ -122,3 +122,17 @@ test('other paths are not auth’s business', async () => {
   assert.equal((await call(enabled(), '/api/apps')).status, 418);
   assert.equal((await call(enabled(), '/login/extra')).status, 418);
 });
+
+// Every sign-in with a key the server doesn't know yet waits on the key fetch in flight, which had
+// no timeout: one that never settled (as one of Clinch's didn't, 2026-10-09) would hang /login.
+test('a key fetch that never answers gives up at its deadline, and the sign-in is refused', async () => {
+  const v = new AccessVerifier(TEAM, AUD, () => new Promise(() => {}), () => NOW, 50);
+  let timer;
+  const outcome = await Promise.race([
+    v.verify(token()),
+    new Promise((_resolve, reject) => {
+      timer = setTimeout(() => reject(new Error('still waiting after 1 s')), 1_000);
+    }),
+  ]).finally(() => clearTimeout(timer));
+  assert.equal(outcome, undefined);
+});

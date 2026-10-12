@@ -9,6 +9,8 @@
 //
 // No dependencies.
 
+import { withDeadline } from './deadline.mjs';
+
 const BERLIN = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit' });
 /** The calendar date in Berlin, YYYY-MM-DD: Cantina's dates are local. */
 export const berlinDate = (ms) => BERLIN.format(new Date(ms));
@@ -20,17 +22,23 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms).unref?.()
  * A value with a time to live, loaded single-flight: concurrent readers share one load.
  * @template T
  * @param {() => Promise<T>} load
- * @param {{ ttl: number, retry?: number, now?: () => number, name?: string }} options
+ * @param {{ ttl: number, retry?: number, deadline?: number, now?: () => number, name?: string }} options
+ *   deadline  how long one load may take, on our own clock (deadline.mjs)
  */
-export function cached(load, { ttl, retry = 30_000, now = Date.now, name = 'source' }) {
+export function cached(load, { ttl, retry = 30_000, deadline = 15_000, now = Date.now, name = 'source' }) {
   /** @type {{ value: T, at: number } | null} */
   let last = null;
   /** @type {Promise<void> | null} */
   let pending = null;
+  let pendingSince = 0;
   let failedAt = -Infinity;
 
   function refresh() {
-    pending ??= load()
+    if (pending) return pending;
+    pendingSince = now();
+    // A load that never settled would keep `pending` for good, and the tile on its last value,
+    // refreshed never again (Clinch's poll that didn't, 2026-10-09). Past the deadline it fails.
+    pending = withDeadline(deadline, () => load())
       .then((value) => {
         last = { value, at: now() };
       })
@@ -56,19 +64,33 @@ export function cached(load, { ttl, retry = 30_000, now = Date.now, name = 'sour
       if (!last) return null;
       return { value: last.value, at: last.at, stale: now() - last.at > ttl * 3 };
     },
+
+    /**
+     * A load has been in flight for longer than its deadline allows, which refresh() rules out,
+     * so this is true only if something else holds it. An app being down is a failing load every
+     * half minute, which is this working. `/healthz` answers 503 on it.
+     */
+    get stuck() {
+      return pending !== null && now() - pendingSince > deadline + 60_000;
+    },
   };
 }
 
-/** GET a JSON document, with a timeout. Errors carry a code, never the URL (it may be a LAN address). */
-async function getJson(fetcher, url, timeout) {
-  let res;
-  try {
-    res = await fetcher(url, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(timeout) });
-  } catch (error) {
-    throw Object.assign(new Error('fetch failed'), { code: error?.cause?.code ?? error?.cause?.name ?? error?.name ?? 'FETCH' });
-  }
-  if (!res.ok) throw Object.assign(new Error('bad status'), { code: `HTTP ${res.status}` });
-  return res.json();
+/**
+ * GET a JSON document, headers and body within `timeout` on our own clock (deadline.mjs). Errors
+ * carry a code or a message, never the URL (it may be a LAN address).
+ */
+function getJson(fetcher, url, timeout) {
+  return withDeadline(timeout, async (signal) => {
+    let res;
+    try {
+      res = await fetcher(url, { headers: { accept: 'application/json' }, signal });
+    } catch (error) {
+      throw Object.assign(new Error('fetch failed'), { code: error?.cause?.code ?? error?.cause?.name ?? error?.name ?? 'FETCH' });
+    }
+    if (!res.ok) throw Object.assign(new Error('bad status'), { code: `HTTP ${res.status}` });
+    return res.json();
+  });
 }
 
 // --- Clinch: the playoff picture -------------------------------------------------------------
@@ -207,6 +229,11 @@ export function createSources({ upstreams, cantinaOutlet = 4, fetch: fetcher = g
     clinch,
     cantina,
     pulse,
+
+    /** Whether a tile's load is stuck (cached → stuck), for `/healthz`. */
+    get stuck() {
+      return clinch.stuck || cantina.stuck || pulse.stuck;
+    },
 
     /** All three, each waiting at most `wait` ms when it has nothing yet. */
     async all({ wait } = {}) {

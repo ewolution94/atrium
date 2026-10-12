@@ -17,6 +17,7 @@
 // The cookie is set only on sign-in; a guest gets none. No dependencies.
 
 import { createHmac, createPublicKey, timingSafeEqual, verify } from 'node:crypto';
+import { withDeadline } from './deadline.mjs';
 
 export const COOKIE = 'atrium_session';
 const SESSION_DAYS = 30;
@@ -34,11 +35,12 @@ export class AccessVerifier {
    * @param {string} team e.g. ewolution.cloudflareaccess.com
    * @param {string} aud the Access application's AUD tag
    */
-  constructor(team, aud, fetcher = globalThis.fetch, now = Date.now) {
+  constructor(team, aud, fetcher = globalThis.fetch, now = Date.now, timeoutMs = 10_000) {
     this.team = team;
     this.aud = aud;
     this.fetcher = fetcher;
     this.now = now;
+    this.timeoutMs = timeoutMs;
   }
 
   /** The signed-in email, or undefined for anything not signed by this team for this app. */
@@ -76,9 +78,12 @@ export class AccessVerifier {
   #refresh() {
     this.#pending ??= (async () => {
       try {
-        const res = await this.fetcher(`https://${this.team}/cdn-cgi/access/certs`);
-        if (!res.ok) return;
-        const { keys } = await res.json();
+        // On our own clock (deadline.mjs), and with one at all: every sign-in with a key we don't
+        // know yet waits on this one, so a fetch that never settled would hang /login for good.
+        const keys = await withDeadline(this.timeoutMs, async (signal) => {
+          const res = await this.fetcher(`https://${this.team}/cdn-cgi/access/certs`, { signal });
+          return res.ok ? (await res.json()).keys : undefined;
+        });
         for (const jwk of keys ?? []) {
           if (jwk.kty === 'RSA' && jwk.kid) this.#keys.set(jwk.kid, createPublicKey({ key: { kty: 'RSA', n: jwk.n, e: jwk.e }, format: 'jwk' }));
         }

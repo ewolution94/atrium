@@ -104,7 +104,7 @@ export function createApi(config, deps = {}) {
    * @param {import('node:http').IncomingMessage} req
    * @param {import('node:http').ServerResponse} res
    */
-  return async function handle(req, res) {
+  async function handle(req, res) {
     if (await auth.handle(req, res)) return true;
     const url = new URL(req.url, 'http://localhost');
     if (!url.pathname.startsWith('/api/')) return false;
@@ -133,5 +133,8 @@ export function createApi(config, deps = {}) {
 
     json(res, 404, { error: 'not found' });
     return true;
-  };
+  }
+  /** Whether the tiles' loads still come round (sources.mjs → stuck), for `/healthz`. */
+  handle.healthy = () => !sources.stuck;
+  return handle;
 }
