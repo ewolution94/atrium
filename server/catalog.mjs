@@ -283,6 +283,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'stichle',
+    name: 'Stichle',
+    audience: 'public',
+    host: 'stichle.ewolution.cloud',
+    pulse: 'stichle',
+    repo: 'https://github.com/ewolution94/stichle',
+    writeup: '/stichle/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Say how many tricks you’ll take, then take them: our own Wizard for the afternoon meeting, on cards you can tilt.',
+        desc: 'Share a table’s four-letter code and take a seat; the dealer turns up trump, everyone bids, and the cards are played by flicking them from the hand onto the pile, where they stay visible like a real stack. Sixty letterpress cards drawn in SVG, numbers as paper-cut figures from beggar to king, a foil that moves with the phone. Open bids, bids that mustn’t add up, or secret ones; a clock if you want one, bots, a big screen for the meeting room. Achievements and the tables they unlock are kept on your own device. A Node server without dependencies keeps the tables in memory and sends each page only its own hand over Server-Sent Events.',
+      },
+      de: {
+        line: 'Ansagen, wie viele Stiche man macht, und sie dann machen: unser eigenes Wizard fürs Nachmittags-Meeting, auf Karten, die man kippen kann.',
+        desc: 'Den Code aus vier Buchstaben teilen und Platz nehmen; der Geber deckt Trumpf auf, alle sagen an, und gespielt wird, indem man die Karte aus der Hand auf den Stapel schnippt, wo sie wie bei einem echten Stapel sichtbar liegen bleibt. Sechzig Karten im Buchdruck-Stil, als SVG gezeichnet, die Zahlen als Scherenschnitt-Figuren vom Bettler bis zum König, eine Folie, die sich mit dem Handy bewegt. Offene Ansagen, Ansagen, die nicht aufgehen dürfen, oder verdeckte; auf Wunsch eine Uhr, Bots und ein großer Bildschirm für den Besprechungsraum. Erfolge und die Tische, die sie freischalten, bleiben auf dem eigenen Gerät. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite per Server-Sent Events nur ihre eigene Hand.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
