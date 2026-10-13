@@ -305,6 +305,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'stammtisch',
+    name: 'Stammtisch',
+    audience: 'public',
+    host: 'stammtisch.ewolution.cloud',
+    pulse: 'stammtisch',
+    repo: 'https://github.com/ewolution94/stammtisch',
+    writeup: '/stammtisch/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Mau-Mau, Doppelkopf, Skat and Durak at one table: the classic card games for the afternoon meeting, in the German deck.',
+        desc: 'Share a table’s four-letter code, pick the game and its house rules, and play deal after deal, with bots in the empty seats. Doppelkopf to the German Doppelkopf Association’s rules, Skat to the International Skat Order, Mau-Mau and Durak the way most tables play them; every house rule is a switch. The German deck is drawn in SVG, its Unter, Ober and König as paper cuts, and held as a fan you scrub, flick or tap; how each game goes is in the app, page by page. A Node server without dependencies keeps the tables in memory and sends each page only its own hand over Server-Sent Events.',
+      },
+      de: {
+        line: 'Mau-Mau, Doppelkopf, Skat und Durak an einem Tisch: die klassischen Kartenspiele fürs Nachmittags-Meeting, mit dem deutschen Blatt.',
+        desc: 'Den Code aus vier Buchstaben teilen, Spiel und Hausregeln wählen und Spiel um Spiel spielen, leere Plätze füllen Bots. Doppelkopf nach den Regeln des Deutschen Doppelkopf-Verbands, Skat nach der Internationalen Skatordnung, Mau-Mau und Durak so, wie die meisten Tische sie spielen; jede Hausregel ist ein Schalter. Das deutsche Blatt ist als SVG gezeichnet, Unter, Ober und König als Scherenschnitte, und liegt als Fächer in der Hand, zum Drüberstreichen, Schnippen oder Antippen; wie jedes Spiel geht, erklärt die App Seite für Seite. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite per Server-Sent Events nur ihre eigene Hand.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
