@@ -327,6 +327,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'wuerfle',
+    name: 'Würfle',
+    audience: 'public',
+    host: 'wuerfle.ewolution.cloud',
+    pulse: 'wuerfle',
+    repo: 'https://github.com/ewolution94/wuerfle',
+    writeup: null,
+    stack: 'Svelte · three.js · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'The classic five-dice game, alone or at a table with friends: glass dice you flick or shake, and the paper block with up to six games.',
+        desc: 'Throw five cobalt glass dice with a flick across the table, a shake of the phone or a button, keep the ones you like on the rail, and write the score in a block laid out like the paper one, one column per game. Alone, the rules and up to three bots run in the page, offline too; with friends, share a four-letter code and everyone sees each throw land and each die kept. Every throw is played through by the physics before it’s shown, then lands on the numbers the server rolled. Schmidt’s championship rules by default, its basic rules and the joker rule as the host’s choice. A Node server without dependencies keeps the tables in memory and sends every page the room over Server-Sent Events.',
+      },
+      de: {
+        line: 'Das klassische Würfelspiel mit fünf Würfeln, allein oder mit Freunden am Tisch: Glaswürfel zum Schnippen oder Schütteln und der Papierblock für bis zu sechs Spiele.',
+        desc: 'Fünf Würfel aus Kobaltglas mit einem Wisch über den Tisch, einem Schütteln des Handys oder per Knopf werfen, die guten an die Leiste legen und den Wurf in einen Block schreiben, der aussieht wie der aus Papier, eine Spalte pro Spiel. Allein laufen die Regeln und bis zu drei Bots in der Seite, auch offline; mit Freunden den Code aus vier Buchstaben teilen, und alle sehen jeden Wurf landen und jeden behaltenen Würfel. Jeder Wurf wird von der Physik erst ganz durchgespielt und dann gezeigt, und er landet auf den Zahlen, die der Server gewürfelt hat. Schmidts Meisterschaftsregeln sind voreingestellt, die Grundregel und die Joker-Regel wählt der Gastgeber. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite den Tisch per Server-Sent Events.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {

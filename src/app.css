@@ -46,6 +46,11 @@
   --ewo-accent: light-dark(#5b1427, #c2566d);
   --ewo-accent-2: light-dark(#2f6b4f, #5fae86);
 }
+[data-ewo-project='wuerfle'] {
+  /* Folio's --ewo-project-wuerfle pair: the glass dice's cobalt and the gold of the throw. */
+  --ewo-accent: light-dark(#2443c4, #5a82ff);
+  --ewo-accent-2: light-dark(#8a6a10, #f0c75e);
+}
 [data-ewo-project='verso'] {
   /* Folio's --ewo-project-verso pair: plum, and the dark full stop of its icon. */
   --ewo-accent: light-dark(#7b2598, #d38bea);

@@ -51,7 +51,7 @@
       'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata'
       'schaetzle schaetzle schaetzle vollmond vollmond vollmond stichle stichle stichle stichle stichle stichle'
       'kritzle kritzle kritzle cdnms cdnms cdnms stichle stichle stichle stichle stichle stichle'
-      'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch';
+      'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch wuerfle wuerfle wuerfle wuerfle';
   }
   /* Room beside Verso for the next app that needs an invitation. */
   .private {
@@ -111,7 +111,8 @@
         'stichle stichle stichle stichle stichle stichle'
         'stichle stichle stichle stichle stichle stichle'
         'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch'
-        'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch';
+        'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch'
+        'wuerfle wuerfle wuerfle wuerfle wuerfle wuerfle';
     }
     .private {
       grid-template-areas:
