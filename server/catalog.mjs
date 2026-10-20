@@ -378,7 +378,7 @@ export const APPS = [
     host: 'skibbo.ewolution.cloud',
     pulse: 'skibbo',
     repo: 'https://github.com/ewolution94/skibbo',
-    writeup: null,
+    writeup: '/skibbo/',
     stack: 'Svelte · Node',
     since: 2026,
     text: {
