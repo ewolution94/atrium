@@ -349,6 +349,29 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'yksi',
+    name: 'Yksi',
+    audience: 'public',
+    host: 'yksi.ewolution.cloud',
+    pulse: 'yksi',
+    repo: 'https://github.com/ewolution94/yksi',
+    // The landing's write-up goes live after the app: the link comes then (Würfle's way).
+    writeup: null,
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Our colour-matching card game for the afternoon meeting, against bots or at a table with friends: match the colour or the number, and call “yksi!” before your last card.',
+        desc: 'Match the top card’s colour, number or sign, play Skips, Reverses and Draw Twos, name the colour with a wild, and tap “yksi!” before your second-to-last card, or anyone can catch you and you draw two; a Wild Draw Four can be challenged. Against up to five bots the rules run in the page, offline too; with friends, share a four-letter code, and bots fill the empty seats. The 108-card deck is drawn as SVG like a Finnish screen print, each colour with its own sign so the colours tell apart without colour vision, in light and dark. The printed rules by default; stacking, jump-in, 7-0 and drawing until a card fits are the host’s house rules. A Node server without dependencies keeps the tables in memory and sends every page only its own hand over Server-Sent Events.',
+      },
+      de: {
+        line: 'Unser Kartenspiel fürs Nachmittags-Meeting, gegen Bots oder mit Freunden am Tisch: Farbe oder Zahl, und vor der letzten Karte „yksi!“ rufen.',
+        desc: 'Eine Karte legen, die zur obersten passt, in Farbe, Zahl oder Zeichen, Aussetzen, Richtungswechsel und +2 spielen, mit einer Farbwahl die Farbe bestimmen und vor der vorletzten Karte auf „yksi!“ tippen, sonst darf dich jeder erwischen, und du ziehst zwei; eine +4 lässt sich anzweifeln. Gegen bis zu fünf Bots laufen die Regeln in der Seite, auch offline; mit Freunden den Code aus vier Buchstaben teilen, leere Plätze füllen Bots. Die 108 Karten sind als SVG gezeichnet wie ein finnischer Siebdruck, jede Farbe mit ihrem eigenen Zeichen, damit man sie auch ohne Farbsehen unterscheidet, hell und dunkel. Voreingestellt sind die gedruckten Regeln; Stapeln, Reinwerfen, 7-0 und Ziehen, bis es passt, sind Hausregeln des Gastgebers. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite per Server-Sent Events nur ihre eigene Hand.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
