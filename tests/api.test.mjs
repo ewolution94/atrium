@@ -95,7 +95,7 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(by.wuerfle.writeup, 'https://ewolution.cloud/wuerfle/');
   assert.equal(by.yksi.status, null);
   assert.equal(by.yksi.tile, null);
-  assert.equal(by.yksi.writeup, null, 'no write-up until the landing has it');
+  assert.equal(by.yksi.writeup, 'https://ewolution.cloud/yksi/');
   assert.equal(by.skibbo.status, null);
   assert.equal(by.skibbo.tile, null);
   assert.equal(by.skibbo.writeup, null, 'no write-up until the landing has it');

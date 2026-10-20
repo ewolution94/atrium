@@ -356,8 +356,7 @@ export const APPS = [
     host: 'yksi.ewolution.cloud',
     pulse: 'yksi',
     repo: 'https://github.com/ewolution94/yksi',
-    // The landing's write-up goes live after the app: the link comes then (Würfle's way).
-    writeup: null,
+    writeup: '/yksi/',
     stack: 'Svelte · Node',
     since: 2026,
     text: {
