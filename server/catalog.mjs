@@ -334,7 +334,7 @@ export const APPS = [
     host: 'wuerfle.ewolution.cloud',
     pulse: 'wuerfle',
     repo: 'https://github.com/ewolution94/wuerfle',
-    writeup: null,
+    writeup: '/wuerfle/',
     stack: 'Svelte · three.js · Node',
     since: 2026,
     text: {
