@@ -19,6 +19,7 @@
   import Stammtisch from './viz/Stammtisch.svelte';
   import Wuerfle from './viz/Wuerfle.svelte';
   import Yksi from './viz/Yksi.svelte';
+  import Skibbo from './viz/Skibbo.svelte';
   import Verso from './viz/Verso.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
@@ -58,6 +59,8 @@
   <Wuerfle {awake} />
 {:else if app.slug === 'yksi'}
   <Yksi {awake} />
+{:else if app.slug === 'skibbo'}
+  <Skibbo {awake} />
 {:else if app.slug === 'verso'}
   <Verso {awake} />
 {:else if app.slug === 'census'}

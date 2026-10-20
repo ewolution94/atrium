@@ -372,6 +372,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'skibbo',
+    name: 'Skibbo',
+    audience: 'public',
+    host: 'skibbo.ewolution.cloud',
+    pulse: 'skibbo',
+    repo: 'https://github.com/ewolution94/skibbo',
+    writeup: null,
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Our own take on the stock-pile card game, alone against bots or at a table with friends: enamel number plates built up from 1 to 12, laid out for the tablet first.',
+        desc: 'Play out your stock before everyone else: onto four shared piles that count from 1 to 12, from your hand, your stock or your four discard piles, and end each turn on a discard pile. Every card is an enamel house-number plate drawn in the page, blue, green or fuchsia by its number, the Joker in all three. Alone, the rules and up to five bots in three ranks run in the page, offline too; with friends, share a four-letter code, play one round or to 500, in teams of two if you like. Drag a plate or tap it; the table is laid out for an iPad on its side or upright, grows with a big screen and has a layout of its own on the phone. A Node server without dependencies keeps the tables in memory and sends each page only its own hand over Server-Sent Events.',
+      },
+      de: {
+        line: 'Unser eigenes Kartenspiel mit dem Vorrat, allein gegen Bots oder mit Freunden am Tisch: Emaille-Nummernschilder, von 1 bis 12 gestapelt, zuerst fürs Tablet gemacht.',
+        desc: 'Den eigenen Vorrat als Erstes leer spielen: auf vier gemeinsame Stapel, die von 1 bis 12 zählen, aus der Hand, vom Vorrat oder von den vier eigenen Ablagen, und jeden Zug auf einer Ablage beenden. Jede Karte ist ein Hausnummernschild aus Emaille, in der Seite gezeichnet, blau, grün oder fuchsia nach ihrer Zahl, der Joker in allen dreien. Allein laufen die Regeln und bis zu fünf Bots in drei Rängen in der Seite, auch offline; mit Freunden den Code aus vier Buchstaben teilen, eine Runde oder bis 500 spielen, wer mag zu zweit im Team. Ein Schild ziehen oder antippen; der Tisch ist fürs iPad gemacht, quer oder hochkant, wächst mit großen Bildschirmen und hat auf dem Handy sein eigenes Layout. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite per Server-Sent Events nur ihre eigene Hand.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
