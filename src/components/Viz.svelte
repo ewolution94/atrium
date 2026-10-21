@@ -20,6 +20,7 @@
   import Wuerfle from './viz/Wuerfle.svelte';
   import Yksi from './viz/Yksi.svelte';
   import Skibbo from './viz/Skibbo.svelte';
+  import Randomiser from './viz/Randomiser.svelte';
   import Verso from './viz/Verso.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
@@ -61,6 +62,8 @@
   <Yksi {awake} />
 {:else if app.slug === 'skibbo'}
   <Skibbo {awake} />
+{:else if app.slug === 'randomiser'}
+  <Randomiser {awake} />
 {:else if app.slug === 'verso'}
   <Verso {awake} />
 {:else if app.slug === 'census'}

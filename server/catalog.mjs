@@ -393,6 +393,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'randomiser',
+    name: 'Randomiser',
+    audience: 'public',
+    host: 'randomiser.ewolution.cloud',
+    pulse: 'randomiser',
+    repo: 'https://github.com/ewolution94/randomiser',
+    writeup: null,
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Who hosts today? The afternoon meeting’s draw, at the fair: a painted wheel, a jackpot or a duck race, made for the laptop shared in the call.',
+        desc: 'Put the meeting’s names in, then spin the painted wheel, pull the jackpot’s lever or start the duck race; the name that comes up swings in on a hanging sign. The winner is drawn first, evenly, from the browser’s random source, and the machine only plays its way there: on Max the wheel stops against the neighbour’s nail and creeps over, the reel stops one short, the race is won by a beak. Everyone once lets the winners sit out until all have had a turn, and the last draws keep their time. The names stay on the device, it works offline, and the jackpot is the same reel as Aale Spiele’s draw.',
+      },
+      de: {
+        line: 'Wer moderiert heute? Die Auslosung fürs Nachmittags-Meeting, auf der Kirmes: ein bemaltes Glücksrad, ein Jackpot oder ein Entenrennen, gemacht für den Laptop, der im Call geteilt wird.',
+        desc: 'Die Namen der Runde eintragen, dann das Glücksrad drehen, am Hebel des Jackpots ziehen oder das Entenrennen starten; der gezogene Name schwingt auf einem hängenden Schild herein. Gezogen wird zuerst, gleichmäßig, mit dem Zufall des Browsers, die Maschine spielt sich nur dorthin: Auf Maximal bleibt das Rad am Nagel des Nachbarn hängen und rutscht dann weiter, die Walze hält eins zu früh, das Rennen geht um Schnabelbreite aus. „Jeder einmal“ lässt Gezogene aussetzen, bis alle dran waren, und die letzten Ziehungen stehen mit Uhrzeit da. Die Namen bleiben auf dem Gerät, es läuft auch offline, und der Jackpot ist dieselbe Walze wie die Auslosung von Aale Spiele.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
