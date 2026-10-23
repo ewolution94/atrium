@@ -22,6 +22,7 @@
   import Skibbo from './viz/Skibbo.svelte';
   import Randomiser from './viz/Randomiser.svelte';
   import Curveextreme from './viz/Curveextreme.svelte';
+  import Pokeproxy from './viz/Pokeproxy.svelte';
   import Verso from './viz/Verso.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
@@ -67,6 +68,8 @@
   <Randomiser {awake} />
 {:else if app.slug === 'curveextreme'}
   <Curveextreme {awake} />
+{:else if app.slug === 'pokeproxy'}
+  <Pokeproxy {awake} />
 {:else if app.slug === 'verso'}
   <Verso {awake} />
 {:else if app.slug === 'census'}

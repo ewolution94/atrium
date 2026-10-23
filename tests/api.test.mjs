@@ -51,7 +51,7 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(doc.viewer, null);
   assert.deepEqual(
     doc.apps.map((a) => a.slug),
-    ['clinch', 'planum', 'pulse', 'cantina', 'axioma', 'fermata', 'aale-spiele', 'tcgsl', 'schaetzle', 'vollmond', 'kritzle', 'cdnms', 'stichle', 'stammtisch', 'wuerfle', 'yksi', 'skibbo', 'randomiser', 'curveextreme', 'verso'],
+    ['clinch', 'planum', 'pulse', 'cantina', 'axioma', 'fermata', 'aale-spiele', 'tcgsl', 'schaetzle', 'vollmond', 'kritzle', 'cdnms', 'stichle', 'stammtisch', 'wuerfle', 'yksi', 'skibbo', 'randomiser', 'curveextreme', 'pokeproxy', 'verso'],
   );
   assert.equal(doc.status.overall, 'operational');
 
@@ -63,8 +63,8 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(by.clinch.tile.conferences[0].seeds[0].abbr, 'KC');
   assert.equal(by.cantina.tile.dish.photo, '/api/cantina/photo?d=249312');
   assert.equal(by.pulse.status.state, 'operational');
-  // Aale Spiele, TCGSL, Schätzle, Vollmond, Kritzle, CDNMS, Stichle, Stammtisch, Würfle, Yksi, Skibbo, Randomiser, CurveExtreme and Verso count towards Pulse's total, but the fixture predates their checks: no status yet.
-  assert.equal(by.pulse.tile.of, 19);
+  // Aale Spiele, TCGSL, Schätzle, Vollmond, Kritzle, CDNMS, Stichle, Stammtisch, Würfle, Yksi, Skibbo, Randomiser, CurveExtreme, PokeProxy and Verso count towards Pulse's total, but the fixture predates their checks: no status yet.
+  assert.equal(by.pulse.tile.of, 20);
   assert.equal(by.pulse.tile.up, 5);
   assert.equal(by['aale-spiele'].status, null);
   assert.equal(by['aale-spiele'].tile, null);
@@ -106,6 +106,10 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(by.curveextreme.status, null);
   assert.equal(by.curveextreme.tile, null);
   assert.equal(by.curveextreme.writeup, null, 'no write-up until the landing has it');
+  assert.equal(by.pokeproxy.url, 'https://pokeproxy.ewolution.cloud/');
+  assert.equal(by.pokeproxy.status, null);
+  assert.equal(by.pokeproxy.tile, null);
+  assert.equal(by.pokeproxy.writeup, null, 'no write-up until the landing has it');
   // Verso is private: everyone sees it, in its own group, and it has no write-up on the landing.
   assert.equal(by.verso.audience, 'private');
   assert.equal(by.verso.url, 'https://verso.ewolution.cloud/');
@@ -166,7 +170,7 @@ test('apps that are down upstream still list, without tile data', async () => {
     const doc = await (await fetch(`http://127.0.0.1:${s.address().port}/api/apps`)).json();
     assert.equal(doc.login, false);
     // Eighteen public apps and Verso, the private one; the owner's stay hidden.
-    assert.equal(doc.apps.length, 20);
+    assert.equal(doc.apps.length, 21);
     assert.equal(doc.status.overall, 'unknown');
     assert.ok(doc.apps.every((a) => a.tile === null));
     assert.equal(doc.apps.find((a) => a.slug === 'pulse').status.state, 'unknown');

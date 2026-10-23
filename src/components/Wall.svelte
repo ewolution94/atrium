@@ -53,7 +53,8 @@
       'kritzle kritzle kritzle cdnms cdnms cdnms stichle stichle stichle stichle stichle stichle'
       'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch wuerfle wuerfle wuerfle wuerfle'
       'yksi yksi yksi yksi yksi yksi skibbo skibbo skibbo skibbo skibbo skibbo'
-      'randomiser randomiser randomiser randomiser randomiser randomiser curveextreme curveextreme curveextreme curveextreme curveextreme curveextreme';
+      'randomiser randomiser randomiser randomiser randomiser randomiser curveextreme curveextreme curveextreme curveextreme curveextreme curveextreme'
+      'pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy';
   }
   /* Room beside Verso for the next app that needs an invitation. */
   .private {
@@ -118,7 +119,8 @@
         'yksi yksi yksi yksi yksi yksi'
         'skibbo skibbo skibbo skibbo skibbo skibbo'
         'randomiser randomiser randomiser randomiser randomiser randomiser'
-        'curveextreme curveextreme curveextreme curveextreme curveextreme curveextreme';
+        'curveextreme curveextreme curveextreme curveextreme curveextreme curveextreme'
+        'pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy';
     }
     .private {
       grid-template-areas:

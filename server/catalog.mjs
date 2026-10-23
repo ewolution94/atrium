@@ -437,6 +437,29 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'pokeproxy',
+    name: 'PokeProxy',
+    audience: 'public',
+    host: 'pokeproxy.ewolution.cloud',
+    pulse: 'pokeproxy',
+    repo: 'https://github.com/ewolution94/pokeproxy',
+    // Its write-up waits on the landing's branch pokeproxy-launch; '/pokeproxy/' once that is live.
+    writeup: null,
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Printable sheets of Pokémon card proxies at the real card size, for the cards the binder is still missing.',
+        desc: 'Choose the paper and the card size, 63 × 88\u00a0mm by default, and the page shows the grid that fits, with cut marks and a 50\u00a0mm line to check the printer kept the size. Fill a slot from a search over every English and Japanese card in TCGSL’s list, from a link to a card page or a picture, or from a picture of your own, and print in colour, greyscale or a lighter ink saver. A card comes out at 63 × 88\u00a0mm because every position on the page is set in millimetres. The sheet stays on your own device; a small Node server searches the cards in memory and reads pasted links, only from public addresses.',
+      },
+      de: {
+        line: 'Druckbare Bögen mit Pokémon-Karten als Platzhalter in echter Kartengröße, für die Karten, die im Ordner noch fehlen.',
+        desc: 'Papier und Kartengröße wählen, 63 × 88\u00a0mm sind voreingestellt, und die Seite zeigt das Raster, das passt, mit Schnittmarken und einer 50-mm-Linie, an der man nachmisst, ob der Drucker die Größe gehalten hat. Einen Platz füllt eine Suche über jede englische und japanische Karte aus der Liste von TCGSL, ein Link auf eine Kartenseite oder ein Bild, oder ein eigenes Bild; gedruckt wird in Farbe, in Graustufen oder heller und tintensparend. Eine Karte kommt mit 63 × 88\u00a0mm aus dem Drucker, weil jede Position auf der Seite in Millimetern gesetzt ist. Der Bogen bleibt auf dem eigenen Gerät; ein kleiner Node-Server durchsucht die Karten im Speicher und liest eingefügte Links, nur von öffentlichen Adressen.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
