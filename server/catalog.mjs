@@ -415,6 +415,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'curveextreme',
+    name: 'CurveExtreme',
+    audience: 'public',
+    host: 'curveextreme.ewolution.cloud',
+    pulse: 'curveextreme',
+    repo: 'https://github.com/ewolution94/curveextreme',
+    writeup: null,
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Our own CurveCrash for the afternoon meeting: steer a line that never stops, slip through its gaps, outlast everyone.',
+        desc: 'Everyone steers a curve that keeps moving and leaves a line; crash into any line or the wall and you’re out, and everyone still driving scores. The steering was measured from the original’s public replays, frame by frame: speed, turn radius, line width and the random gaps. All 25 powerups, free-for-all or teams, up to ten in a room with a code, or up to four on one keyboard. Your own curve is drawn ahead with the keys you hold, and the room’s host can tune every number of the feel between rounds.',
+      },
+      de: {
+        line: 'Unser eigenes CurveCrash fürs Nachmittags-Meeting: eine Linie steuern, die nie anhält, durch ihre Lücken schlüpfen, alle überleben.',
+        desc: 'Alle steuern eine Kurve, die nie anhält und eine Linie hinterlässt; wer in eine Linie oder die Wand fährt, ist raus, und alle, die noch fahren, punkten. Die Steuerung ist aus den öffentlichen Replays des Originals vermessen, Bild für Bild: Tempo, Wenderadius, Linienbreite und die zufälligen Lücken. Alle 25 Power-ups, jeder gegen jeden oder Teams, bis zu zehn in einem Raum mit Code oder bis zu vier an einer Tastatur. Die eigene Kurve ist mit den gedrückten Tasten vorausgezeichnet, und der Host stellt zwischen den Runden jede Zahl des Fahrgefühls ein.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
