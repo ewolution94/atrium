@@ -460,6 +460,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'pitcher',
+    name: 'Pitcher',
+    audience: 'public',
+    host: 'pitcher.ewolution.cloud',
+    pulse: 'pitcher',
+    repo: 'https://github.com/ewolution94/pitcher',
+    writeup: null, // the landing's write-up isn't live yet: '/pitcher/' once it is
+    stack: 'Svelte · WebAssembly',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Paste a YouTube link, set a BPM, and hear the track at it, the key held or resampled: a bootleg tested before the DAW opens.',
+        desc: 'Type the tempo into the big number or throw the ruler and let it settle on a genre: House 124, Techno 132, Drum & bass 174. Keep key holds the key while the tempo moves; Resample lets the pitch follow the tempo like a record, FL Studio’s default. The page reads the track’s tempo, beat grid and key itself, lays a kick on every beat, loops bars and jumps to YouTube’s most replayed part. The audio comes through a small relay to YouTube, the same as Fermata’s, and is decoded, analysed and stretched in the browser with WebAssembly, never stored.',
+      },
+      de: {
+        line: 'YouTube-Link einfügen, BPM setzen und den Track darin hören, die Tonart gehalten oder resampelt: ein Bootleg getestet, bevor die DAW aufgeht.',
+        desc: 'Das Tempo in die große Zahl tippen oder das Lineal werfen und auf einem Genre landen lassen: House 124, Techno 132, Drum & Bass 174. „Tonart halten“ hält die Tonart, während sich das Tempo bewegt; „Resample“ lässt die Tonhöhe dem Tempo folgen wie bei einer Platte, FL Studios Standard. Die Seite liest Tempo, Beat-Raster und Tonart des Tracks selbst, legt eine Kick auf jeden Schlag, loopt Takte und springt zur meistgehörten Stelle auf YouTube. Die Audiospur kommt über ein kleines Relay zu YouTube, dasselbe wie bei Fermata, und wird im Browser mit WebAssembly dekodiert, analysiert und gestreckt, nie gespeichert.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {

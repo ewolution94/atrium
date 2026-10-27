@@ -76,6 +76,11 @@
   --ewo-accent: light-dark(#0b7a55, #4fd6a5);
   --ewo-accent-2: light-dark(#8a6500, #f2cf4a);
 }
+[data-ewo-project='pitcher'] {
+  /* Folio's --ewo-project-pitcher pair: a CDJ's amber readout and the waveform's blue lows. */
+  --ewo-accent: light-dark(#8f5200, #f2a33a);
+  --ewo-accent-2: light-dark(#2d63e0, #5b8cff);
+}
 [data-ewo-project='verso'] {
   /* Folio's --ewo-project-verso pair: plum, and the dark full stop of its icon. */
   --ewo-accent: light-dark(#7b2598, #d38bea);
