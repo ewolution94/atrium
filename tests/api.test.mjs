@@ -113,7 +113,7 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(by.pitcher.url, 'https://pitcher.ewolution.cloud/');
   assert.equal(by.pitcher.status, null);
   assert.equal(by.pitcher.tile, null);
-  assert.equal(by.pitcher.writeup, null, 'no write-up until the landing has it');
+  assert.equal(by.pitcher.writeup, 'https://ewolution.cloud/pitcher/');
   // Verso is private: everyone sees it, in its own group, and it has no write-up on the landing.
   assert.equal(by.verso.audience, 'private');
   assert.equal(by.verso.url, 'https://verso.ewolution.cloud/');

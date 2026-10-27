@@ -467,7 +467,7 @@ export const APPS = [
     host: 'pitcher.ewolution.cloud',
     pulse: 'pitcher',
     repo: 'https://github.com/ewolution94/pitcher',
-    writeup: null, // the landing's write-up isn't live yet: '/pitcher/' once it is
+    writeup: '/pitcher/',
     stack: 'Svelte · WebAssembly',
     since: 2026,
     text: {
