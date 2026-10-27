@@ -208,11 +208,11 @@ export const APPS = [
     text: {
       en: {
         line: 'Guess the price of eBay listings together, in four modes: a party game for our afternoon meeting.',
-        desc: 'Join a room with its four-letter code or QR code, no account needed. Guess the price, guess without going over, call higher or lower against the last item, or sort four items by price, alone or in teams, while a big-screen view shows the game on the meeting room’s projector. Guesses are scored by the ratio: 10% off earns about 850 of 1,000 points, half or double the price earns nothing. A Node server without dependencies keeps the rooms in memory and streams them over Server-Sent Events; until its eBay keys are set, it plays 95 demo items and labels them as such.',
+        desc: 'Join a room with its four-letter code, no account needed: guess the price, guess without going over, call higher or lower, or sort four items by price, alone or in teams, with a big-screen view for the meeting room’s projector. Guesses are scored by the ratio: 10% off earns about 850 of 1,000 points, half or double the price earns nothing.',
       },
       de: {
         line: 'Gemeinsam den Preis von eBay-Angeboten schätzen, in vier Spielarten: ein Partyspiel für unser Nachmittags-Meeting.',
-        desc: 'Beitreten mit dem Code aus vier Buchstaben oder per QR-Code, ohne Konto. Den Preis schätzen, schätzen ohne drüberzuliegen, teurer oder billiger als der letzte Artikel, oder vier Artikel nach Preis sortieren, allein oder in Teams; eine Ansicht für den großen Bildschirm zeigt das Spiel am Beamer im Besprechungsraum. Tipps zählen nach dem Verhältnis: 10\u00a0% daneben bringt etwa 850 von 1.000 Punkten, der halbe oder doppelte Preis nichts. Ein Node-Server ohne Abhängigkeiten hält die Räume im Speicher und schickt sie per Server-Sent Events; bis seine eBay-Schlüssel gesetzt sind, spielt es mit 95 Demo-Artikeln und sagt das auch.',
+        desc: 'Beitreten mit dem Code aus vier Buchstaben, ohne Konto: den Preis schätzen, schätzen ohne drüberzuliegen, teurer oder billiger als der letzte Artikel oder vier Artikel nach Preis sortieren, allein oder in Teams, mit einer Ansicht für den Beamer im Besprechungsraum. Tipps zählen nach dem Verhältnis: 10 % daneben bringt etwa 850 von 1.000 Punkten, der halbe oder doppelte Preis nichts.',
       },
     },
   },
@@ -230,11 +230,11 @@ export const APPS = [
     text: {
       en: {
         line: 'The party game Werewolf for our afternoon meeting, with the app as the narrator, on a video call or at one table.',
-        desc: 'Found a village, share its four-letter code, and the app deals the cards: werewolves, villagers and eight special roles from the Seer to the Elder, each a woodcut in two inks drawn for the game. It runs the nights and days by itself; at night everyone taps something, so no screen gives a role away, and the wolves agree on a victim without a word. Classic or quick, with a deck that shows its balance and a big-screen view for sharing; bots fill a table for trying it out. A Node server without dependencies holds the villages in memory and sends each player only their own view over Server-Sent Events.',
+        desc: 'Found a village, share its four-letter code, and the app deals the cards: werewolves, villagers and eight special roles from the Seer to the Elder, each a woodcut in two inks drawn for the game. It runs the nights and days by itself; at night everyone taps something, so no screen gives a role away. Bots fill a table for trying it out, and a big-screen view is there for sharing.',
       },
       de: {
         line: 'Das Partyspiel Werwolf für unser Nachmittags-Meeting, mit der App als Erzählerin, im Videocall oder am selben Tisch.',
-        desc: 'Ein Dorf gründen, den Code aus vier Buchstaben teilen, und die App verteilt die Karten: Werwölfe, Dorfbewohner und acht Sonderrollen von der Seherin bis zum Alten, jede ein Holzschnitt in zwei Farben, gezeichnet für das Spiel. Nächte und Tage laufen von selbst; nachts tippen alle etwas, damit kein Bildschirm eine Rolle verrät, und die Wölfe einigen sich ohne ein Wort auf ein Opfer. Klassisch oder schnell, mit einem Deck, das sein Gleichgewicht zeigt, und einer Ansicht für den großen Bildschirm; Bots füllen den Tisch zum Ausprobieren. Ein Node-Server ohne Abhängigkeiten hält die Dörfer im Speicher und schickt jedem per Server-Sent Events nur seine eigene Sicht.',
+        desc: 'Ein Dorf gründen, den Code aus vier Buchstaben teilen, und die App verteilt die Karten: Werwölfe, Dorfbewohner und acht Sonderrollen von der Seherin bis zum Alten, jede ein Holzschnitt in zwei Farben, gezeichnet für das Spiel. Nächte und Tage laufen von selbst; nachts tippen alle etwas, damit kein Bildschirm eine Rolle verrät. Bots füllen den Tisch zum Ausprobieren, und eine Ansicht für den großen Bildschirm ist zum Teilen da.',
       },
     },
   },
@@ -252,11 +252,11 @@ export const APPS = [
     text: {
       en: {
         line: 'Draw a word, guess the others’: our own skribbl.io for the afternoon meeting, with an avatar maker and a gallery at the end.',
-        desc: 'Share a room’s four-letter code, build a face with a few arrows, and take turns drawing while everyone else guesses in the chat; a right guess never shows, only who got it. The strokes reach every screen as they’re drawn and play back on the drawer’s own timing, fills included. Classic or Blitz, with hidden or combination words, German or English word lists in nine themes and your own words; bots fill a room for trying it out. At the end a podium, awards and a gallery where every drawing replays as a timelapse. A Node server without dependencies keeps the rooms in memory and sends each page only what it may see over Server-Sent Events.',
+        desc: 'Share a room’s four-letter code, build a face with a few arrows, and take turns drawing while everyone else guesses in the chat; a right guess never shows, only who got it. Classic or Blitz, German or English word lists in nine themes or your own words, and bots to fill a room. At the end a podium, awards and a gallery where every drawing replays as a timelapse.',
       },
       de: {
         line: 'Ein Wort zeichnen, die der anderen raten: unser eigenes skribbl.io fürs Nachmittags-Meeting, mit Avatar-Baukasten und Galerie am Ende.',
-        desc: 'Den Code aus vier Buchstaben teilen, mit ein paar Pfeilen ein Gesicht bauen, und reihum zeichnet einer, während alle anderen im Chat raten; ein richtiger Tipp erscheint nie, nur wer es hat. Die Striche erreichen jeden Bildschirm, während sie entstehen, und laufen im Takt des Zeichners ab, Füllungen inklusive. Klassisch oder Blitz, mit versteckten oder kombinierten Wörtern, deutschen oder englischen Wortlisten in neun Themen und eigenen Wörtern; Bots füllen den Raum zum Ausprobieren. Am Ende ein Podest, Auszeichnungen und eine Galerie, in der jede Zeichnung im Zeitraffer abläuft. Ein Node-Server ohne Abhängigkeiten hält die Räume im Speicher und schickt jeder Seite per Server-Sent Events nur, was sie sehen darf.',
+        desc: 'Den Code aus vier Buchstaben teilen, mit ein paar Pfeilen ein Gesicht bauen, und reihum zeichnet einer, während alle anderen im Chat raten; ein richtiger Tipp erscheint nie, nur wer es hat. Klassisch oder Blitz, deutsche oder englische Wortlisten in neun Themen oder eigene Wörter, und Bots füllen den Raum. Am Ende ein Podest, Auszeichnungen und eine Galerie, in der jede Zeichnung im Zeitraffer abläuft.',
       },
     },
   },
@@ -274,11 +274,11 @@ export const APPS = [
     text: {
       en: {
         line: 'One word, a number, a board of cards: our own Codenames for the afternoon meeting, with word and picture cards.',
-        desc: 'Share a room’s four-letter code and take a seat in a team: one spymaster each, everyone else guesses. The spymaster taps the cards a clue is meant for and types one word, checked against the board as it’s typed; the team points at cards and holds to turn one over. Boards of 25 words, 20 picture cards that each put two line motifs together, or both; German or English words in six themes and your own; an objection for the other spymaster, clocks and bots. At the end the whole key and what every clue was meant for. A Node server without dependencies keeps the rooms in memory and sends each page only what it may see over Server-Sent Events, so the key never leaves the spymasters’ screens.',
+        desc: 'Share a room’s four-letter code and take a seat in a team: one spymaster each, everyone else guesses. Boards of 25 words, 20 picture cards that each put two line motifs together, or both, with German or English words in six themes and your own. Each page gets only what it may see, so the key never leaves the spymasters’ screens.',
       },
       de: {
         line: 'Ein Wort, eine Zahl, ein Brett voller Karten: unser eigenes Codenames fürs Nachmittags-Meeting, mit Wort- und Bildkarten.',
-        desc: 'Den Code aus vier Buchstaben teilen und in einem Team Platz nehmen: je ein Chef, alle anderen raten. Der Chef tippt die Karten an, die ein Hinweis meint, und schreibt ein Wort, das schon beim Tippen gegen das Brett geprüft wird; das Team zeigt auf Karten und hält gedrückt, um eine aufzudecken. Bretter aus 25 Wörtern, aus 20 Bildkarten, die je zwei Strichmotive zusammensetzen, oder beides; deutsche oder englische Wörter in sechs Themen und eigene; Einspruch für den anderen Chef, Uhren und Bots. Am Ende der ganze Schlüssel und was jeder Hinweis gemeint hat. Ein Node-Server ohne Abhängigkeiten hält die Räume im Speicher und schickt jeder Seite per Server-Sent Events nur, was sie sehen darf, so verlässt der Schlüssel nie die Bildschirme der Chefs.',
+        desc: 'Den Code aus vier Buchstaben teilen und in einem Team Platz nehmen: je ein Chef, alle anderen raten. Bretter aus 25 Wörtern, aus 20 Bildkarten, die je zwei Strichmotive zusammensetzen, oder beides, mit deutschen oder englischen Wörtern in sechs Themen und eigenen. Jede Seite bekommt nur, was sie sehen darf, so verlässt der Schlüssel nie die Bildschirme der Chefs.',
       },
     },
   },
@@ -296,11 +296,11 @@ export const APPS = [
     text: {
       en: {
         line: 'Say how many tricks you’ll take, then take them: our own Wizard for the afternoon meeting, on cards you can tilt.',
-        desc: 'Share a table’s four-letter code and take a seat; the dealer turns up trump, everyone bids, and the cards are played by flicking them from the hand onto the pile, where they stay visible like a real stack. Sixty letterpress cards drawn in SVG, numbers as paper-cut figures from beggar to king, a foil that moves with the phone. Open bids, bids that mustn’t add up, or secret ones; a clock if you want one, bots, a big screen for the meeting room. Achievements and the tables they unlock are kept on your own device. A Node server without dependencies keeps the tables in memory and sends each page only its own hand over Server-Sent Events.',
+        desc: 'Share a table’s four-letter code and take a seat; the dealer turns up trump, everyone bids, and the cards are played by flicking them from the hand onto the pile. Sixty letterpress cards drawn in SVG, numbers as paper-cut figures from beggar to king, a foil that moves with the phone. Open bids, secret ones or bids that mustn’t add up; bots and a big screen for the meeting room.',
       },
       de: {
         line: 'Ansagen, wie viele Stiche man macht, und sie dann machen: unser eigenes Wizard fürs Nachmittags-Meeting, auf Karten, die man kippen kann.',
-        desc: 'Den Code aus vier Buchstaben teilen und Platz nehmen; der Geber deckt Trumpf auf, alle sagen an, und gespielt wird, indem man die Karte aus der Hand auf den Stapel schnippt, wo sie wie bei einem echten Stapel sichtbar liegen bleibt. Sechzig Karten im Buchdruck-Stil, als SVG gezeichnet, die Zahlen als Scherenschnitt-Figuren vom Bettler bis zum König, eine Folie, die sich mit dem Handy bewegt. Offene Ansagen, Ansagen, die nicht aufgehen dürfen, oder verdeckte; auf Wunsch eine Uhr, Bots und ein großer Bildschirm für den Besprechungsraum. Erfolge und die Tische, die sie freischalten, bleiben auf dem eigenen Gerät. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite per Server-Sent Events nur ihre eigene Hand.',
+        desc: 'Den Code aus vier Buchstaben teilen und Platz nehmen; der Geber deckt Trumpf auf, alle sagen an, und gespielt wird, indem man die Karte aus der Hand auf den Stapel schnippt. Sechzig Karten im Buchdruck-Stil, als SVG gezeichnet, die Zahlen als Scherenschnitt-Figuren vom Bettler bis zum König, eine Folie, die sich mit dem Handy bewegt. Offene Ansagen, verdeckte oder solche, die nicht aufgehen dürfen; Bots und ein großer Bildschirm für den Besprechungsraum.',
       },
     },
   },
@@ -318,11 +318,11 @@ export const APPS = [
     text: {
       en: {
         line: 'Mau-Mau, Doppelkopf, Skat and Durak at one table: the classic card games for the afternoon meeting, in the German deck.',
-        desc: 'Share a table’s four-letter code, pick the game and its house rules, and play deal after deal, with bots in the empty seats. Doppelkopf to the German Doppelkopf Association’s rules, Skat to the International Skat Order, Mau-Mau and Durak the way most tables play them; every house rule is a switch. The German deck is drawn in SVG, its Unter, Ober and König as paper cuts, and held as a fan you scrub, flick or tap; how each game goes is in the app, page by page. A Node server without dependencies keeps the tables in memory and sends each page only its own hand over Server-Sent Events.',
+        desc: 'Share a table’s four-letter code, pick the game and its house rules, and play deal after deal, with bots in the empty seats. Doppelkopf to the German Doppelkopf Association’s rules, Skat to the International Skat Order, Mau-Mau and Durak the way most tables play them; every house rule is a switch. The German deck is drawn in SVG, its Unter, Ober and König as paper cuts.',
       },
       de: {
         line: 'Mau-Mau, Doppelkopf, Skat und Durak an einem Tisch: die klassischen Kartenspiele fürs Nachmittags-Meeting, mit dem deutschen Blatt.',
-        desc: 'Den Code aus vier Buchstaben teilen, Spiel und Hausregeln wählen und Spiel um Spiel spielen, leere Plätze füllen Bots. Doppelkopf nach den Regeln des Deutschen Doppelkopf-Verbands, Skat nach der Internationalen Skatordnung, Mau-Mau und Durak so, wie die meisten Tische sie spielen; jede Hausregel ist ein Schalter. Das deutsche Blatt ist als SVG gezeichnet, Unter, Ober und König als Scherenschnitte, und liegt als Fächer in der Hand, zum Drüberstreichen, Schnippen oder Antippen; wie jedes Spiel geht, erklärt die App Seite für Seite. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite per Server-Sent Events nur ihre eigene Hand.',
+        desc: 'Den Code aus vier Buchstaben teilen, Spiel und Hausregeln wählen und Spiel um Spiel spielen, leere Plätze füllen Bots. Doppelkopf nach den Regeln des Deutschen Doppelkopf-Verbands, Skat nach der Internationalen Skatordnung, Mau-Mau und Durak so, wie die meisten Tische sie spielen; jede Hausregel ist ein Schalter. Das deutsche Blatt ist als SVG gezeichnet, Unter, Ober und König als Scherenschnitte.',
       },
     },
   },
@@ -340,11 +340,11 @@ export const APPS = [
     text: {
       en: {
         line: 'The classic five-dice game, alone or at a table with friends: glass dice you flick across the table, and the paper block with up to six games.',
-        desc: 'Throw five cobalt glass dice with a flick across the table or a button, keep the ones you like on the rail, and write the score in a block laid out like the paper one, one column per game. Alone, the rules and up to three bots run in the page, offline too; with friends, share a four-letter code and everyone sees each throw land and each die kept. Every throw is played through by the physics before it’s shown, then lands on the numbers the server rolled. Schmidt’s championship rules by default, its basic rules and the joker rule as the host’s choice, and with several games the house rule that lets a roll go into any column. A Node server without dependencies keeps the tables in memory and sends every page the room over Server-Sent Events.',
+        desc: 'Throw five cobalt glass dice with a flick across the table or a button, keep the ones you like on the rail, and write the score in a block laid out like the paper one. Alone, the rules and up to three bots run in the page, offline too; with friends, share a four-letter code and everyone sees each throw land. Every throw is played through by the physics before it’s shown, then lands on the numbers the server rolled.',
       },
       de: {
         line: 'Das klassische Würfelspiel mit fünf Würfeln, allein oder mit Freunden am Tisch: Glaswürfel zum Schnippen und der Papierblock für bis zu sechs Spiele.',
-        desc: 'Fünf Würfel aus Kobaltglas mit einem Wisch über den Tisch oder per Knopf werfen, die guten an die Leiste legen und den Wurf in einen Block schreiben, der aussieht wie der aus Papier, eine Spalte pro Spiel. Allein laufen die Regeln und bis zu drei Bots in der Seite, auch offline; mit Freunden den Code aus vier Buchstaben teilen, und alle sehen jeden Wurf landen und jeden behaltenen Würfel. Jeder Wurf wird von der Physik erst ganz durchgespielt und dann gezeigt, und er landet auf den Zahlen, die der Server gewürfelt hat. Schmidts Meisterschaftsregeln sind voreingestellt, die Grundregel und die Joker-Regel wählt der Gastgeber, bei mehreren Spielen auch die Hausregel, nach der jeder Wurf in jede Spalte darf. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite den Tisch per Server-Sent Events.',
+        desc: 'Fünf Würfel aus Kobaltglas mit einem Wisch über den Tisch oder per Knopf werfen, die guten an die Leiste legen und den Wurf in einen Block schreiben, der aussieht wie der aus Papier. Allein laufen die Regeln und bis zu drei Bots in der Seite, auch offline; mit Freunden den Code aus vier Buchstaben teilen, und alle sehen jeden Wurf landen. Jeder Wurf wird von der Physik erst ganz durchgespielt und dann gezeigt, und er landet auf den Zahlen, die der Server gewürfelt hat.',
       },
     },
   },
@@ -362,11 +362,11 @@ export const APPS = [
     text: {
       en: {
         line: 'Our colour-matching card game for the afternoon meeting, against bots or at a table with friends: match the colour or the number, and call “yksi!” before your last card.',
-        desc: 'Match the top card’s colour, number or sign, play Skips, Reverses and Draw Twos, name the colour with a wild, and tap “yksi!” before your second-to-last card, or anyone can catch you and you draw two; a Wild Draw Four can be challenged. Against up to five bots the rules run in the page, offline too; with friends, share a four-letter code, and bots fill the empty seats. The 108-card deck is drawn as SVG like a Finnish screen print, each colour with its own sign so the colours tell apart without colour vision, in light and dark. The printed rules by default; stacking, jump-in, 7-0 and drawing until a card fits are the host’s house rules. A Node server without dependencies keeps the tables in memory and sends every page only its own hand over Server-Sent Events.',
+        desc: 'Match the top card’s colour, number or sign, and tap “yksi!” before your second-to-last card, or anyone can catch you and you draw two. Against up to five bots the rules run in the page, offline too; with friends, share a four-letter code, and the house rules are the host’s. The 108-card deck is drawn like a Finnish screen print, each colour with its own sign so the colours tell apart without colour vision.',
       },
       de: {
         line: 'Unser Kartenspiel fürs Nachmittags-Meeting, gegen Bots oder mit Freunden am Tisch: Farbe oder Zahl, und vor der letzten Karte „yksi!“ rufen.',
-        desc: 'Eine Karte legen, die zur obersten passt, in Farbe, Zahl oder Zeichen, Aussetzen, Richtungswechsel und +2 spielen, mit einer Farbwahl die Farbe bestimmen und vor der vorletzten Karte auf „yksi!“ tippen, sonst darf dich jeder erwischen, und du ziehst zwei; eine +4 lässt sich anzweifeln. Gegen bis zu fünf Bots laufen die Regeln in der Seite, auch offline; mit Freunden den Code aus vier Buchstaben teilen, leere Plätze füllen Bots. Die 108 Karten sind als SVG gezeichnet wie ein finnischer Siebdruck, jede Farbe mit ihrem eigenen Zeichen, damit man sie auch ohne Farbsehen unterscheidet, hell und dunkel. Voreingestellt sind die gedruckten Regeln; Stapeln, Reinwerfen, 7-0 und Ziehen, bis es passt, sind Hausregeln des Gastgebers. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite per Server-Sent Events nur ihre eigene Hand.',
+        desc: 'Eine Karte legen, die zur obersten passt, in Farbe, Zahl oder Zeichen, und vor der vorletzten Karte auf „yksi!“ tippen, sonst darf dich jeder erwischen, und du ziehst zwei. Gegen bis zu fünf Bots laufen die Regeln in der Seite, auch offline; mit Freunden den Code aus vier Buchstaben teilen, die Hausregeln wählt der Gastgeber. Die 108 Karten sind gezeichnet wie ein finnischer Siebdruck, jede Farbe mit ihrem eigenen Zeichen, damit man sie auch ohne Farbsehen unterscheidet.',
       },
     },
   },
@@ -384,11 +384,11 @@ export const APPS = [
     text: {
       en: {
         line: 'Our own take on the stock-pile card game, alone against bots or at a table with friends: enamel number plates built up from 1 to 12, laid out for the tablet first.',
-        desc: 'Play out your stock before everyone else: onto four shared piles that count from 1 to 12, from your hand, your stock or your four discard piles, and end each turn on a discard pile. Every card is an enamel house-number plate drawn in the page, blue, green or fuchsia by its number, the Joker in all three. Alone, the rules and up to five bots in three ranks run in the page, offline too; with friends, share a four-letter code, play one round or to 500, in teams of two if you like. Drag a plate or tap it; the table is laid out for an iPad on its side or upright, grows with a big screen and has a layout of its own on the phone. A Node server without dependencies keeps the tables in memory and sends each page only its own hand over Server-Sent Events.',
+        desc: 'Play out your stock before everyone else, onto four shared piles that count from 1 to 12. Every card is an enamel house-number plate drawn in the page, blue, green or fuchsia by its number, the Joker in all three. Alone against up to five bots, offline too, or with friends at a four-letter code, in teams of two if you like; the table is laid out for an iPad first.',
       },
       de: {
         line: 'Unser eigenes Kartenspiel mit dem eigenen Stapel, allein gegen Bots oder mit Freunden am Tisch: Emaille-Nummernschilder, von 1 bis 12 gestapelt, zuerst fürs Tablet gemacht.',
-        desc: 'Den eigenen Stapel als Erstes leer spielen: auf vier gemeinsame Aufbaustapel, die von 1 bis 12 zählen, aus der Hand, vom Stapel oder von den vier eigenen Ablagen, und jeden Zug auf einer Ablage beenden. Jede Karte ist ein Hausnummernschild aus Emaille, in der Seite gezeichnet, blau, grün oder fuchsia nach ihrer Zahl, der Joker in allen dreien. Allein laufen die Regeln und bis zu fünf Bots in drei Rängen in der Seite, auch offline; mit Freunden den Code aus vier Buchstaben teilen, eine Runde oder bis 500 spielen, wer mag zu zweit im Team. Ein Schild ziehen oder antippen; der Tisch ist fürs iPad gemacht, quer oder hochkant, wächst mit großen Bildschirmen und hat auf dem Handy sein eigenes Layout. Ein Node-Server ohne Abhängigkeiten hält die Tische im Speicher und schickt jeder Seite per Server-Sent Events nur ihre eigene Hand.',
+        desc: 'Den eigenen Stapel als Erstes leer spielen, auf vier gemeinsame Aufbaustapel, die von 1 bis 12 zählen. Jede Karte ist ein Hausnummernschild aus Emaille, in der Seite gezeichnet, blau, grün oder fuchsia nach ihrer Zahl, der Joker in allen dreien. Allein gegen bis zu fünf Bots, auch offline, oder mit Freunden über einen Code aus vier Buchstaben, wer mag zu zweit im Team; der Tisch ist zuerst fürs iPad gemacht.',
       },
     },
   },
@@ -428,11 +428,11 @@ export const APPS = [
     text: {
       en: {
         line: 'Our own curve game for the afternoon meeting: steer a line that never stops, slip through its gaps and outlast everyone, up to ten in a room.',
-        desc: 'Every line moves at a measured speed and turns on a measured circle, leaves a gap now and then, and its round ends at any line or the wall; whoever is still driving scores. Share a four-letter code for up to ten curves, or put up to four people on one keyboard. No page is ever told where a curve is: each simulates the round itself on the server’s clock, only steering changes travel, and one that arrives late rewinds the round to where it belongs, while a Node server without dependencies referees 150 milliseconds behind. 25 powerups, modes from None to GS++, and a Tune panel that turns every number of the feel.',
+        desc: 'Every line moves at a measured speed and turns on a measured circle, leaves a gap now and then, and its round ends at any line or the wall; whoever is still driving scores. Share a four-letter code for up to ten curves, or put up to four people on one keyboard, with 25 powerups and a Tune panel that turns every number of the feel. No page is told where a curve is: each simulates the round itself on the server’s clock, and only steering changes travel.',
       },
       de: {
         line: 'Unser eigenes Kurvenspiel für das Nachmittags-Meeting: eine Linie lenken, die nie anhält, durch ihre Lücken schlüpfen und alle überleben, bis zu zehn in einem Raum.',
-        desc: 'Jede Linie fährt mit gemessenem Tempo und lenkt auf einem gemessenen Kreis, lässt ab und zu eine Lücke, und ihre Runde endet an jeder Linie und an der Wand; wer noch fährt, punktet. Einen Code aus vier Buchstaben teilen, für bis zu zehn Kurven, oder bis zu vier Leute an eine Tastatur setzen. Keiner Seite wird je gesagt, wo eine Kurve ist: Jede simuliert die Runde selbst nach der Uhr des Servers, unterwegs sind nur Lenkwechsel, und einer, der zu spät ankommt, spult die Runde dorthin zurück, wo er hingehört, während ein Node-Server ohne Abhängigkeiten 150 Millisekunden dahinter als Schiedsrichter läuft. 25 Powerups, Modi von None bis GS++ und ein Feintuning, das jede Zahl des Fahrgefühls dreht.',
+        desc: 'Jede Linie fährt mit gemessenem Tempo und lenkt auf einem gemessenen Kreis, lässt ab und zu eine Lücke, und ihre Runde endet an jeder Linie und an der Wand; wer noch fährt, punktet. Einen Code aus vier Buchstaben teilen, für bis zu zehn Kurven, oder bis zu vier Leute an eine Tastatur setzen, mit 25 Powerups und einem Feintuning, das jede Zahl des Fahrgefühls dreht. Keiner Seite wird je gesagt, wo eine Kurve ist: Jede simuliert die Runde selbst nach der Uhr des Servers, und unterwegs sind nur Lenkwechsel.',
       },
     },
   },
