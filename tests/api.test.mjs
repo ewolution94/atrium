@@ -101,15 +101,15 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(by.skibbo.writeup, 'https://ewolution.cloud/skibbo/');
   assert.equal(by.randomiser.status, null);
   assert.equal(by.randomiser.tile, null);
-  assert.equal(by.randomiser.writeup, null, 'no write-up until the landing has it');
+  assert.equal(by.randomiser.writeup, 'https://ewolution.cloud/randomiser/');
   assert.equal(by.curveextreme.url, 'https://curveextreme.ewolution.cloud/');
   assert.equal(by.curveextreme.status, null);
   assert.equal(by.curveextreme.tile, null);
-  assert.equal(by.curveextreme.writeup, null, 'no write-up until the landing has it');
+  assert.equal(by.curveextreme.writeup, 'https://ewolution.cloud/curveextreme/');
   assert.equal(by.pokeproxy.url, 'https://pokeproxy.ewolution.cloud/');
   assert.equal(by.pokeproxy.status, null);
   assert.equal(by.pokeproxy.tile, null);
-  assert.equal(by.pokeproxy.writeup, null, 'no write-up until the landing has it');
+  assert.equal(by.pokeproxy.writeup, 'https://ewolution.cloud/pokeproxy/');
   // Verso is private: everyone sees it, in its own group, and it has no write-up on the landing.
   assert.equal(by.verso.audience, 'private');
   assert.equal(by.verso.url, 'https://verso.ewolution.cloud/');

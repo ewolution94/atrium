@@ -400,17 +400,17 @@ export const APPS = [
     host: 'randomiser.ewolution.cloud',
     pulse: 'randomiser',
     repo: 'https://github.com/ewolution94/randomiser',
-    writeup: null,
+    writeup: '/randomiser/',
     stack: 'Svelte · Node',
     since: 2026,
     text: {
       en: {
-        line: 'Who hosts today? The afternoon meeting’s draw, at the fair: a painted wheel, a jackpot or a duck race, made for the laptop shared in the call.',
-        desc: 'Put the meeting’s names in, then spin the painted wheel, pull the jackpot’s lever or start the duck race; the name that comes up swings in on a hanging sign. The winner is drawn first, evenly, from the browser’s random source, and the machine only plays its way there: on Max the wheel stops against the neighbour’s nail and creeps over, the reel stops one short, the race is won by a beak. Everyone once lets the winners sit out until all have had a turn, and the last draws keep their time. The names stay on the device, it works offline, and the jackpot is the same reel as Aale Spiele’s draw.',
+        line: 'Our wheel of fortune for the afternoon meeting, at the fair: a painted wheel, a jackpot or a duck race draws a name, and the winner is decided before anything moves.',
+        desc: 'Type the meeting’s names once, pick the wheel, the jackpot or the duck race and press the ticket: the winner is drawn first from the browser’s crypto random source and the machine only plays its way there, with a near miss and a clown horn on Max drama and a prize ticket in a spotlight at the end. Each machine’s length and feel are set in Settings, and Everyone once lets the winners sit out until all have had a turn. Made for a laptop shared in the call, it fills the window exactly, keeps everything on the device, works offline and makes its fairground sounds with Web Audio.',
       },
       de: {
-        line: 'Wer moderiert heute? Die Auslosung fürs Nachmittags-Meeting, auf der Kirmes: ein bemaltes Glücksrad, ein Jackpot oder ein Entenrennen, gemacht für den Laptop, der im Call geteilt wird.',
-        desc: 'Die Namen der Runde eintragen, dann das Glücksrad drehen, am Hebel des Jackpots ziehen oder das Entenrennen starten; der gezogene Name schwingt auf einem hängenden Schild herein. Gezogen wird zuerst, gleichmäßig, mit dem Zufall des Browsers, die Maschine spielt sich nur dorthin: Auf Maximal bleibt das Rad am Nagel des Nachbarn hängen und rutscht dann weiter, die Walze hält eins zu früh, das Rennen geht um Schnabelbreite aus. „Jeder einmal“ lässt Gezogene aussetzen, bis alle dran waren, und die letzten Ziehungen stehen mit Uhrzeit da. Die Namen bleiben auf dem Gerät, es läuft auch offline, und der Jackpot ist dieselbe Walze wie die Auslosung von Aale Spiele.',
+        line: 'Unser Glücksrad fürs Nachmittags-Meeting, auf der Kirmes: ein bemaltes Rad, ein Jackpot oder ein Entenrennen zieht einen Namen, und der Gewinner steht fest, bevor sich etwas bewegt.',
+        desc: 'Die Namen der Runde einmal eintragen, Glücksrad, Jackpot oder Entenrennen wählen und das Los drücken: Der Gewinner wird zuerst aus der Zufallsquelle des Browsers gezogen, und die Maschine spielt sich nur noch dorthin, bei Maximal mit Beinahe-Treffer und Clownshupe, am Ende mit einem Gewinnlos im Scheinwerferlicht. Dauer und Tempo jeder Maschine stehen in den Einstellungen, und mit „Jeder einmal“ setzen die Gewinner aus, bis alle dran waren. Gemacht für den Laptop, der im Call geteilt wird, füllt es das Fenster genau, behält alles auf dem Gerät, läuft offline und macht seine Kirmesklänge mit Web Audio.',
       },
     },
   },
@@ -422,17 +422,17 @@ export const APPS = [
     host: 'curveextreme.ewolution.cloud',
     pulse: 'curveextreme',
     repo: 'https://github.com/ewolution94/curveextreme',
-    writeup: null,
+    writeup: '/curveextreme/',
     stack: 'Svelte · Node',
     since: 2026,
     text: {
       en: {
-        line: 'Our own CurveCrash for the afternoon meeting: steer a line that never stops, slip through its gaps, outlast everyone.',
-        desc: 'Everyone steers a curve that keeps moving and leaves a line; crash into any line or the wall and you’re out, and everyone still driving scores. The steering was measured from the original’s public replays, frame by frame: speed, turn radius, line width and the random gaps. All 25 powerups, free-for-all or teams, up to ten in a room with a code, or up to four on one keyboard. Your own curve is drawn ahead with the keys you hold, and the room’s host can tune every number of the feel between rounds.',
+        line: 'Our own curve game for the afternoon meeting: steer a line that never stops, slip through its gaps and outlast everyone, up to ten in a room.',
+        desc: 'Every line moves at a measured speed and turns on a measured circle, leaves a gap now and then, and its round ends at any line or the wall; whoever is still driving scores. Share a four-letter code for up to ten curves, or put up to four people on one keyboard. No page is ever told where a curve is: each simulates the round itself on the server’s clock, only steering changes travel, and one that arrives late rewinds the round to where it belongs, while a Node server without dependencies referees 150 milliseconds behind. 25 powerups, modes from None to GS++, and a Tune panel that turns every number of the feel.',
       },
       de: {
-        line: 'Unser eigenes CurveCrash fürs Nachmittags-Meeting: eine Linie steuern, die nie anhält, durch ihre Lücken schlüpfen, alle überleben.',
-        desc: 'Alle steuern eine Kurve, die nie anhält und eine Linie hinterlässt; wer in eine Linie oder die Wand fährt, ist raus, und alle, die noch fahren, punkten. Die Steuerung ist aus den öffentlichen Replays des Originals vermessen, Bild für Bild: Tempo, Wenderadius, Linienbreite und die zufälligen Lücken. Alle 25 Power-ups, jeder gegen jeden oder Teams, bis zu zehn in einem Raum mit Code oder bis zu vier an einer Tastatur. Die eigene Kurve ist mit den gedrückten Tasten vorausgezeichnet, und der Host stellt zwischen den Runden jede Zahl des Fahrgefühls ein.',
+        line: 'Unser eigenes Kurvenspiel für das Nachmittags-Meeting: eine Linie lenken, die nie anhält, durch ihre Lücken schlüpfen und alle überleben, bis zu zehn in einem Raum.',
+        desc: 'Jede Linie fährt mit gemessenem Tempo und lenkt auf einem gemessenen Kreis, lässt ab und zu eine Lücke, und ihre Runde endet an jeder Linie und an der Wand; wer noch fährt, punktet. Einen Code aus vier Buchstaben teilen, für bis zu zehn Kurven, oder bis zu vier Leute an eine Tastatur setzen. Keiner Seite wird je gesagt, wo eine Kurve ist: Jede simuliert die Runde selbst nach der Uhr des Servers, unterwegs sind nur Lenkwechsel, und einer, der zu spät ankommt, spult die Runde dorthin zurück, wo er hingehört, während ein Node-Server ohne Abhängigkeiten 150 Millisekunden dahinter als Schiedsrichter läuft. 25 Powerups, Modi von None bis GS++ und ein Feintuning, das jede Zahl des Fahrgefühls dreht.',
       },
     },
   },
@@ -445,7 +445,7 @@ export const APPS = [
     pulse: 'pokeproxy',
     repo: 'https://github.com/ewolution94/pokeproxy',
     // Its write-up waits on the landing's branch pokeproxy-launch; '/pokeproxy/' once that is live.
-    writeup: null,
+    writeup: '/pokeproxy/',
     stack: 'Svelte · Node',
     since: 2026,
     text: {
