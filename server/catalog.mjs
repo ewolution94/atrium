@@ -505,6 +505,28 @@ export const APPS = [
       },
     },
   },
+  // Not on the landing (one person's tool, behind Cloudflare Access), so the texts restate the README.
+  {
+    slug: 'encore',
+    name: 'Encore',
+    audience: 'private',
+    host: 'encore.ewolution.cloud',
+    pulse: 'encore',
+    repo: 'https://github.com/ewolution94/encore',
+    writeup: null,
+    stack: 'Svelte · Node · SQLite · ffmpeg',
+    since: 2026,
+    text: {
+      en: {
+        line: 'YouTube live sets, checked and cut into tracks, into Spotify on the phone.',
+        desc: 'A set saved to a YouTube playlist is downloaded on the NAS, and Encore finds its tracklist in the description or the top comments, or takes one you paste. You check the times and trim the ends; it cuts the set into tagged tracks that play through without gaps, and Synology Drive takes them to Spotify’s local files. One person’s tool, behind a login.',
+      },
+      de: {
+        line: 'YouTube-Livesets, geprüft und in Tracks geschnitten, in Spotify auf dem Handy.',
+        desc: 'Ein in einer YouTube-Playlist gespeichertes Set wird auf dem NAS geladen, und Encore findet seine Trackliste in der Beschreibung oder den Top-Kommentaren oder nimmt eine eingefügte. Du prüfst die Zeiten und kürzt Anfang und Ende; es schneidet das Set in getaggte Tracks, die ohne Lücken durchlaufen, und Synology Drive bringt sie in Spotifys lokale Dateien. Ein Werkzeug für eine Person, hinter einem Login.',
+      },
+    },
+  },
 
   // --- Only for the owner, once sign-in is set up (auth.mjs). ------------------------------
   {

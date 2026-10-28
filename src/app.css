@@ -86,6 +86,11 @@
   --ewo-accent: light-dark(#7b2598, #d38bea);
   --ewo-accent-2: light-dark(#2b0a38, #f6e0ff);
 }
+[data-ewo-project='encore'] {
+  /* Folio's --ewo-project-encore pair: the sleeve's blue, and a stage light's pink on the label. */
+  --ewo-accent: light-dark(#2541b8, #8aa2ff);
+  --ewo-accent-2: light-dark(#c2185b, #ff7ab8);
+}
 [data-ewo-project='tcgsl'] {
   /* Folio's --ewo-project-tcgsl pair: foil gold and the holo teal of its set symbol. */
   --ewo-accent: light-dark(#8a6200, #f2c14e);
