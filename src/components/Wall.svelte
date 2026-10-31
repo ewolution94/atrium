@@ -54,7 +54,7 @@
       'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch wuerfle wuerfle wuerfle wuerfle'
       'yksi yksi yksi yksi yksi yksi skibbo skibbo skibbo skibbo skibbo skibbo'
       'randomiser randomiser randomiser randomiser randomiser randomiser curveextreme curveextreme curveextreme curveextreme curveextreme curveextreme'
-      'pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pitcher pitcher pitcher pitcher pitcher pitcher';
+      'pokeproxy pokeproxy pokeproxy pokeproxy pitcher pitcher pitcher pitcher fundus fundus fundus fundus';
   }
   .private {
     grid-template-areas:
@@ -120,7 +120,8 @@
         'randomiser randomiser randomiser randomiser randomiser randomiser'
         'curveextreme curveextreme curveextreme curveextreme curveextreme curveextreme'
         'pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy'
-        'pitcher pitcher pitcher pitcher pitcher pitcher';
+        'pitcher pitcher pitcher pitcher pitcher pitcher'
+        'fundus fundus fundus fundus fundus fundus';
     }
     .private {
       grid-template-areas:

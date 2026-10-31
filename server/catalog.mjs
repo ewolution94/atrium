@@ -482,6 +482,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'fundus',
+    name: 'Fundus',
+    audience: 'public',
+    host: 'fundus.ewolution.cloud',
+    pulse: 'fundus',
+    repo: 'https://github.com/ewolution94/fundus',
+    writeup: null, // the landing's write-up isn't live yet: '/fundus/' once it is
+    stack: 'Svelte · WebAssembly',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Everyday tools for photos, PDFs, text, numbers and time that run on your device, so nothing you put in leaves it.',
+        desc: 'Twenty tools, from Shrink a photo and Sign a PDF to Percent & VAT and Time zones, plus six for developers behind a switch, each filed under an article number whose hundreds are its kind: F-102 is a photo tool, F-502 one for numbers and time. Drop, paste or pick something anywhere, and the tools that take it come first, each with its reason; a result goes on into the next tool with the file already in. It all runs in the browser, HEIC photos and PDFs included, and the page may only talk to its own address, so a photo, a PDF or a text never leaves the device.',
+      },
+      de: {
+        line: 'Werkzeuge für jeden Tag, für Fotos, PDFs, Text, Zahlen und Zeit, die auf dem eigenen Gerät laufen, sodass nichts, was man hineingibt, es verlässt.',
+        desc: 'Zwanzig Werkzeuge, von „Foto verkleinern“ und „PDF unterschreiben“ bis „Prozent & MwSt.“ und „Zeitzonen“, dazu sechs für Entwickler hinter einem Schalter, jedes unter einer Artikelnummer abgelegt, deren Hunderter seine Art sind: F-102 ist ein Foto-Werkzeug, F-502 eins für Zahlen und Zeit. Etwas irgendwo ablegen, einfügen oder auswählen, und die Werkzeuge, die es nehmen, kommen zuerst, jedes mit seinem Grund; ein Ergebnis geht mit der Datei schon darin ins nächste Werkzeug weiter. Alles läuft im Browser, HEIC-Fotos und PDFs eingeschlossen, und die Seite darf nur mit ihrer eigenen Adresse sprechen, so verlässt ein Foto, ein PDF oder ein Text nie das Gerät.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
