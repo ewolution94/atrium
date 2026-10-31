@@ -117,7 +117,7 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(by.fundus.url, 'https://fundus.ewolution.cloud/');
   assert.equal(by.fundus.status, null);
   assert.equal(by.fundus.tile, null);
-  assert.equal(by.fundus.writeup, null);
+  assert.equal(by.fundus.writeup, 'https://ewolution.cloud/fundus/');
   // Verso is private: everyone sees it, in its own group, and it has no write-up on the landing.
   assert.equal(by.verso.audience, 'private');
   assert.equal(by.verso.url, 'https://verso.ewolution.cloud/');

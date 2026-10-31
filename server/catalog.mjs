@@ -489,7 +489,7 @@ export const APPS = [
     host: 'fundus.ewolution.cloud',
     pulse: 'fundus',
     repo: 'https://github.com/ewolution94/fundus',
-    writeup: null, // the landing's write-up isn't live yet: '/fundus/' once it is
+    writeup: '/fundus/',
     stack: 'Svelte · WebAssembly',
     since: 2026,
     text: {
