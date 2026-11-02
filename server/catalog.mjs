@@ -511,7 +511,7 @@ export const APPS = [
     host: 'linea.ewolution.cloud',
     pulse: 'linea',
     repo: 'https://github.com/ewolution94/linea',
-    writeup: null,
+    writeup: '/linea/',
     stack: 'Svelte · Node',
     since: 2026,
     text: {
