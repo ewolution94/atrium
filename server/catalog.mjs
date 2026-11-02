@@ -504,6 +504,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'linea',
+    name: 'Linea',
+    audience: 'public',
+    host: 'linea.ewolution.cloud',
+    pulse: 'linea',
+    repo: 'https://github.com/ewolution94/linea',
+    writeup: null,
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Timelines you plan together: lanes, bars and milestones dragged into place, shared with a link instead of an account.',
+        desc: 'Each lane is drawn as a metro line, each bar as a section with a stop at either end, each milestone as a station. Drag across a lane to draw a bar, drag it to move it, grab a stop to stretch it; on a phone, a press lifts it first. Every timeline has two links: the edit link changes the plan, live for everyone who has it open, and the view link shows each change but changes nothing. Zoom from weeks to years, take back your own steps, and take the plan away as a picture for slides or a file to open again. There are no accounts: the timelines are kept on the NAS under their links, and the ones you’ve opened are listed on your device.',
+      },
+      de: {
+        line: 'Zeitleisten, die man gemeinsam plant: Bahnen, Balken und Meilensteine, an ihren Platz gezogen und per Link geteilt statt mit einem Konto.',
+        desc: 'Jede Bahn ist als U-Bahn-Linie gezeichnet, jeder Balken als Abschnitt mit einem Halt an jedem Ende, jeder Meilenstein als Station. Über eine Bahn ziehen zeichnet einen Balken, ziehen verschiebt ihn, ein Halt dehnt ihn; auf dem Handy hebt ihn zuerst ein langer Druck an. Jede Zeitleiste hat zwei Links: Der Bearbeiten-Link ändert den Plan, live für alle, die ihn offen haben, und der Ansehen-Link zeigt jede Änderung, ändert aber nichts. Zoom von Wochen bis zu Jahren, die eigenen Schritte zurücknehmen, und den Plan als Bild für Folien oder als Datei zum Wiederöffnen mitnehmen. Konten gibt es keine: Die Zeitleisten liegen unter ihren Links auf dem NAS, und die schon geöffneten listet das eigene Gerät.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {

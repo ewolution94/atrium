@@ -25,6 +25,7 @@
   import Pokeproxy from './viz/Pokeproxy.svelte';
   import Pitcher from './viz/Pitcher.svelte';
   import Fundus from './viz/Fundus.svelte';
+  import Linea from './viz/Linea.svelte';
   import Verso from './viz/Verso.svelte';
   import Encore from './viz/Encore.svelte';
   import Census from './viz/Census.svelte';
@@ -77,6 +78,8 @@
   <Pitcher {awake} />
 {:else if app.slug === 'fundus'}
   <Fundus {awake} />
+{:else if app.slug === 'linea'}
+  <Linea {awake} />
 {:else if app.slug === 'verso'}
   <Verso {awake} />
 {:else if app.slug === 'encore'}
