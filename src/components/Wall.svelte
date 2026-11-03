@@ -64,8 +64,8 @@
   }
   .owner {
     grid-template-areas:
-      'census census census census census census folio folio folio folio folio folio'
-      'census census census census census census folio folio folio folio folio folio';
+      'census census census census folio folio folio folio dashboard dashboard dashboard dashboard'
+      'census census census census folio folio folio folio dashboard dashboard dashboard dashboard';
   }
   .wall > :global([data-slug]) {
     grid-area: var(--area);
@@ -135,7 +135,9 @@
     .owner {
       grid-template-areas:
         'census census census folio folio folio'
-        'census census census folio folio folio';
+        'census census census folio folio folio'
+        'dashboard dashboard dashboard dashboard dashboard dashboard'
+        'dashboard dashboard dashboard dashboard dashboard dashboard';
     }
   }
 

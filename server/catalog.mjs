@@ -617,6 +617,27 @@ export const APPS = [
       },
     },
   },
+  {
+    slug: 'dashboard',
+    name: 'Dashboard',
+    audience: 'owner',
+    host: 'dashboard.ewolution.cloud',
+    pulse: 'dashboard',
+    repo: 'https://github.com/ewolution94/dashboard',
+    writeup: null,
+    stack: 'Svelte · Node · SQLite',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Settings, layout and defaults for every app, in one place',
+        desc: 'An app announces what it takes in a manifest, and Dashboard draws the control each setting asks for and checks every value against it. The family’s defaults (language, theme, sounds and motion) reach every app at once, while a visitor’s own choice on their device always wins. Atrium’s wall, the landing’s pins and Aale Spiele’s games are arranged here, and every change is a revision that can be reverted.',
+      },
+      de: {
+        line: 'Einstellungen, Layout und Vorgaben für jede App, an einem Ort',
+        desc: 'Eine App meldet in einem Manifest, was sie annimmt, und Dashboard zeichnet für jede Einstellung das passende Bedienelement und prüft jeden Wert dagegen. Die Vorgaben der Familie (Sprache, Theme, Töne und Bewegung) erreichen alle Apps zugleich, die eigene Wahl auf dem Gerät gewinnt dabei immer. Atriums Wand, die Pins der Landingpage und die Spiele von Aale Spiele werden hier angeordnet, und jede Änderung ist eine Revision, die sich zurücknehmen lässt.',
+      },
+    },
+  },
 ];
 
 /** The entries a viewer may see: everyone gets the public and private ones, an owner all of them. */

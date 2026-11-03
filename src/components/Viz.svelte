@@ -30,6 +30,7 @@
   import Encore from './viz/Encore.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
+  import Dashboard from './viz/Dashboard.svelte';
 
   let { app, awake = false }: { app: App; awake?: boolean } = $props();
 </script>
@@ -88,4 +89,6 @@
   <Census {awake} />
 {:else if app.slug === 'folio'}
   <Folio {awake} />
+{:else if app.slug === 'dashboard'}
+  <Dashboard {awake} />
 {/if}

@@ -136,11 +136,11 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(by.axioma.repo, null);
   // Nothing about the owner's apps, and no LAN address anywhere.
   const text = JSON.stringify(doc);
-  assert.doesNotMatch(text, /"slug":"(census|folio)"|census\.ewolution|folio\.ewolution|Census|Folio/);
+  assert.doesNotMatch(text, /"slug":"(census|folio|dashboard)"|census\.ewolution|folio\.ewolution|dashboard\.ewolution|Census|Folio|Dashboard/);
   assert.doesNotMatch(text, /\.lan|192\.168/);
 });
 
-test('the owner, signed in, also sees Census and Folio', async () => {
+test('the owner, signed in, also sees Census, Folio and Dashboard', async () => {
   const login = await fetch(`${base}/login`, { headers: { 'cf-access-jwt-assertion': 'good' }, redirect: 'manual' });
   assert.equal(login.status, 303);
   const cookie = login.headers.get('set-cookie').split(';')[0];
@@ -149,7 +149,7 @@ test('the owner, signed in, also sees Census and Folio', async () => {
   const owner = doc.apps.filter((a) => a.audience === 'owner');
   assert.deepEqual(
     owner.map((a) => a.slug),
-    ['census', 'folio'],
+    ['census', 'folio', 'dashboard'],
   );
   assert.equal(owner.find((a) => a.slug === 'folio').url, null);
 });
