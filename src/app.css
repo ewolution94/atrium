@@ -91,6 +91,11 @@
   --ewo-accent: light-dark(#d8232a, #ff4d52);
   --ewo-accent-2: light-dark(#1d63b8, #6aa8ff);
 }
+[data-ewo-project='wichtle'] {
+  /* Folio's --ewo-project-wichtle pair: the gingerbread brown, and the red sugar (the candle gold in the dark). */
+  --ewo-accent: light-dark(#86491f, #dba26e);
+  --ewo-accent-2: light-dark(#ad2329, #ffb84d);
+}
 [data-ewo-project='verso'] {
   /* Folio's --ewo-project-verso pair: plum, and the dark full stop of its icon. */
   --ewo-accent: light-dark(#7b2598, #d38bea);

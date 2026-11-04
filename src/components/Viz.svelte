@@ -26,6 +26,7 @@
   import Pitcher from './viz/Pitcher.svelte';
   import Fundus from './viz/Fundus.svelte';
   import Linea from './viz/Linea.svelte';
+  import Wichtle from './viz/Wichtle.svelte';
   import Verso from './viz/Verso.svelte';
   import Encore from './viz/Encore.svelte';
   import Census from './viz/Census.svelte';
@@ -82,6 +83,8 @@
   <Fundus {awake} />
 {:else if app.slug === 'linea'}
   <Linea {awake} />
+{:else if app.slug === 'wichtle'}
+  <Wichtle {awake} />
 {:else if app.slug === 'verso'}
   <Verso {awake} />
 {:else if app.slug === 'encore'}

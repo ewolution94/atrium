@@ -526,6 +526,28 @@ export const APPS = [
     },
   },
 
+  {
+    slug: 'wichtle',
+    name: 'Wichtle',
+    audience: 'public',
+    host: 'wichtle.ewolution.cloud',
+    pulse: 'wichtle',
+    repo: 'https://github.com/ewolution94/wichtle',
+    writeup: '/wichtle/',
+    stack: 'Svelte · Node',
+    since: 2026,
+    text: {
+      en: {
+        line: 'Wichteln for a group: one link in the group chat, each person taps their own name, and the draw stays sealed, even from the host.',
+        desc: 'The host lists the names, or people add themselves, and posts one link; each person taps their name, and that device keeps their own link. Everyone adds a few wishes, what they’d rather not get and, if they want their present posted, an address only the person who draws them will see. Couples and households never draw each other, and the host picks one closed chain or any fair draw, drawn quietly or live on the shared screen, where every open page lights up at once. The host follows each person’s steps, opened, present ready, on its way, arrived, but never who has whom; a code the server checks opens the pairs when something goes wrong. A practice group of made-up colleagues tries it all first. There are no accounts, and everything is deleted 30 days after the party.',
+      },
+      de: {
+        line: 'Wichteln für eine Gruppe: ein Link im Gruppenchat, alle tippen ihren eigenen Namen an, und die Auslosung bleibt versiegelt, auch vor der Orga.',
+        desc: 'Die Orga trägt die Namen ein, oder die Leute tragen sich selbst ein, und schickt einen Link; alle tippen ihren Namen an, und das Gerät behält den eigenen Link. Alle schreiben ein paar Wünsche dazu, was sie lieber nicht bekommen, und wer das Geschenk per Post möchte, eine Adresse, die nur sieht, wer sie zieht. Paare und Haushalte ziehen sich nie gegenseitig, und die Orga wählt eine geschlossene Kette oder jede faire Auslosung, still gezogen oder live auf dem geteilten Bildschirm, wo jede offene Seite im selben Moment aufleuchtet. Die Orga verfolgt die Schritte jeder Person, geöffnet, Geschenk bereit, unterwegs, angekommen, aber nie, wer wen hat; ein Code, den der Server prüft, öffnet die Paare, wenn etwas schiefgeht. Eine Probegruppe mit ausgedachten Kolleg:innen spielt vorher alles durch. Konten gibt es keine, und alles wird 30 Tage nach der Feier gelöscht.',
+      },
+    },
+  },
+
   // --- Private: shown to everyone, usable by invited people only. -------------------------
   // Not on the landing, so the texts restate the README.
   {
