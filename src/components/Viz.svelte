@@ -1,7 +1,7 @@
 <script lang="ts">
   // What a tile shows above its name: a live glimpse where the app has data to give (Clinch,
-  // Cantina, Pulse, Aale Spiele's games), its motif where it doesn't. `awake` plays the hover
-  // state for good, as on the app's own page.
+  // Cantina, Pulse, Aale Spiele's games), its motif where it doesn't, its icon until it has one
+  // (Generic). `awake` plays the hover state for good, as on the app's own page.
   import type { AaleTile, App, CantinaTile, ClinchTile, PulseTile } from '../lib/types';
   import Clinch from './viz/Clinch.svelte';
   import Planum from './viz/Planum.svelte';
@@ -31,6 +31,7 @@
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
   import Dashboard from './viz/Dashboard.svelte';
+  import Generic from './viz/Generic.svelte';
 
   let { app, awake = false }: { app: App; awake?: boolean } = $props();
 </script>
@@ -91,4 +92,6 @@
   <Folio {awake} />
 {:else if app.slug === 'dashboard'}
   <Dashboard {awake} />
+{:else}
+  <Generic slug={app.slug} {awake} />
 {/if}

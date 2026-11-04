@@ -68,10 +68,21 @@ export type App = {
   tile: ClinchTile | CantinaTile | PulseTile | AaleTile | null;
 };
 
+/** A tile's spot on a grid in cells (server/wall.mjs): column, row, width, height. */
+export type Cells = [column: number, row: number, width: number, height: number];
+/** The wall's layout for the apps in the document: per grid each group's spots, and the phone's column. */
+export type WallLayout = {
+  wide: { columns: number } & Record<string, Record<string, Cells> | number>;
+  mid: { columns: number } & Record<string, Record<string, Cells> | number>;
+  narrow: { base: number; heights: Record<string, number>; order?: Record<string, string[]> };
+};
+
 export type Doc = {
   generatedAt: number;
   login: boolean;
   viewer: { email: string } | null;
   status: { overall: ServiceState; checkedAt: number | null };
   apps: App[];
+  /** Missing in a copy kept from before the wall came from Dashboard. */
+  wall?: WallLayout;
 };

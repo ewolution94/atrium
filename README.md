@@ -30,6 +30,16 @@ elements throughout.
   are Pulse's states and uptime. Pulse doesn't check itself; its own dot says whether it answered.
 - **The page refreshes every minute while visible**, keeps the last good copy on the device, and
   says "Last known" once that copy is more than three minutes old.
+- **The wall's layout is data, and Dashboard can change it.** `server/wall.json` is the built-in
+  layout: each tile's spot on the 12-column grid (wide) and the 6-column one (mid, up to 1100 px),
+  as `[column, row, width, height]` in cells, and its height in the phone's one column (up to
+  720 px). `server/wall.mjs` announces it to Dashboard as the `wall` setting, with each tile's
+  smallest spot (three columns by one row; Clinch four by three, Cantina three by two), and polls
+  Dashboard's value with Folio's `config-server`. A value with a tile off the grid, on another or
+  below its smallest spot is refused whole, and wall.json stays. `/api/apps` carries the layout
+  for the apps its viewer sees, so a guest's never names the owner's. With `DASHBOARD_URL` unset
+  or Dashboard down, the wall is wall.json. An app without a spot flows in after the others, and
+  one without a drawing of its own shows its icon (`viz/Generic.svelte`).
 - **Two layouts**, a bento wall and app icons like a home screen, kept per device. ⌘K (Ctrl K, or
   `/`) opens a launcher: Enter opens the app, Shift+Enter its page here.
 - **An app's page is a page**, not an overlay (`/clinch`): Back works, it scrolls and shares like
@@ -82,7 +92,8 @@ Like the other apps:
 - `docker-publish.yml` gates on `ci.yml`, then pushes `ghcr.io/ewolution94/atrium:latest` for
   amd64 and arm64. A push to `release` is the whole deploy; Watchtower picks it up.
 - The NAS runs `deploy/portainer-stack.yml` on port **5400**. It joins the external network
-  `ewolution`, where Census listens as `census:4901`.
+  `ewolution`, where Census listens as `census:4901` and Dashboard's apps' port as
+  `dashboard:8081`.
 - Atrium keeps no state, so the stack has no volume.
 
 | Variable | Default | Purpose |
@@ -94,6 +105,7 @@ Like the other apps:
 | `ATRIUM_AALE` | `https://aale-spiele.ewolution.cloud` | Where Aale Spiele's games are read (`/games.json`: the ones Dashboard leaves on, with their drawings) |
 | `ATRIUM_CANTINA_OUTLET` | `4` | The canteen outlet on the tile (4 = Kochwerk Elbe) |
 | `ATRIUM_CENSUS` | off | Census's ingest origin, `http://census:4901` on the NAS |
+| `DASHBOARD_URL` | off | Dashboard's apps' port, `http://dashboard:8081` on the NAS: the wall's layout. Off, the built-in one |
 | `ATRIUM_ACCESS_TEAM` | off | Cloudflare Access team domain, for sign-in |
 | `ATRIUM_ACCESS_AUD` | off | The Access application's AUD tag |
 | `ATRIUM_SESSION_SECRET` | off | Signs the session cookie; at least 32 characters |
@@ -104,9 +116,11 @@ Like the other apps:
 1. An entry in `server/catalog.mjs` (`audience: 'owner'` to keep it to the owner). Its `pulse` id
    must match the app's id in Pulse's `services.json`.
 2. Its icon as `public/apps/<slug>.svg` (from the app's `brand/app-icon.svg`).
-3. A motif or a live glimpse in `src/components/viz/`, wired in `src/components/Viz.svelte`.
-4. A place in the wall's grid (`src/components/Wall.svelte`, and `PLACED` in `Tile.svelte`);
-   without one it flows in after the others.
+3. A motif or a live glimpse in `src/components/viz/`, wired in `src/components/Viz.svelte`;
+   until then the tile shows its icon.
+4. Its spots in `server/wall.json`, at `wide` and `mid` in its group (`tests/wall.test.mjs` fails
+   without them), and a smallest spot in `MIN` in `server/wall.mjs` if its drawing needs more than
+   three columns by one row. Dashboard's editor moves it from there.
 
 ## Project layout
 
@@ -115,6 +129,7 @@ server/
   server.mjs        static files, security headers, /healthz, shutdown
   api.mjs           /api/apps, /api/cantina/photo; shared with the Vite dev server
   catalog.mjs       the apps and what Atrium says about them
+  wall.json         the wall's built-in layout; wall.mjs makes it Dashboard's `wall` setting
   sources.mjs       live data from Clinch, Cantina, Pulse and Aale Spiele, cached
   auth.mjs          the optional owner sign-in (Cloudflare Access + a signed cookie)
   census.mjs        the forwarder for Census's beacon (/_e, /_e.js)
@@ -122,7 +137,7 @@ src/
   App.svelte        the wall or an app's page, the launcher
   components/       Bar, Intro, Wall, Tile, Icons, AppPage, Palette, Uptime, Footer, Field
   components/viz/   one glimpse or motif per app
-  lib/              data, route, i18n (EN/DE), transition, field, scrolling, census
+  lib/              data, route, i18n (EN/DE), wall (spots from the layout), transition, field, scrolling, census
 public/             boot.js (theme and language before paint), sw.js, manifest, icons, apps/
 vendor/ewo/         Folio's tokens, fonts and elements (`npm run vendor -- atrium` in Folio)
 brand/              the app icon (Field style, see development/plans/app-icons)

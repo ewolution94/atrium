@@ -1,13 +1,15 @@
 // Atrium's API, shared by the production server (server.mjs) and the Vite dev server
 // (vite.config.ts), so both behave the same. No dependencies.
 //
-//   GET /api/apps                 every app this viewer may see, with its status and tile data
+//   GET /api/apps                 every app this viewer may see, with its status and tile data,
+//                                 and the wall's layout for them (wall.mjs, from Dashboard)
 //   GET /api/cantina/photo?d=<id> the featured dish's photo, same-origin (the CSP stays 'self')
 //   GET /login, /logout           the optional owner sign-in (auth.mjs)
 
 import { visibleApps } from './catalog.mjs';
 import { createSources } from './sources.mjs';
 import { createAuth } from './auth.mjs';
+import { createWall } from './wall.mjs';
 
 const RANK = { none: 0, ok: 1, warn: 2, bad: 3 };
 
@@ -25,6 +27,7 @@ export function readConfig(env) {
     },
     cantinaOutlet: Number(env.ATRIUM_CANTINA_OUTLET || 4),
     census: env.ATRIUM_CENSUS || '',
+    dashboard: env.DASHBOARD_URL || '',
     auth: {
       team: env.ATRIUM_ACCESS_TEAM,
       aud: env.ATRIUM_ACCESS_AUD,
@@ -48,6 +51,9 @@ export function createApi(config, deps = {}) {
   const now = deps.now ?? Date.now;
   const sources = createSources({ upstreams: config.upstreams, cantinaOutlet: config.cantinaOutlet, fetch: deps.fetch, now });
   const auth = createAuth({ ...config.auth, fetch: deps.fetch, now, verifier: deps.verifier });
+  // Dashboard's layout for the wall; without DASHBOARD_URL (the dev server, the tests) the built-in one.
+  const wall = createWall({ url: config.dashboard });
+  void wall.start();
 
   /** What a tile shows besides the app's facts: live data for four of them, nothing for the rest. */
   function tileFor(slug, { clinch, cantina, pulse, aale }, statuses) {
@@ -98,6 +104,7 @@ export function createApi(config, deps = {}) {
         status: app.pulse ? (services[app.pulse] ?? null) : app.slug === 'pulse' ? { state: pulseState, uptime: null, days: null } : null,
         tile: tileFor(app.slug, data, statuses),
       })),
+      wall: wall.for(list),
     };
   }
 
@@ -138,5 +145,6 @@ export function createApi(config, deps = {}) {
   }
   /** Whether the tiles' loads still come round (sources.mjs → stuck), for `/healthz`. */
   handle.healthy = () => !sources.stuck;
+  handle.stop = () => wall.stop();
   return handle;
 }

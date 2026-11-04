@@ -3,6 +3,7 @@
 // offline; it's labelled "Last known" once it's older than a few minutes, never shown as current.
 
 import type { Doc } from './types';
+import { publicOnly } from './wall';
 
 const KEY = 'atrium:last';
 const EVERY = 60_000;
@@ -21,7 +22,7 @@ function restore(): Doc | null {
 /** The public part only: the owner's apps and email stay off the disk. */
 function keep(doc: Doc) {
   try {
-    localStorage.setItem(KEY, JSON.stringify({ ...doc, viewer: null, apps: doc.apps.filter((a) => a.audience === 'public') }));
+    localStorage.setItem(KEY, JSON.stringify({ ...doc, viewer: null, apps: doc.apps.filter((a) => a.audience === 'public'), wall: publicOnly(doc.wall) }));
   } catch {
     // full or blocked: the next visit just starts empty
   }

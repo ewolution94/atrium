@@ -4,12 +4,11 @@
   import { morph } from '../lib/transition';
   import { tintField } from '../lib/field';
   import type { App, CantinaTile } from '../lib/types';
+  import type { Place } from '../lib/wall';
   import Viz from './Viz.svelte';
 
-  let { app }: { app: App } = $props();
-
-  /** The slugs the wall's grid has a place for; anything else flows in after them. */
-  const PLACED = new Set(['clinch', 'planum', 'pulse', 'cantina', 'axioma', 'fermata', 'aale-spiele', 'tcgsl', 'schaetzle', 'vollmond', 'kritzle', 'cdnms', 'stichle', 'stammtisch', 'wuerfle', 'yksi', 'skibbo', 'randomiser', 'curveextreme', 'pokeproxy', 'pitcher', 'fundus', 'linea', 'verso', 'encore', 'census', 'folio', 'dashboard']);
+  /** `place`: its spot at each width (Wall.svelte, from the layout); without one it flows in after the placed tiles. */
+  let { app, place }: { app: App; place?: Place } = $props();
 
   let tile: HTMLElement;
   let spot: HTMLElement;
@@ -49,7 +48,9 @@
   bind:this={tile}
   data-slug={app.slug}
   data-ewo-project={app.slug}
-  style:--area={PLACED.has(app.slug) ? app.slug : null}
+  style:--area-wide={place?.wide}
+  style:--area-mid={place?.mid}
+  style:--min-narrow={place?.narrow}
   onpointerenter={enter}
   onpointermove={move}
   onpointerleave={leave}

@@ -1,0 +1,77 @@
+{
+  "wide": {
+    "columns": 12,
+    "web": {
+      "clinch": [1, 1, 6, 3],
+      "planum": [7, 1, 3, 2],
+      "aale-spiele": [10, 1, 3, 2],
+      "pulse": [7, 3, 6, 1],
+      "cantina": [1, 4, 3, 2],
+      "axioma": [4, 4, 3, 2],
+      "tcgsl": [7, 4, 3, 2],
+      "fermata": [10, 4, 3, 2],
+      "schaetzle": [1, 6, 3, 1],
+      "vollmond": [4, 6, 3, 1],
+      "stichle": [7, 6, 6, 2],
+      "kritzle": [1, 7, 3, 1],
+      "cdnms": [4, 7, 3, 1],
+      "stammtisch": [1, 8, 8, 1],
+      "wuerfle": [9, 8, 4, 1],
+      "yksi": [1, 9, 6, 1],
+      "skibbo": [7, 9, 6, 1],
+      "randomiser": [1, 10, 6, 1],
+      "curveextreme": [7, 10, 6, 1],
+      "pokeproxy": [1, 11, 6, 1],
+      "pitcher": [7, 11, 6, 1],
+      "fundus": [1, 12, 6, 1],
+      "linea": [7, 12, 6, 1]
+    },
+    "private": {
+      "verso": [1, 1, 6, 2],
+      "encore": [7, 1, 6, 2]
+    },
+    "owner": {
+      "census": [1, 1, 4, 2],
+      "folio": [5, 1, 4, 2],
+      "dashboard": [9, 1, 4, 2]
+    }
+  },
+  "mid": {
+    "columns": 6,
+    "web": {
+      "clinch": [1, 1, 6, 3],
+      "planum": [1, 4, 3, 2],
+      "axioma": [4, 4, 3, 2],
+      "pulse": [1, 6, 6, 1],
+      "cantina": [1, 7, 3, 2],
+      "fermata": [4, 7, 3, 2],
+      "aale-spiele": [1, 9, 3, 2],
+      "tcgsl": [4, 9, 3, 2],
+      "schaetzle": [1, 11, 6, 1],
+      "vollmond": [1, 12, 6, 1],
+      "kritzle": [1, 13, 6, 1],
+      "cdnms": [1, 14, 6, 1],
+      "stichle": [1, 15, 6, 2],
+      "stammtisch": [1, 17, 6, 2],
+      "wuerfle": [1, 19, 6, 1],
+      "yksi": [1, 20, 6, 1],
+      "skibbo": [1, 21, 6, 1],
+      "randomiser": [1, 22, 6, 1],
+      "curveextreme": [1, 23, 6, 1],
+      "pokeproxy": [1, 24, 6, 1],
+      "pitcher": [1, 25, 6, 1],
+      "fundus": [1, 26, 6, 1],
+      "linea": [1, 27, 6, 1]
+    },
+    "private": {
+      "verso": [1, 1, 6, 2],
+      "encore": [1, 3, 6, 2]
+    },
+    "owner": {
+      "census": [1, 1, 3, 2],
+      "folio": [4, 1, 3, 2],
+      "dashboard": [1, 3, 6, 2]
+    }
+  },
+  "narrow": { "base": 290, "heights": { "clinch": 470, "pulse": 160 } }
+}

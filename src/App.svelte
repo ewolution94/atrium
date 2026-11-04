@@ -41,7 +41,7 @@
     {#if prefs.layout === 'icons'}
       <Icons {apps} />
     {:else}
-      <Wall {apps} />
+      <Wall {apps} layout={data.doc?.wall} />
     {/if}
   {/if}
 </main>

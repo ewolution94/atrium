@@ -1,18 +1,23 @@
 <script lang="ts">
   import { t } from '../lib/i18n.svelte';
-  import type { App } from '../lib/types';
+  import type { App, WallLayout } from '../lib/types';
+  import { BUILT_IN, GROUP, inOrder, placeOf } from '../lib/wall';
   import Tile from './Tile.svelte';
 
-  let { apps }: { apps: App[] } = $props();
+  // The layout is data (server/wall.json, or Dashboard's): each tile gets its spot per width, and
+  // each group is in the phone's order, which only one column shows.
+  let { apps, layout }: { apps: App[]; layout?: WallLayout } = $props();
 
-  const publicApps = $derived(apps.filter((a) => a.audience === 'public'));
-  const privateApps = $derived(apps.filter((a) => a.audience === 'private'));
-  const ownerApps = $derived(apps.filter((a) => a.audience === 'owner'));
+  const wall = $derived(layout ?? BUILT_IN);
+  const group = (audience: App['audience']) => inOrder(apps.filter((a) => a.audience === audience), wall.narrow.order?.[GROUP[audience]]);
+  const publicApps = $derived(group('public'));
+  const privateApps = $derived(group('private'));
+  const ownerApps = $derived(group('owner'));
 </script>
 
 <div class="wall web">
   {#each publicApps as app (app.slug)}
-    <Tile {app} />
+    <Tile {app} place={placeOf(wall, app)} />
   {/each}
 </div>
 
@@ -20,7 +25,7 @@
   <h2 class="group">{t('private')} <span>{privateApps.length}</span></h2>
   <div class="wall private">
     {#each privateApps as app (app.slug)}
-      <Tile {app} />
+      <Tile {app} place={placeOf(wall, app)} />
     {/each}
   </div>
 {/if}
@@ -29,46 +34,22 @@
   <h2 class="group">{t('yours')} <span>{ownerApps.length}</span></h2>
   <div class="wall owner">
     {#each ownerApps as app (app.slug)}
-      <Tile {app} />
+      <Tile {app} place={placeOf(wall, app)} />
     {/each}
   </div>
 {/if}
 
 <style>
-  /* The bento: Clinch large, the rest around it. Apps the layout doesn't name flow in after. */
+  /* The bento, placed by the layout: Clinch large, the rest around it. An app it doesn't name yet
+     flows in after the others, half a row wide like the newest ones (a full row at mid width). */
   .wall {
     display: grid;
     gap: 14px;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-auto-rows: 152px;
   }
-  .web {
-    grid-template-areas:
-      'clinch clinch clinch clinch clinch clinch planum planum planum aale-spiele aale-spiele aale-spiele'
-      'clinch clinch clinch clinch clinch clinch planum planum planum aale-spiele aale-spiele aale-spiele'
-      'clinch clinch clinch clinch clinch clinch pulse pulse pulse pulse pulse pulse'
-      'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata'
-      'cantina cantina cantina axioma axioma axioma tcgsl tcgsl tcgsl fermata fermata fermata'
-      'schaetzle schaetzle schaetzle vollmond vollmond vollmond stichle stichle stichle stichle stichle stichle'
-      'kritzle kritzle kritzle cdnms cdnms cdnms stichle stichle stichle stichle stichle stichle'
-      'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch wuerfle wuerfle wuerfle wuerfle'
-      'yksi yksi yksi yksi yksi yksi skibbo skibbo skibbo skibbo skibbo skibbo'
-      'randomiser randomiser randomiser randomiser randomiser randomiser curveextreme curveextreme curveextreme curveextreme curveextreme curveextreme'
-      'pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pitcher pitcher pitcher pitcher pitcher pitcher'
-      'fundus fundus fundus fundus fundus fundus linea linea linea linea linea linea';
-  }
-  .private {
-    grid-template-areas:
-      'verso verso verso verso verso verso encore encore encore encore encore encore'
-      'verso verso verso verso verso verso encore encore encore encore encore encore';
-  }
-  .owner {
-    grid-template-areas:
-      'census census census census folio folio folio folio dashboard dashboard dashboard dashboard'
-      'census census census census folio folio folio folio dashboard dashboard dashboard dashboard';
-  }
   .wall > :global([data-slug]) {
-    grid-area: var(--area);
+    grid-area: var(--area-wide, auto / auto / auto / span 6);
   }
 
   .group {
@@ -95,49 +76,8 @@
     .wall {
       grid-template-columns: repeat(6, minmax(0, 1fr));
     }
-    .web {
-      grid-template-areas:
-        'clinch clinch clinch clinch clinch clinch'
-        'clinch clinch clinch clinch clinch clinch'
-        'clinch clinch clinch clinch clinch clinch'
-        'planum planum planum axioma axioma axioma'
-        'planum planum planum axioma axioma axioma'
-        'pulse pulse pulse pulse pulse pulse'
-        'cantina cantina cantina fermata fermata fermata'
-        'cantina cantina cantina fermata fermata fermata'
-        'aale-spiele aale-spiele aale-spiele tcgsl tcgsl tcgsl'
-        'aale-spiele aale-spiele aale-spiele tcgsl tcgsl tcgsl'
-        'schaetzle schaetzle schaetzle schaetzle schaetzle schaetzle'
-        'vollmond vollmond vollmond vollmond vollmond vollmond'
-        'kritzle kritzle kritzle kritzle kritzle kritzle'
-        'cdnms cdnms cdnms cdnms cdnms cdnms'
-        'stichle stichle stichle stichle stichle stichle'
-        'stichle stichle stichle stichle stichle stichle'
-        'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch'
-        'stammtisch stammtisch stammtisch stammtisch stammtisch stammtisch'
-        'wuerfle wuerfle wuerfle wuerfle wuerfle wuerfle'
-        'yksi yksi yksi yksi yksi yksi'
-        'skibbo skibbo skibbo skibbo skibbo skibbo'
-        'randomiser randomiser randomiser randomiser randomiser randomiser'
-        'curveextreme curveextreme curveextreme curveextreme curveextreme curveextreme'
-        'pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy pokeproxy'
-        'pitcher pitcher pitcher pitcher pitcher pitcher'
-        'fundus fundus fundus fundus fundus fundus'
-        'linea linea linea linea linea linea';
-    }
-    .private {
-      grid-template-areas:
-        'verso verso verso verso verso verso'
-        'verso verso verso verso verso verso'
-        'encore encore encore encore encore encore'
-        'encore encore encore encore encore encore';
-    }
-    .owner {
-      grid-template-areas:
-        'census census census folio folio folio'
-        'census census census folio folio folio'
-        'dashboard dashboard dashboard dashboard dashboard dashboard'
-        'dashboard dashboard dashboard dashboard dashboard dashboard';
+    .wall > :global([data-slug]) {
+      grid-area: var(--area-mid, auto / auto / auto / span 6);
     }
   }
 
@@ -146,20 +86,9 @@
       grid-template-columns: minmax(0, 1fr);
       grid-auto-rows: auto;
     }
-    .web,
-    .private,
-    .owner {
-      grid-template-areas: none;
-    }
     .wall > :global([data-slug]) {
       grid-area: auto;
-      min-height: 290px;
-    }
-    .wall > :global([data-slug='clinch']) {
-      min-height: 470px;
-    }
-    .wall > :global([data-slug='pulse']) {
-      min-height: 160px;
+      min-height: var(--min-narrow, 290px);
     }
   }
 </style>

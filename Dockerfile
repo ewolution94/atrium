@@ -10,13 +10,15 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# The server has zero dependencies, so the runtime image is just Node + the built app.
-# Atrium keeps no state: the apps' data lives in memory and is fetched again after a restart.
+# The server has zero dependencies, so the runtime image is just Node + the built app, plus
+# Folio's config helper (the wall's layout from Dashboard). Atrium keeps no state: the apps' data
+# and the layout live in memory and are fetched again after a restart.
 FROM node:24-alpine
 WORKDIR /app
 ENV NODE_ENV=production PORT=8080 TZ=Europe/Berlin
 COPY --from=build /app/dist ./dist
 COPY server ./server
+COPY vendor/ewo/elements/config-server.js vendor/ewo/elements/config-core.js ./vendor/ewo/elements/
 COPY package.json ./
 USER node
 EXPOSE 8080
