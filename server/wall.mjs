@@ -7,6 +7,11 @@
 //
 // A viewer gets the groups they may see and nothing else: a guest's /api/apps never names the
 // owner's apps, not even as a spot on a grid.
+//
+// The same manifest takes the family's language and theme (Phase 5): the page gets those two as
+// #ewo-config, first in <head> (server.mjs), and a device that hasn't picked starts from them
+// (src/lib/defaults.ts). Only those two: the wall names every app, the owner's too, so it never
+// goes into the page.
 
 import { readFileSync } from 'node:fs';
 import { createConfig } from '../vendor/ewo/elements/config-server.js';
@@ -51,8 +56,13 @@ export const MANIFEST = {
       base: WALL.narrow.base,
       default: WALL,
     },
+    lang: { family: true },
+    theme: { family: true },
   },
 };
+
+/** The settings the page carries as #ewo-config: the family's, never the wall. */
+const PAGE = ['lang', 'theme'];
 
 /** @param {{ url?: string, log?: (line: string) => void }} [options] */
 export function createWall({ url = '', log } = {}) {
@@ -61,6 +71,18 @@ export function createWall({ url = '', log } = {}) {
   return {
     start: () => config.start(),
     stop: () => config.stop(),
+    /** Changes whenever the values do: a key for caching the page. */
+    etag: () => config.etag(),
+    /**
+     * The page with the family's values as `<script type="application/json" id="ewo-config">`,
+     * first in <head>: Folio's `inject`, for the page's settings alone.
+     * @param {string} html
+     */
+    inject(html) {
+      const { values } = config.get();
+      const json = JSON.stringify(Object.fromEntries(PAGE.map((key) => [key, values[key]]))).replace(/</g, '\\u003c');
+      return html.replace(/<head(\s[^>]*)?>/i, (head) => `${head}\n    <script type="application/json" id="ewo-config">${json}</script>`);
+    },
     /**
      * The layout for the apps a viewer sees: per grid only their groups and spots, and in one
      * column their order and heights.

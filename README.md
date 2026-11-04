@@ -40,6 +40,11 @@ elements throughout.
   for the apps its viewer sees, so a guest's never names the owner's. With `DASHBOARD_URL` unset
   or Dashboard down, the wall is wall.json. An app without a spot flows in after the others, and
   one without a drawing of its own shows its icon (`viz/Generic.svelte`).
+- **The language and theme start from Dashboard's.** The same manifest takes the family's `lang`
+  and `theme`; the server puts those two (never the wall) first in the page as `#ewo-config`, and
+  `public/boot.js` applies them before first paint on a device that hasn't picked
+  (`src/lib/defaults.ts`). A choice made on the device wins; with nothing set it's the browser's
+  language and the system's theme, as before.
 - **Two layouts**, a bento wall and app icons like a home screen, kept per device. ⌘K (Ctrl K, or
   `/`) opens a launcher: Enter opens the app, Shift+Enter its page here.
 - **An app's page is a page**, not an overlay (`/clinch`): Back works, it scrolls and shares like
@@ -105,7 +110,7 @@ Like the other apps:
 | `ATRIUM_AALE` | `https://aale-spiele.ewolution.cloud` | Where Aale Spiele's games are read (`/games.json`: the ones Dashboard leaves on, with their drawings) |
 | `ATRIUM_CANTINA_OUTLET` | `4` | The canteen outlet on the tile (4 = Kochwerk Elbe) |
 | `ATRIUM_CENSUS` | off | Census's ingest origin, `http://census:4901` on the NAS |
-| `DASHBOARD_URL` | off | Dashboard's apps' port, `http://dashboard:8081` on the NAS: the wall's layout. Off, the built-in one |
+| `DASHBOARD_URL` | off | Dashboard's apps' port, `http://dashboard:8081` on the NAS: the wall's layout, and the language and theme a device that hasn't picked starts from (the family's, or Atrium's own). Off or down: the built-in ones, as before |
 | `ATRIUM_ACCESS_TEAM` | off | Cloudflare Access team domain, for sign-in |
 | `ATRIUM_ACCESS_AUD` | off | The Access application's AUD tag |
 | `ATRIUM_SESSION_SECRET` | off | Signs the session cookie; at least 32 characters |

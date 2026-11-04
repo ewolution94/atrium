@@ -51,7 +51,8 @@ export function createApi(config, deps = {}) {
   const now = deps.now ?? Date.now;
   const sources = createSources({ upstreams: config.upstreams, cantinaOutlet: config.cantinaOutlet, fetch: deps.fetch, now });
   const auth = createAuth({ ...config.auth, fetch: deps.fetch, now, verifier: deps.verifier });
-  // Dashboard's layout for the wall; without DASHBOARD_URL (the dev server, the tests) the built-in one.
+  // Dashboard's layout for the wall and the family's language and theme for the page; without
+  // DASHBOARD_URL (the dev server, the tests) the built-in ones.
   const wall = createWall({ url: config.dashboard });
   void wall.start();
 
@@ -146,5 +147,8 @@ export function createApi(config, deps = {}) {
   /** Whether the tiles' loads still come round (sources.mjs → stuck), for `/healthz`. */
   handle.healthy = () => !sources.stuck;
   handle.stop = () => wall.stop();
+  /** The page with the family's language and theme from Dashboard (#ewo-config), and its cache key. */
+  handle.inject = (html) => wall.inject(html);
+  handle.etag = () => wall.etag();
   return handle;
 }

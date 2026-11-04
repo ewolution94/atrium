@@ -60,19 +60,25 @@ jobs:
           test "$(curl -s -o /dev/null -w '%{http_code}' -X POST --data '{}' http://127.0.0.1:5499/_e)" = 204
           # Without Dashboard: the built-in wall, Clinch in its corner, and no owner app in a guest's layout.
           curl -sf http://127.0.0.1:5499/api/apps | grep -q '"wall":{"wide":{"columns":12,"web":{"clinch":\[1,1,6,3\]'
+          # The page carries the built-in language and theme, and only those (the wall names the owner's
+          # apps). The manifest isn't served for the same reason; the next step checks what's announced.
+          curl -sf http://127.0.0.1:5499/ | grep -q '<script type="application/json" id="ewo-config">{"lang":"system","theme":"system"}</script>'
+          curl -sf http://127.0.0.1:5499/clinch | grep -q 'id="ewo-config"'
 
-      # The server against a stand-in for Dashboard's apps' port: it takes the manifest, and a tile
-      # moved there reaches /api/apps.
+      # The server against a stand-in for Dashboard's apps' port: it takes the manifest (the wall and
+      # the family's language and theme), a tile moved there reaches /api/apps, and the family's dark
+      # theme and English reach the page.
       - name: Smoke test Dashboard's layout
         run: |
-          node --input-type=module -e "
+          announced=$(mktemp)
+          ANNOUNCED=$announced node --input-type=module -e "
             import http from 'node:http';
-            import { readFileSync } from 'node:fs';
+            import { readFileSync, writeFileSync } from 'node:fs';
             const wall = JSON.parse(readFileSync('server/wall.json', 'utf8'));
             [wall.wide.web.planum, wall.wide.web['aale-spiele']] = [wall.wide.web['aale-spiele'], wall.wide.web.planum];
             http.createServer((req, res) => {
-              if (req.method === 'PUT' && req.url === '/v1/manifest/atrium') { req.resume(); return res.writeHead(204).end(); }
-              if (req.url === '/v1/config/atrium') return res.writeHead(200, { 'content-type': 'application/json', etag: '\"1\"' }).end(JSON.stringify({ family: {}, app: { wall } }));
+              if (req.method === 'PUT' && req.url === '/v1/manifest/atrium') { let body = ''; req.on('data', (c) => (body += c)).on('end', () => (writeFileSync(process.env.ANNOUNCED, body), res.writeHead(204).end())); return; }
+              if (req.url === '/v1/config/atrium') return res.writeHead(200, { 'content-type': 'application/json', etag: '\"1\"' }).end(JSON.stringify({ family: { theme: 'dark', lang: 'en' }, app: { wall } }));
               res.writeHead(404).end();
             }).listen(5498);
           " &
@@ -81,3 +87,5 @@ jobs:
           for _ in $(seq 1 20); do curl -sf http://127.0.0.1:5497/healthz && break; sleep 0.5; done
           for _ in $(seq 1 20); do curl -sf http://127.0.0.1:5497/api/apps | grep -q '"planum":\[10,1,3,2\]' && break; sleep 0.5; done
           curl -sf http://127.0.0.1:5497/api/apps | grep -q '"planum":\[10,1,3,2\]'
+          grep -q '"lang":{"family":true},"theme":{"family":true}' "$announced"
+          curl -sf http://127.0.0.1:5497/ | grep -q '<script type="application/json" id="ewo-config">{"lang":"en","theme":"dark"}</script>'

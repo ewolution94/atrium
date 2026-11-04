@@ -1,5 +1,6 @@
 // Production server: serves the built SPA from ../dist, the API (api.mjs) and the Census
-// forwarder. No dependencies.
+// forwarder, and puts Dashboard's language and theme into the page (#ewo-config, wall.mjs). No
+// dependencies.
 //
 //   PORT=8080 HOST=0.0.0.0 node server/server.mjs
 //
@@ -66,6 +67,22 @@ if ((config.auth.team || config.auth.aud) && (config.auth.secret?.length ?? 0) <
 }
 const compressed = new Map();
 
+// The page carries the family's values (never part of /healthz), so its bodies are kept for the
+// current values only. Until Dashboard answers, and whenever it's down, the built-in ones: the page
+// as it ships.
+let pages = { etag: '', bodies: new Map() };
+async function page(entry, encoding) {
+  if (pages.etag !== api.etag()) pages = { etag: api.etag(), bodies: new Map() };
+  const key = `${entry.mtime.getTime()}:${encoding ?? 'identity'}`;
+  let body = pages.bodies.get(key);
+  if (!body) {
+    const raw = Buffer.from(api.inject(await readFile(entry.file, 'utf8')));
+    body = encoding === 'br' ? zlib.brotliCompressSync(raw) : encoding === 'gzip' ? zlib.gzipSync(raw) : raw;
+    pages.bodies.set(key, body);
+  }
+  return body;
+}
+
 async function resolveFile(pathname) {
   let decoded;
   try {
@@ -102,6 +119,15 @@ async function serveStatic(req, res) {
 
   const accept = req.headers['accept-encoding'] ?? '';
   const encoding = /\bbr\b/.test(accept) ? 'br' : /\bgzip\b/.test(accept) ? 'gzip' : null;
+
+  // The page carries Dashboard's values (#ewo-config, a data block the CSP allows).
+  if (entry.file === path.join(DIST, 'index.html')) {
+    const body = await page(entry, encoding);
+    res.writeHead(200, { ...headers, 'content-length': body.length, vary: 'accept-encoding', ...(encoding && { 'content-encoding': encoding }) });
+    res.end(req.method === 'HEAD' ? undefined : body);
+    return;
+  }
+
   if (encoding && COMPRESSIBLE.has(ext) && entry.size < 8 * 1024 * 1024) {
     const key = `${entry.file}:${entry.mtime.getTime()}:${encoding}`;
     let body = compressed.get(key);
