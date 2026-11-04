@@ -21,6 +21,7 @@ export function readConfig(env) {
       clinch: env.ATRIUM_CLINCH || 'https://clinch.ewolution.cloud',
       cantina: env.ATRIUM_CANTINA || 'https://cantina.ewolution.cloud',
       pulse: env.ATRIUM_PULSE || 'https://pulse.ewolution.cloud',
+      aale: env.ATRIUM_AALE || 'https://aale-spiele.ewolution.cloud',
     },
     cantinaOutlet: Number(env.ATRIUM_CANTINA_OUTLET || 4),
     census: env.ATRIUM_CENSUS || '',
@@ -48,9 +49,10 @@ export function createApi(config, deps = {}) {
   const sources = createSources({ upstreams: config.upstreams, cantinaOutlet: config.cantinaOutlet, fetch: deps.fetch, now });
   const auth = createAuth({ ...config.auth, fetch: deps.fetch, now, verifier: deps.verifier });
 
-  /** What a tile shows besides the app's facts: live data for three of them, nothing for the rest. */
-  function tileFor(slug, { clinch, cantina, pulse }, statuses) {
+  /** What a tile shows besides the app's facts: live data for four of them, nothing for the rest. */
+  function tileFor(slug, { clinch, cantina, pulse, aale }, statuses) {
     if (slug === 'clinch' && clinch) return { ...clinch.value, stale: clinch.stale };
+    if (slug === 'aale-spiele' && aale) return { ...aale.value, stale: aale.stale };
     if (slug === 'cantina' && cantina?.value) {
       const { dish, ...rest } = cantina.value;
       const photo = dish.photo ? `/api/cantina/photo?d=${encodeURIComponent(dish.id)}` : null;

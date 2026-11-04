@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { berlinDate, cached, createSources, dayState, dayWindow, summarizeCantina, summarizeClinch, summarizePulse } from '../server/sources.mjs';
+import { berlinDate, cached, cleanMark, createSources, dayState, dayWindow, summarizeAale, summarizeCantina, summarizeClinch, summarizePulse } from '../server/sources.mjs';
 
 // The fixtures are trimmed copies of the live answers on 2026-10-02.
 const fixture = (name) => JSON.parse(readFileSync(new URL(`fixtures/${name}`, import.meta.url), 'utf8'));
@@ -207,4 +207,33 @@ test('sources: a fetch that never answers fails its tile at the timeout, even wh
   } finally {
     console.warn = warn;
   }
+});
+
+test('Aale Spiele: every game of its /games.json, in its order, with its drawing', () => {
+  const list = fixture('aale-games.json');
+  const { games } = summarizeAale(list);
+  assert.deepEqual(games.map((g) => g.slug), list.map((g) => g.slug));
+  assert.deepEqual(games[0], list[0]);
+  assert.deepEqual(summarizeAale({}).games, []);
+});
+
+test('Aale Spiele: a drawing passes only as plain SVG shapes, and a game that doesn’t fit is left out', () => {
+  for (const { mark } of fixture('aale-games.json')) assert.equal(cleanMark(mark), mark);
+  for (const bad of [
+    '<script>alert(1)</script>',
+    '<path d="M0 0" onload="x()"/>',
+    '<image href="x"/>',
+    '<path fill="url(#a)"/>',
+    '<path style="fill:red"/>',
+    '<g><path d="M0"/>',
+    '<path d="M0"/></g>',
+    '<path d="M0"/>text',
+    '<path d="M0">',
+    '<path d=\'M0\'/>',
+    '',
+  ])
+    assert.equal(cleanMark(bad), null, bad);
+  const [good] = fixture('aale-games.json');
+  const { games } = summarizeAale([good, { ...good, slug: 'Bad Slug' }, { ...good, ink: 'red' }, { ...good, mark: '<script/>' }, { ...good, host: 'a b' }]);
+  assert.deepEqual(games.map((g) => g.slug), [good.slug]);
 });

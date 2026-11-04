@@ -93,6 +93,57 @@ function getJson(fetcher, url, timeout) {
   });
 }
 
+// --- Aale Spiele: the games Dashboard leaves on --------------------------------------------
+
+const HEX = /^#[0-9a-f]{6}$/i;
+const SHAPES = new Set(['g', 'path', 'circle', 'rect', 'ellipse', 'line', 'polyline', 'polygon']);
+const ATTRIBUTES = new Set(['class', 'd', 'cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'x1', 'y1', 'x2', 'y2', 'width', 'height', 'points', 'transform', 'opacity', 'fill', 'stroke', 'stroke-width', 'stroke-linejoin', 'stroke-linecap']);
+const TAG = /<(\/?)([a-z]+)((?:\s+[a-z-]+="[^"]*")*)\s*(\/?)>/y;
+
+/**
+ * A game's mark as the tile may draw it ({@html}): only SVG shapes with plain geometry and colours,
+ * every tag closed, nothing that loads, links or runs (no href, no url(), no on…). Null otherwise.
+ */
+export function cleanMark(mark) {
+  if (typeof mark !== 'string' || !mark || mark.length > 8000) return null;
+  TAG.lastIndex = 0;
+  let open = 0;
+  while (TAG.lastIndex < mark.length) {
+    const at = TAG.lastIndex;
+    const tag = TAG.exec(mark);
+    if (!tag || tag.index !== at) return null;
+    const [, closing, name, attrs, selfClosing] = tag;
+    if (!SHAPES.has(name)) return null;
+    if (closing) {
+      if (name !== 'g' || attrs || open-- === 0) return null;
+      continue;
+    }
+    for (const [, key, value] of attrs.matchAll(/([a-z-]+)="([^"]*)"/g)) {
+      if (!ATTRIBUTES.has(key) || !/^[#\w\s.,()-]*$/.test(value) || /url|script/i.test(value)) return null;
+    }
+    if (name === 'g' && !selfClosing) open++;
+    else if (!selfClosing) return null;
+  }
+  return open === 0 ? mark : null;
+}
+
+/** The games from Aale Spiele's /games.json, each checked: a game that doesn't fit is left out. */
+export function summarizeAale(list) {
+  const games = [];
+  for (const game of Array.isArray(list) ? list : []) {
+    const mark = cleanMark(game?.mark);
+    const ok =
+      mark &&
+      typeof game.slug === 'string' && /^[a-z0-9-]{1,40}$/.test(game.slug) &&
+      typeof game.name === 'string' && game.name.length > 0 && game.name.length <= 40 &&
+      typeof game.host === 'string' && /^[a-z0-9.-]{1,80}$/.test(game.host) &&
+      Array.isArray(game.ground) && game.ground.length === 2 && game.ground.every((c) => HEX.test(c)) &&
+      HEX.test(game.ink) && HEX.test(game.spark);
+    if (ok) games.push({ slug: game.slug, name: game.name, host: game.host, ground: game.ground, ink: game.ink, spark: game.spark, mark });
+  }
+  return { games: games.slice(0, 60) };
+}
+
 // --- Clinch: the playoff picture -------------------------------------------------------------
 
 /** Seeds one to eight per conference from Clinch's /api/snapshot (eight shows who's first out). */
@@ -221,6 +272,7 @@ export function createSources({ upstreams, cantinaOutlet = 4, fetch: fetcher = g
     return summarizeCantina(doc, { outletId: cantinaOutlet, today: berlinDate(now()) });
   }, opts(15 * 60_000, 'cantina'));
   const pulse = cached(async () => summarizePulse(await getJson(fetcher, url('pulse', '/api/status'), timeout), now()), opts(60_000, 'pulse'));
+  const aale = cached(async () => summarizeAale(await getJson(fetcher, url('aale', '/games.json'), timeout)), opts(60_000, 'aale'));
 
   /** One photo at a time: the featured dish's. @type {{ path: string | null, body: Buffer | null, type: string | null }} */
   let photo = { path: null, body: null, type: null };
@@ -229,16 +281,17 @@ export function createSources({ upstreams, cantinaOutlet = 4, fetch: fetcher = g
     clinch,
     cantina,
     pulse,
+    aale,
 
     /** Whether a tile's load is stuck (cached → stuck), for `/healthz`. */
     get stuck() {
-      return clinch.stuck || cantina.stuck || pulse.stuck;
+      return clinch.stuck || cantina.stuck || pulse.stuck || aale.stuck;
     },
 
-    /** All three, each waiting at most `wait` ms when it has nothing yet. */
+    /** All four, each waiting at most `wait` ms when it has nothing yet. */
     async all({ wait } = {}) {
-      const [c, k, p] = await Promise.all([clinch.get({ wait }), cantina.get({ wait }), pulse.get({ wait })]);
-      return { clinch: c, cantina: k, pulse: p };
+      const [c, k, p, a] = await Promise.all([clinch.get({ wait }), cantina.get({ wait }), pulse.get({ wait }), aale.get({ wait })]);
+      return { clinch: c, cantina: k, pulse: p, aale: a };
     },
 
     /**

@@ -48,6 +48,11 @@ export type PulseTile = {
   stale: boolean;
 };
 
+export type AaleTile = {
+  games: { slug: string; name: string; host: string; ground: [string, string]; ink: string; spark: string; mark: string }[];
+  stale: boolean;
+};
+
 export type App = {
   slug: string;
   name: string;
@@ -60,7 +65,7 @@ export type App = {
   since: number;
   text: Record<Lang, { line: string; desc: string }>;
   status: Status | null;
-  tile: ClinchTile | CantinaTile | PulseTile | null;
+  tile: ClinchTile | CantinaTile | PulseTile | AaleTile | null;
 };
 
 export type Doc = {

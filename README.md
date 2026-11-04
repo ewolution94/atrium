@@ -13,13 +13,17 @@ elements throughout.
 - **Nothing is discovered.** The apps are listed in `server/catalog.mjs`, with the landing's own
   line and description for each (English and German), so the two sites never disagree.
 - **The server fetches the live data, the browser never does.** `server/sources.mjs` reads
-  Clinch's `/api/snapshot`, Cantina's `/api/menu` and Pulse's `/api/status` (over the LAN on the
-  NAS), keeps the last good copy of each and serves a small summary as `GET /api/apps`. The page
-  only talks to its own origin, so the CSP stays `'self'` and the apps need no changes.
+  Clinch's `/api/snapshot`, Cantina's `/api/menu`, Pulse's `/api/status` and Aale Spiele's
+  `/games.json` (over the LAN on the NAS), keeps the last good copy of each and serves a small
+  summary as `GET /api/apps`. The page only talks to its own origin, so the CSP stays `'self'`.
   - A cold source gets 2.5 s, then the tile renders without its data and fills in on the next
     poll. A failed refresh keeps the old data (marked stale once it's three refreshes old) and is
     retried after 30 s.
-  - Refreshes: Pulse every minute, Clinch every 5, Cantina every 15.
+  - Refreshes: Pulse and Aale Spiele every minute, Clinch every 5, Cantina every 15.
+  - Aale Spiele's tile spins through the games the app shows (Dashboard turns them on and off),
+    drawn as the app draws them. Each drawing is markup the tile renders, so the server lets
+    through only plain SVG shapes with geometry and colours (`cleanMark`); a game that fails any
+    check is left out, and below three games the window shows empty rows.
   - The dish photo comes through `/api/cantina/photo?d=<dish>`, which only ever fetches the
     featured dish's image from Cantina's own image proxy, so it can't be used as an open proxy.
 - **Status comes from Pulse.** Each tile's dot, the wall's summary line and an app page's 90 ticks
@@ -87,6 +91,7 @@ Like the other apps:
 | `ATRIUM_CLINCH` | `https://clinch.ewolution.cloud` | Where Clinch's API is read (`http://192.168.178.36:4600` on the NAS) |
 | `ATRIUM_CANTINA` | `https://cantina.ewolution.cloud` | Where Cantina's API and photos are read |
 | `ATRIUM_PULSE` | `https://pulse.ewolution.cloud` | Where Pulse's status is read |
+| `ATRIUM_AALE` | `https://aale-spiele.ewolution.cloud` | Where Aale Spiele's games are read (`/games.json`: the ones Dashboard leaves on, with their drawings) |
 | `ATRIUM_CANTINA_OUTLET` | `4` | The canteen outlet on the tile (4 = Kochwerk Elbe) |
 | `ATRIUM_CENSUS` | off | Census's ingest origin, `http://census:4901` on the NAS |
 | `ATRIUM_ACCESS_TEAM` | off | Cloudflare Access team domain, for sign-in |
@@ -110,7 +115,7 @@ server/
   server.mjs        static files, security headers, /healthz, shutdown
   api.mjs           /api/apps, /api/cantina/photo; shared with the Vite dev server
   catalog.mjs       the apps and what Atrium says about them
-  sources.mjs       live data from Clinch, Cantina and Pulse, cached
+  sources.mjs       live data from Clinch, Cantina, Pulse and Aale Spiele, cached
   auth.mjs          the optional owner sign-in (Cloudflare Access + a signed cookie)
   census.mjs        the forwarder for Census's beacon (/_e, /_e.js)
 src/

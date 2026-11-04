@@ -42,7 +42,7 @@ jobs:
       # closed port, so this proves the page and the API answer even when every upstream is down.
       - name: Smoke test the production server
         run: |
-          PORT=5499 ATRIUM_CLINCH=http://127.0.0.1:9 ATRIUM_CANTINA=http://127.0.0.1:9 ATRIUM_PULSE=http://127.0.0.1:9 node server/server.mjs &
+          PORT=5499 ATRIUM_CLINCH=http://127.0.0.1:9 ATRIUM_CANTINA=http://127.0.0.1:9 ATRIUM_PULSE=http://127.0.0.1:9 ATRIUM_AALE=http://127.0.0.1:9 node server/server.mjs &
           for _ in $(seq 1 20); do curl -sf http://127.0.0.1:5499/healthz && break; sleep 0.5; done
           curl -sf http://127.0.0.1:5499/ | grep -q '<title>Atrium</title>'
           curl -sf http://127.0.0.1:5499/clinch | grep -q '<title>Atrium</title>'

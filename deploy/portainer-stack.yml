@@ -31,6 +31,7 @@ services:
       - ATRIUM_CLINCH=http://192.168.178.36:4600
       - ATRIUM_CANTINA=http://192.168.178.36:5200
       - ATRIUM_PULSE=http://192.168.178.36:4400
+      - ATRIUM_AALE=http://192.168.178.36:5600
       # Visit counts: /_e and /_e.js are forwarded to Census over the `ewolution` network.
       # Remove the line to stop counting; the page doesn't change either way.
       - ATRIUM_CENSUS=http://census:4901

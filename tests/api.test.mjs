@@ -8,7 +8,7 @@ const fixture = (name) => readFileSync(new URL(`fixtures/${name}`, import.meta.u
 const NOW = Date.UTC(2026, 9, 2, 15, 40);
 const JPEG = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 1, 2, 3]);
 
-/** The three apps, as seen over the LAN, plus Cantina's image proxy. */
+/** The four apps, as seen over the LAN, plus Cantina's image proxy. */
 const requested = [];
 async function upstream(url) {
   const { host, pathname } = new URL(url);
@@ -17,13 +17,14 @@ async function upstream(url) {
     'clinch.lan/api/snapshot': fixture('clinch-snapshot.json'),
     'cantina.lan/api/menu': fixture('cantina-menu.json'),
     'pulse.lan/api/status': fixture('pulse-status.json'),
+    'aale.lan/games.json': fixture('aale-games.json'),
   }[`${host}${pathname}`];
   if (body) return new Response(body, { headers: { 'content-type': 'application/json' } });
   if (host === 'cantina.lan' && pathname.startsWith('/img/')) return new Response(JPEG, { headers: { 'content-type': 'image/jpeg' } });
   return new Response('nope', { status: 404 });
 }
 
-const config = readConfig({ ATRIUM_CLINCH: 'http://clinch.lan', ATRIUM_CANTINA: 'http://cantina.lan', ATRIUM_PULSE: 'http://pulse.lan' });
+const config = readConfig({ ATRIUM_CLINCH: 'http://clinch.lan', ATRIUM_CANTINA: 'http://cantina.lan', ATRIUM_PULSE: 'http://pulse.lan', ATRIUM_AALE: 'http://aale.lan' });
 let base;
 let server;
 
@@ -67,7 +68,10 @@ test('a guest sees the twelve public apps and the private ones, with status and 
   assert.equal(by.pulse.tile.of, 24);
   assert.equal(by.pulse.tile.up, 5);
   assert.equal(by['aale-spiele'].status, null);
-  assert.equal(by['aale-spiele'].tile, null);
+  // The games Aale Spiele shows, from its /games.json, drawings included.
+  assert.equal(by['aale-spiele'].tile.games.length, 20);
+  assert.deepEqual(Object.keys(by['aale-spiele'].tile.games[0]), ['slug', 'name', 'host', 'ground', 'ink', 'spark', 'mark']);
+  assert.equal(by['aale-spiele'].tile.stale, false);
   assert.equal(by['aale-spiele'].writeup, 'https://ewolution.cloud/aale-spiele/');
   assert.equal(by.tcgsl.status, null);
   assert.equal(by.tcgsl.tile, null);
@@ -172,7 +176,7 @@ test('unknown API paths are 404, writes are 405, the rest is not the API', async
 });
 
 test('apps that are down upstream still list, without tile data', async () => {
-  const api = createApi(readConfig({ ATRIUM_CLINCH: 'http://down.lan', ATRIUM_CANTINA: 'http://down.lan', ATRIUM_PULSE: 'http://down.lan' }), {
+  const api = createApi(readConfig({ ATRIUM_CLINCH: 'http://down.lan', ATRIUM_CANTINA: 'http://down.lan', ATRIUM_PULSE: 'http://down.lan', ATRIUM_AALE: 'http://down.lan' }), {
     fetch: async () => {
       throw Object.assign(new TypeError('fetch failed'), { cause: { code: 'ECONNREFUSED' } });
     },

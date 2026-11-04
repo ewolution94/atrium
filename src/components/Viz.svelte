@@ -1,8 +1,8 @@
 <script lang="ts">
   // What a tile shows above its name: a live glimpse where the app has data to give (Clinch,
-  // Cantina, Pulse), its motif where it doesn't. `awake` plays the hover state for good, as on
-  // the app's own page.
-  import type { App, CantinaTile, ClinchTile, PulseTile } from '../lib/types';
+  // Cantina, Pulse, Aale Spiele's games), its motif where it doesn't. `awake` plays the hover
+  // state for good, as on the app's own page.
+  import type { AaleTile, App, CantinaTile, ClinchTile, PulseTile } from '../lib/types';
   import Clinch from './viz/Clinch.svelte';
   import Planum from './viz/Planum.svelte';
   import Pulse from './viz/Pulse.svelte';
@@ -48,7 +48,7 @@
 {:else if app.slug === 'fermata'}
   <Fermata url={app.url} {awake} />
 {:else if app.slug === 'aale-spiele'}
-  <AaleSpiele {awake} />
+  <AaleSpiele tile={app.tile as AaleTile | null} {awake} />
 {:else if app.slug === 'tcgsl'}
   <Tcgsl {awake} />
 {:else if app.slug === 'schaetzle'}
