@@ -85,4 +85,9 @@ export type Doc = {
   apps: App[];
   /** Missing in a copy kept from before the wall came from Dashboard. */
   wall?: WallLayout;
+  /**
+   * Only with ?draft=: whether `wall` is Dashboard's draft (shown, for the owner), the live wall
+   * because the draft is over (missing), or the live wall because nobody's signed in (sign-in).
+   */
+  draft?: { state: 'shown' | 'missing' | 'sign-in' };
 };

@@ -15,8 +15,11 @@
  *    cache trimmed as it grows: its URL names the dish, so a hit is always that dish.
  *  - **Sign-in is never touched.** /login goes through Cloudflare Access, a redirect to another
  *    origin that a worker's fetch can't follow; /logout and /cdn-cgi/ are Cloudflare's too.
- *  - **Everything else of ours is network-first, cache as a fallback**: /api/apps, boot.js,
- *    the icons and the manifest keep their names across deploys.
+ *  - **The apps' list (/api/apps) is never cached here.** The page keeps its own copy, the public part only; a
+ *    signed-in owner's answer names their apps and email, and a draft's preview (?draft=) is
+ *    for that moment alone.
+ *  - **Everything else of ours is network-first, cache as a fallback**: boot.js, the icons and
+ *    the manifest keep their names across deploys.
  *
  * To retire this worker, ship one whose `install` calls `self.registration.unregister()`.
  */
@@ -81,6 +84,9 @@ self.addEventListener('activate', (event) => {
     caches
       .keys()
       .then((keys) => Promise.all(keys.filter((k) => !MINE.includes(k)).map((k) => caches.delete(k))))
+      // Earlier workers kept /api/apps answers here; none is read any more.
+      .then(() => caches.open(SHELL))
+      .then((cache) => cache.keys().then((requests) => Promise.all(requests.filter((r) => new URL(r.url).pathname === '/api/apps').map((r) => cache.delete(r)))))
       .then(() => self.clients.claim()),
   );
 });
@@ -142,6 +148,7 @@ self.addEventListener('fetch', (event) => {
   // The iOS launch images: iOS keeps its own copy from when the app was added to the home screen.
   if (url.pathname.startsWith('/splash/')) return;
   if (url.pathname === '/login' || url.pathname === '/logout' || url.pathname.startsWith('/cdn-cgi/')) return;
+  if (url.pathname === '/api/apps') return;
 
   if (request.mode === 'navigate') {
     // Every route (/, /clinch …) is served the same document, so one cached entry answers all.

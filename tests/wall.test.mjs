@@ -107,3 +107,67 @@ test('Dashboard’s layout reaches /api/apps, for the tiles the viewer sees', as
     dashboard.close();
   }
 });
+
+test('a draft from Dashboard reaches the owner’s /api/apps with ?draft=, checked; a guest is asked to sign in', async () => {
+  const id = 'D'.repeat(21) + 'q';
+  const moved = structuredClone(WALL);
+  [moved.wide.web.planum, moved.wide.web['aale-spiele']] = [moved.wide.web['aale-spiele'], moved.wide.web.planum];
+  moved.narrow.heights = { census: 470 };
+  const onTop = structuredClone(WALL);
+  onTop.wide.web.planum = onTop.wide.web.clinch;
+  const drafts = { [id]: moved, ['O'.repeat(22)]: onTop };
+  const asked = [];
+  const dashboard = http.createServer((req, res) => {
+    asked.push(req.url);
+    const m = req.url.match(/^\/v1\/draft\/atrium\/(.+)$/);
+    if (m && drafts[m[1]]) return res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify({ key: 'wall', value: drafts[m[1]], at: 'now' }));
+    if (req.url === '/v1/config/atrium') return res.writeHead(200, { 'content-type': 'application/json', etag: '"1"' }).end('{"family":{},"app":{}}');
+    if (req.method === 'PUT') return req.resume().on('end', () => res.writeHead(204).end());
+    res.writeHead(404, { 'content-type': 'application/json' }).end('{"error":"no-draft"}');
+  });
+  await new Promise((r) => dashboard.listen(0, '127.0.0.1', r));
+  const api = createApi(
+    {
+      ...readConfig({ ATRIUM_CLINCH: 'http://127.0.0.1:9', ATRIUM_CANTINA: 'http://127.0.0.1:9', ATRIUM_PULSE: 'http://127.0.0.1:9', ATRIUM_AALE: 'http://127.0.0.1:9' }),
+      dashboard: `http://127.0.0.1:${dashboard.address().port}`,
+      auth: { team: 'team.example', aud: 'aud', secret: 's'.repeat(40) },
+    },
+    { verifier: { verify: async (t) => (t === 'good' ? 'owner@example.com' : undefined) } },
+  );
+  const server = http.createServer(async (req, res) => {
+    if (!(await api(req, res))) res.writeHead(418).end();
+  });
+  await new Promise((r) => server.listen(0, '127.0.0.1', r));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  try {
+    const login = await fetch(`${base}/login`, { headers: { 'cf-access-jwt-assertion': 'good' }, redirect: 'manual' });
+    const cookie = login.headers.get('set-cookie').split(';')[0];
+    const doc = async (query, headers = { cookie }) => (await fetch(`${base}/api/apps${query}`, { headers })).json();
+
+    const shown = await doc(`?draft=${id}`);
+    assert.deepEqual(shown.draft, { state: 'shown' });
+    assert.deepEqual([shown.wall.wide.web.planum, shown.wall.narrow.heights], [WALL.wide.web['aale-spiele'], { census: 470 }]);
+    // Without the query it's the live wall again: the draft is never kept.
+    const live = await doc('');
+    assert.equal(live.draft, undefined);
+    assert.deepEqual(live.wall.wide.web.planum, WALL.wide.web.planum);
+    // A tile on another, an unknown id, a malformed one: the live wall, and the page says so.
+    for (const other of ['O'.repeat(22), 'Z'.repeat(22), '../config/atrium']) {
+      const d = await doc(`?draft=${encodeURIComponent(other)}`);
+      assert.deepEqual([d.draft, d.wall.wide.web.planum], [{ state: 'missing' }, WALL.wide.web.planum], other);
+    }
+    assert.ok(!asked.some((url) => url.includes('..')), 'a malformed id never reaches Dashboard');
+    // A guest gets the live wall without a word of the draft, and no request to Dashboard for it.
+    const before = asked.filter((url) => url.includes('/v1/draft/')).length;
+    const guest = await doc(`?draft=${id}`, {});
+    assert.deepEqual(guest.draft, { state: 'sign-in' });
+    assert.deepEqual(guest.wall.wide.web.planum, WALL.wide.web.planum);
+    assert.doesNotMatch(JSON.stringify(guest.wall), /census|folio|dashboard/);
+    assert.ok(!guest.apps.some((a) => a.audience === 'owner'));
+    assert.equal(asked.filter((url) => url.includes('/v1/draft/')).length, before);
+  } finally {
+    api.stop();
+    server.close();
+    dashboard.close();
+  }
+});

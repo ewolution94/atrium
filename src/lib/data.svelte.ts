@@ -1,12 +1,19 @@
 // The one document the page shows (GET /api/apps), refreshed every minute while the page is
 // visible. The last good copy is kept on the device, so the page opens with something even
 // offline; it's labelled "Last known" once it's older than a few minutes, never shown as current.
+//
+// Opened with ?draft=<id> (Dashboard's Preview), the page asks for that draft of the wall instead,
+// every few seconds so it follows the changes made in Dashboard, and keeps nothing on the device.
 
 import type { Doc } from './types';
 import { publicOnly } from './wall';
 
 const KEY = 'atrium:last';
-const EVERY = 60_000;
+
+/** The draft this page previews, from ?draft= (the server checks who may see it). */
+export const draftId = new URLSearchParams(location.search).get('draft');
+const EVERY = draftId === null ? 60_000 : 3_000;
+const SOURCE = draftId === null ? '/api/apps' : `/api/apps?draft=${encodeURIComponent(draftId)}`;
 /** Older than this, the data on screen is "last known" rather than current. */
 const FRESH = 3 * 60_000;
 
@@ -28,7 +35,7 @@ function keep(doc: Doc) {
   }
 }
 
-export const data = $state({ doc: restore(), now: Date.now() });
+export const data = $state({ doc: draftId === null ? restore() : null, now: Date.now() });
 
 /** True once what's on screen is too old to call current. */
 export const isStale = () => !data.doc || data.now - data.doc.generatedAt > FRESH;
@@ -39,11 +46,11 @@ let inflight: Promise<void> | null = null;
 export function refresh(): Promise<void> {
   inflight ??= (async () => {
     try {
-      const res = await fetch('/api/apps', { cache: 'no-store', credentials: 'same-origin' });
+      const res = await fetch(SOURCE, { cache: 'no-store', credentials: 'same-origin' });
       if (!res.ok) return;
       const doc = (await res.json()) as Doc;
       data.doc = doc;
-      keep(doc);
+      if (draftId === null) keep(doc);
     } catch {
       // offline: keep showing what we have
     } finally {

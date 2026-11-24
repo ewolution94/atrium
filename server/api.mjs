@@ -2,7 +2,8 @@
 // (vite.config.ts), so both behave the same. No dependencies.
 //
 //   GET /api/apps                 every app this viewer may see, with its status and tile data,
-//                                 and the wall's layout for them (wall.mjs, from Dashboard)
+//                                 and the wall's layout for them (wall.mjs, from Dashboard);
+//                                 ?draft=<id> shows the owner a draft from Dashboard instead
 //   GET /api/cantina/photo?d=<id> the featured dish's photo, same-origin (the CSP stays 'self')
 //   GET /login, /logout           the optional owner sign-in (auth.mjs)
 
@@ -75,9 +76,21 @@ export function createApi(config, deps = {}) {
     return null;
   }
 
+  /**
+   * The draft the page asks for, if any: shown only to the owner, signed in. `state` tells the page
+   * which: shown, missing (applied, discarded, a day old, or Dashboard didn't answer), sign-in.
+   */
+  async function draftFor(req, viewer) {
+    const id = new URL(req.url, 'http://localhost').searchParams.get('draft');
+    if (id === null) return { value: undefined, state: null };
+    if (!viewer) return { value: undefined, state: 'sign-in' };
+    const value = await wall.draft(id);
+    return value ? { value, state: 'shown' } : { value: undefined, state: 'missing' };
+  }
+
   async function apps(req) {
     const viewer = auth.viewer(req);
-    const data = await sources.all({ wait: 2500 });
+    const [data, draft] = await Promise.all([sources.all({ wait: 2500 }), draftFor(req, viewer)]);
     const services = data.pulse?.value.services ?? {};
     const pulseState = data.pulse && !data.pulse.stale ? 'operational' : 'unknown';
     const list = visibleApps(Boolean(viewer));
@@ -105,7 +118,8 @@ export function createApi(config, deps = {}) {
         status: app.pulse ? (services[app.pulse] ?? null) : app.slug === 'pulse' ? { state: pulseState, uptime: null, days: null } : null,
         tile: tileFor(app.slug, data, statuses),
       })),
-      wall: wall.for(list),
+      wall: wall.for(list, draft.value),
+      ...(draft.state && { draft: { state: draft.state } }),
     };
   }
 

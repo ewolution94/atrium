@@ -13,6 +13,7 @@
 //      cookie signed by this server: HttpOnly, Secure, SameSite=Lax, for SESSION_DAYS. That
 //      cookie, not Access's, marks the owner on every other path.
 //   4. /logout drops the cookie and ends the Access session too.
+//   5. /login?draft=<id> comes back to /?draft=<id>: the preview of a draft from Dashboard.
 //
 // The cookie is set only on sign-in; a guest gets none. No dependencies.
 
@@ -156,7 +157,7 @@ export function createAuth({ team, aud, secret, owners, fetch: fetcher, now = Da
    * @param {import('node:http').ServerResponse} res
    */
   async function handle(req, res) {
-    const { pathname } = new URL(req.url, 'http://localhost');
+    const { pathname, searchParams } = new URL(req.url, 'http://localhost');
     if (pathname !== '/login' && pathname !== '/logout') return false;
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       res.writeHead(405).end();
@@ -177,7 +178,11 @@ export function createAuth({ team, aud, secret, owners, fetch: fetcher, now = Da
       res.writeHead(403, { ...noStore, 'content-type': 'text/plain; charset=utf-8' }).end('Sign in through apps.ewolution.cloud/login.');
       return true;
     }
-    res.writeHead(303, { ...noStore, location: '/', 'set-cookie': cookie(issue(email), SESSION_DAYS * 86_400) }).end();
+    // Back where the sign-in started: the wall, or a draft's preview (an id of the one shape only,
+    // so the redirect can't be sent anywhere else).
+    const draft = searchParams.get('draft');
+    const back = draft && /^[A-Za-z0-9_-]{22}$/.test(draft) ? `/?draft=${draft}` : '/';
+    res.writeHead(303, { ...noStore, location: back, 'set-cookie': cookie(issue(email), SESSION_DAYS * 86_400) }).end();
     return true;
   }
 

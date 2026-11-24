@@ -38,11 +38,14 @@ services:
       # The wall's layout, from Dashboard's apps' port over the `ewolution` network. Remove the
       # line and the wall is the one Atrium ships (server/wall.json).
       - DASHBOARD_URL=http://dashboard:8081
-      # Sign-in for the owner (Census and Folio appear on the wall), off until all three are
-      # set. The values live here in Portainer, never in git. See the README, "Sign-in".
-      # - ATRIUM_ACCESS_TEAM=ewolution.cloudflareaccess.com
-      # - ATRIUM_ACCESS_AUD=${ATRIUM_ACCESS_AUD}
-      # - ATRIUM_SESSION_SECRET=${ATRIUM_SESSION_SECRET}
+      # Sign-in for the owner (their apps on the wall, and Dashboard's draft previews), on since
+      # 2026-11-24. The two values are stack variables in Portainer, never in git: piped in with
+      # `portainer.mjs env` (the README, "Sign-in"). Either one empty and sign-in is off.
+      # The Access application ("Atrium sign-in") already lets only the owner through; list
+      # emails in ATRIUM_OWNERS to check them here too.
+      - ATRIUM_ACCESS_TEAM=ewolution.cloudflareaccess.com
+      - ATRIUM_ACCESS_AUD=${ATRIUM_ACCESS_AUD:-}
+      - ATRIUM_SESSION_SECRET=${ATRIUM_SESSION_SECRET:-}
       # - ATRIUM_OWNERS=${ATRIUM_OWNERS}
     networks:
       # The shared network Census and Dashboard listen on. It must exist before this stack is

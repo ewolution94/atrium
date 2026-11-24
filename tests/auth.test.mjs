@@ -89,6 +89,16 @@ test('a valid Access token at /login becomes a session cookie', async () => {
   assert.deepEqual(auth.viewer({ headers: { cookie: `theme=dark; ${sessionFrom(res)}` } }), { email: 'owner@example.com' });
 });
 
+test('/login?draft= comes back to the preview, and only with an id of the one shape', async () => {
+  const auth = enabled();
+  const at = async (path) => (await call(auth, path, { 'cf-access-jwt-assertion': token() })).headers.get('location');
+  const id = 'Ab3_-'.repeat(4) + 'xy';
+  assert.equal(await at(`/login?draft=${id}`), `/?draft=${id}`);
+  assert.equal(await at('/login?draft=//evil.example/x'), '/');
+  assert.equal(await at(`/login?draft=${id}x`), '/');
+  assert.equal(await at('/login?draft='), '/');
+});
+
 test('/login refuses a missing or wrong token, and an email not on the owners list', async () => {
   const auth = enabled({ owners: 'someone@example.com, OTHER@example.com' });
   assert.equal((await call(auth, '/login')).status, 403);

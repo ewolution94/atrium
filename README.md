@@ -52,26 +52,34 @@ elements throughout.
 - **Calm by default.** The dot field behind the page only draws while the mouse moves; tiles
   animate only while hovered; hover pauses while the page scrolls (`src/lib/scrolling.ts`).
 
-## Sign-in (prepared, off)
+## Sign-in
 
-Census and Folio are on the catalog with `audience: 'owner'`: they never leave the server for a
-guest, not even their names. Signing in shows them on the wall under "Only for you".
+Census, Folio and Dashboard are on the catalog with `audience: 'owner'`: they never leave the
+server for a guest, not even their names. Signing in shows them on the wall under "Only for you".
 
-It's off until three variables are set. To turn it on:
+On since 2026-11-24. It's off unless `ATRIUM_ACCESS_TEAM`, `ATRIUM_ACCESS_AUD` and
+`ATRIUM_SESSION_SECRET` (at least 32 characters) are all set. The pieces:
 
-1. Cloudflare Zero Trust → Access controls → Applications → add a **self-hosted** application for
-   `apps.ewolution.cloud` with the **path `login`** only, and a policy that allows the owner's
-   email. The rest of the site stays public. (Menus as of October 2026; check them against
-   developers.cloudflare.com first, see `learnings/cloudflare.md`.)
-2. Copy its AUD tag (Configure → Additional settings).
-3. In the Portainer stack, set `ATRIUM_ACCESS_TEAM=ewolution.cloudflareaccess.com`,
-   `ATRIUM_ACCESS_AUD=<the tag>`, and `ATRIUM_SESSION_SECRET` to a random string of at least
-   32 characters (`openssl rand -base64 48`). Optionally `ATRIUM_OWNERS=<email>`.
+1. The Access application "Atrium sign-in" covers only `apps.ewolution.cloud/login`, with the
+   owner's policy; the rest of the site stays public
+   (`cloudflare.mjs protect apps --path login --name "Atrium sign-in" --like dashboard`).
+2. Its AUD tag and a random session secret are the stack's variables, piped in without being shown:
+   `{ node .claude/skills/cloudflare/cloudflare.mjs aud "Atrium sign-in"; openssl rand -base64 48; } |
+   node .claude/skills/portainer/portainer.mjs env atrium ATRIUM_ACCESS_AUD ATRIUM_SESSION_SECRET`
+   (from the workspace; `--yes` to apply). Optionally `ATRIUM_OWNERS=<email>`.
 
-Then the footer shows "Sign in". `/login` goes through Access; the server checks Access's token
+The footer shows "Sign in". `/login` goes through Access; the server checks Access's token
 itself (the NAS port would skip Access), like Census does, and answers with its own signed session
 cookie (HttpOnly, Secure, SameSite=Lax, 30 days). `/logout` drops it and ends the Access session.
 A guest never gets a cookie.
+
+**Draft previews.** Dashboard's wall editor keeps a copy of an unapplied wall under a random id and
+links to `/?draft=<id>`. For the signed-in owner, `/api/apps?draft=<id>` reads that copy from
+Dashboard's apps' port (`GET /v1/draft/atrium/<id>`), checks it like a value, and answers with it
+instead of the live wall; the page says so in a banner and asks every 3 s, so it follows each change
+in Dashboard, and keeps nothing on the device. A guest gets the live wall and a "Sign in" that comes
+back to the preview (`/login?draft=<id>`). Applied, discarded or a day old, the draft is gone and the
+banner says the wall below is the live one.
 
 ## Run it
 

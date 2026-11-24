@@ -55,6 +55,8 @@ jobs:
           test "$(curl -s -o /dev/null -w '%{http_code}' 'http://127.0.0.1:5499/api/cantina/photo?d=1')" = 404
           # Sign-in is off without its settings.
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5499/login)" = 404
+          # A draft's preview is the signed-in owner's only: a guest gets the live wall and the word to sign in.
+          curl -sf 'http://127.0.0.1:5499/api/apps?draft=AAAAAAAAAAAAAAAAAAAAAA' | grep -q '"draft":{"state":"sign-in"}'
           # The Census forwarder is wired in; without ATRIUM_CENSUS it answers locally.
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5499/_e.js)" = 200
           test "$(curl -s -o /dev/null -w '%{http_code}' -X POST --data '{}' http://127.0.0.1:5499/_e)" = 204

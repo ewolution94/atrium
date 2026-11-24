@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { data, start } from './lib/data.svelte';
+  import { data, draftId, start } from './lib/data.svelte';
   import { route } from './lib/route.svelte';
   import { prefs } from './lib/prefs.svelte';
   import { loadCensus } from './lib/census';
@@ -12,6 +12,7 @@
   import AppPage from './components/AppPage.svelte';
   import Palette from './components/Palette.svelte';
   import Footer from './components/Footer.svelte';
+  import Preview from './components/Preview.svelte';
 
   let palette: ReturnType<typeof Palette> | undefined = $state();
 
@@ -37,8 +38,10 @@
       <AppPage app={current} />
     {/key}
   {:else if !route.slug || data.doc}
+    {#if draftId !== null}<Preview />{/if}
     <Intro {apps} />
-    {#if prefs.layout === 'icons'}
+    <!-- A draft's preview is of the wall, so it shows the wall whichever layout this device keeps. -->
+    {#if prefs.layout === 'icons' && draftId === null}
       <Icons {apps} />
     {:else}
       <Wall {apps} layout={data.doc?.wall} />
