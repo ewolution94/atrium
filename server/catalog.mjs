@@ -594,6 +594,30 @@ export const APPS = [
     },
   },
 
+  // Not on the landing either: a school intern's practicum, the mentor's pages behind Cloudflare
+  // Access, so the texts restate the README. The private repo has no Source link.
+  {
+    slug: 'werkling',
+    name: 'Werkling',
+    audience: 'private',
+    host: 'werkling.ewolution.cloud',
+    pulse: 'werkling',
+    repo: null,
+    writeup: null,
+    stack: 'Svelte · Node · SQLite',
+    since: 2026,
+    text: {
+      en: {
+        line: 'A quest road through a school practicum: a tower of floors to climb, a log for every day.',
+        desc: 'For a school intern and their mentor. The company is a tower with a floor for each part of the work: quests to finish, cards that explain the words, three weeks of days with where to be and what comes next, a daily log whose private notes stay sealed on the intern’s own devices, a questionnaire before and after, and a report for the teachers. The mentor plans it all behind a login, and everything is deleted 90 days after the last day.',
+      },
+      de: {
+        line: 'Ein Quest-Weg durch ein Schulpraktikum: ein Turm mit Stockwerken zum Aufsteigen, ein Log für jeden Tag.',
+        desc: 'Für Praktikant und Betreuung im Schulpraktikum. Die Firma ist ein Turm mit einem Stockwerk für jeden Teil der Arbeit: Quests zum Abschließen, Karten, die die Begriffe erklären, drei Wochen voller Tage mit Ort und nächstem Schritt, ein Tageslog, dessen private Notizen versiegelt auf den eigenen Geräten bleiben, ein Fragebogen vorher und nachher und ein Bericht für die Lehrkräfte. Die Betreuung plant alles hinter einem Login, und 90 Tage nach dem letzten Tag wird alles gelöscht.',
+      },
+    },
+  },
+
   // --- Only for the owner, once sign-in is set up (auth.mjs). ------------------------------
   {
     slug: 'census',

@@ -29,6 +29,7 @@
   import Wichtle from './viz/Wichtle.svelte';
   import Verso from './viz/Verso.svelte';
   import Encore from './viz/Encore.svelte';
+  import Werkling from './viz/Werkling.svelte';
   import Census from './viz/Census.svelte';
   import Folio from './viz/Folio.svelte';
   import Dashboard from './viz/Dashboard.svelte';
@@ -89,6 +90,8 @@
   <Verso {awake} />
 {:else if app.slug === 'encore'}
   <Encore {awake} />
+{:else if app.slug === 'werkling'}
+  <Werkling {awake} />
 {:else if app.slug === 'census'}
   <Census {awake} />
 {:else if app.slug === 'folio'}
